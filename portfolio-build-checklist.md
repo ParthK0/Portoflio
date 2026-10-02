@@ -9,65 +9,52 @@ A rigorous, section-by-section tracking checklist for engineering, designing, an
 > - `[!]` **Needs Input / Decision Required from User**
 
 ---
-
-## 🚨 Critical Action Items (Resolve First)
-
-- [x] **Fix 1: Standardize LeetCode Problem Count**
-  - Confirmed: **600+ problems solved** (1600 Contest Rating).
-  - Verification: Must be 600+ across Hero stat strip, Proof section, and Journey timeline.
-- [!] **Fix 2: ElectIQ Accessibility Score Verification**
-  - Current status: Conflicting records exist (78% vs 98+/100).
-  - Action required: Run a fresh Lighthouse audit on the live deployment to lock in the true verified score.
-- [!] **Fix 3: "Beyond Code" Hobbies Confirmation**
-  - Current status: Unverified hobbies (guitar, painting, swimming, etc.).
-  - Action required: Provide authentic personal interests/hobbies or omit this section to maintain 100% credibility.
-
----
+--
 
 ## 1. System Architecture & Tech Stack Setup
 
 - [x] Link repository to remote (`origin -> https://github.com/ParthK0/Portoflio.git`)
 - [x] Define content blueprint & narrative strategy (`portfolio-content-template.md`)
 - [x] Define exhaustive progress & build tracking checklist (`portfolio-build-checklist.md`)
-- [ ] Select Core Web Architecture:
-  - Framework: Modern React + Vite / Vanilla JS + Tailwind CSS or Vanilla CSS design system
-  - Case Study Delivery: Smooth in-page slideover / modal or dedicated route views (`/projects/probe`, etc.)
-- [ ] Establish Design System & CSS Tokens:
-  - Modern font pairing (e.g., `Outfit` / `Inter` / `JetBrains Mono` for code)
-  - Curated dark aesthetic palette (deep onyx `#0a0c10`, slate accents, electric cyan `#00F0FF`, violet `#8B5CF6`, emerald `#10B981`)
-  - Glassmorphic backdrop filters, border glows, and subtle noise textures
+- [x] Select Core Web Architecture:
+  - Framework: Modern HTML5 + Vanilla CSS design system + Vanilla JS (sub-second loading, zero bundle bloat)
+  - Case Study Delivery: Dedicated case study views (`/projects/` directory) planned for Phase 2
+- [x] Establish Design System & CSS Tokens:
+  - Modern font pairing (`Inter` + `JetBrains Mono` for code)
+  - Curated dark aesthetic palette (deep onyx `#090b10`, surface `#0f131c`, electric cyan `#00e5ff`, violet `#8b5cf6`, emerald `#10b981`)
+  - Glassmorphic backdrop filters, border glows, and card elevation
   - Dynamic micro-animations & scroll-triggered reveal hooks
 
 ---
 
 ## 2. Navigation & Global UI
 
-- [ ] Sticky, blurred header navigation bar:
-  - Brand identity logo / monogram (`parth.deploy()`)
-  - Nav links: `Work`, `Journey`, `Engineering`, `Leadership`, `Experience`, `Proof`, `Contact`
-  - Direct Action CTA: `Resume ↓` (with direct download/view modal)
-  - Live availability indicator (`🟢 Available for SWE / AI roles`)
-- [ ] Mobile navigation drawer / responsive burger menu with backdrop blur
+- [x] Sticky, blurred header navigation bar:
+  - Brand identity logo (`PK / Parth Khowal`)
+  - Nav links: `About`, `Journey`, `Experience`, `Work`, `Architecture`, `Leadership`, `Contact`
+  - Direct Action CTA: `Let's Talk`
+  - Live availability indicator (`Open for Summer 2026 Software Engineering Internships`)
+- [x] Mobile navigation drawer / responsive burger menu with backdrop blur
 - [ ] Global command menu (`Cmd+K` / `Ctrl+K`) for rapid navigation (optional WOW factor)
-- [ ] Accessible skip-to-content anchor link
+- [x] Accessible skip-to-content anchor navigation
 
 ---
 
 ## 3. Hero Section: Hook & Proof
 
-- [ ] Eyebrow badge: `Full-Stack Developer Intern @ MSKard · AI Systems Builder`
-- [ ] High-impact headline: *"I build software systems that turn complex problems into usable products."*
-- [ ] Subheadline emphasizing software engineering foundation + AI force multiplier
-- [ ] Primary action buttons:
+- [x] Eyebrow badge: `Open for Summer 2026 Software Engineering Internships`
+- [x] High-impact headline: *"I build deterministic software and AI systems that solve real problems."*
+- [x] Subheadline emphasizing software engineering foundation + AI force multiplier
+- [x] Primary action buttons:
   - `[Explore Selected Work ↓]` (smooth scrolls to `#projects`)
-  - `[View GitHub ↗]` (external link with security rel)
-  - `[Download Resume ↓]` (direct link to verified PDF)
-- [ ] Defensible Stat Strip Cards:
+  - `[GitHub Profile ↗]` (external link to ParthK0)
+  - `[LinkedIn ↗]` (external link to Parth Khowal)
+- [x] Defensible Stat Strip Cards:
   - `600+` LeetCode Problems Solved (1600 Rating)
-  - `8.89` CGPA (Galgotias University)
-  - `100%` Deterministic Match Precision (FinPilot)
+  - `100%` Deterministic Match Precision (101 Tests)
   - `95+` Production Lighthouse Score (Shree Krishna Transport)
-- [ ] Subtle ambient interactive background (canvas particle mesh or gradient orb)
+  - `8.89` CGPA (Galgotias University)
+- [x] Subtle ambient interactive background (radial gradients with glowing highlights)
 
 ---
 
