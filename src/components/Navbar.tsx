@@ -33,7 +33,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-[#F8FAFC]/90 backdrop-blur-md border-b border-[#E2E8F0] py-4 shadow-xs' : 'bg-transparent py-7'
+      isScrolled ? 'bg-[#EEF4F8]/90 backdrop-blur-md border-b border-[#D6E2EC] py-4 shadow-sm' : 'bg-transparent py-7'
     }`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
         
@@ -60,7 +60,7 @@ export const Navbar: React.FC = () => {
         <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-[#0F172A]/80">
           <Globe className="w-3.5 h-3.5 text-[#2563EB] animate-spin" style={{ animationDuration: '18s' }} />
           <span>Located in Delhi NCR, India</span>
-          {time && <span className="text-slate-400">· {time}</span>}
+          {time && <span className="text-slate-500 font-medium">· {time}</span>}
         </div>
 
         {/* Desktop Links & Actions */}
@@ -87,7 +87,7 @@ export const Navbar: React.FC = () => {
 
           <a
             href={`mailto:${PERSONAL_INFO.email}`}
-            className="px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-[#172554] hover:bg-[#2563EB] transition-all flex items-center gap-1.5 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+            className="px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-[#172554] hover:bg-[#2563EB] transition-all flex items-center gap-1.5 shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
           >
             <span>Let's Talk</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-[#FFE4E6]" />
@@ -106,8 +106,8 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-[#E2E8F0] px-6 py-6 flex flex-col gap-4 shadow-lg">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#0F172A] pb-2 border-b border-[#E2E8F0]">
+        <div className="md:hidden bg-[#F8FAFD] border-b border-[#D6E2EC] px-6 py-6 flex flex-col gap-4 shadow-lg">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#0F172A] pb-2 border-b border-[#D6E2EC]">
             <Globe className="w-3.5 h-3.5 text-[#2563EB]" />
             <span>Delhi NCR, India · {time}</span>
           </div>
