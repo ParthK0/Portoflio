@@ -104,13 +104,13 @@ export const PROJECTS: Project[] = [
     team: "Team of 4 • Hackathon Project",
     category: "AI & Distributed Voice Systems",
     description: "Autonomous conversational interview engine conducting real-time technical assessments with ultra-low latency voice synthesis and candidate emotion perception tracking.",
-    coverImage: "/images/projects/probe-overview.png",
+    coverImage: "/images/probe/overview.png",
     gallery: [
-      "/images/projects/probe-dashboard.png",
-      "/images/projects/probe-interview-room.png",
-      "/images/projects/probe-perception.png",
-      "/images/projects/probe-voice-agent.png",
-      "/images/projects/probe-architecture.png"
+      "/images/probe/dashboard.png",
+      "/images/probe/interview-room.png",
+      "/images/probe/perception.png",
+      "/images/probe/voice-agent.png",
+      "/images/probe/architecture.png"
     ],
     highlights: [
       "Owned AI Job Match Score algorithm, job intelligence parsing, 1-click practice flow, Redis state caching, and recruiter dashboard review workflows.",
@@ -155,13 +155,13 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Architecture & Engine",
     category: "Financial Systems & Deterministic AI",
     description: "High-precision transaction reconciliation engine processing unstructured bank statements and internal ledgers. Implements strict mathematical guardrails to eliminate floating-point drift and LLM hallucination risk.",
-    coverImage: "/images/projects/reconcraft-benchmark.png",
+    coverImage: "/images/reconcraft/benchmark.png",
     gallery: [
-      "/images/projects/reconcraft-engine.png",
-      "/images/projects/reconcraft-paisa-validator.png",
-      "/images/projects/reconcraft-ledger-matching.png",
-      "/images/projects/reconcraft-dashboard.png",
-      "/images/projects/reconcraft-audit.png"
+      "/images/reconcraft/engine.png",
+      "/images/reconcraft/paisa-validator.png",
+      "/images/reconcraft/ledger-matching.png",
+      "/images/reconcraft/dashboard.png",
+      "/images/reconcraft/audit.png"
     ],
     highlights: [
       "7-Stage matching engine: UTR reference matching, exact amount/date checks, tolerance windows, fuzzy description scoring, and guarded LLM reconciliation.",
@@ -209,11 +209,11 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Live Client Deployment",
     category: "Production Web & Enterprise Logistics",
     description: "Live commercial web platform for a regional logistics provider. Designed from scratch for high conversion, instant quote calculation across 18+ corridors, and reliable lead dispatch.",
-    coverImage: "/images/projects/skt-hero.png",
+    coverImage: "/images/shree-krishna-transport/hero.png",
     gallery: [
-      "/images/projects/skt-corridors.png",
-      "/images/projects/skt-quote.png",
-      "/images/projects/skt-fleet.png"
+      "/images/shree-krishna-transport/corridors.png",
+      "/images/shree-krishna-transport/quote.png",
+      "/images/shree-krishna-transport/fleet.png"
     ],
     highlights: [
       "Achieved 95+ across all Google Lighthouse metrics with optimal core web vitals and structured schema markup for local SEO.",
@@ -258,12 +258,12 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Rebuild & Modernization",
     category: "Biometrics & Vector Database Systems",
     description: "Modernized an open-source JavaFX face-recognition prototype into a distributed, production-ready attendance platform with sub-second vector similarity retrieval.",
-    coverImage: "/images/projects/aetherface-dashboard.png",
+    coverImage: "/images/aetherface/dashboard.png",
     gallery: [
-      "/images/projects/aetherface-recognition.png",
-      "/images/projects/aetherface-attendance-log.png",
-      "/images/projects/aetherface-vector-search.png",
-      "/images/projects/aetherface-admin.png"
+      "/images/aetherface/recognition.png",
+      "/images/aetherface/attendance-log.png",
+      "/images/aetherface/vector-search.png",
+      "/images/aetherface/admin.png"
     ],
     highlights: [
       "Replaced linear O(N) distance loops with PostgreSQL + pgvector HNSW indexing, achieving sub-10ms facial feature matches across thousands of records.",
@@ -294,10 +294,10 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Full-Stack Platform",
     category: "Civic Tech & Grounded AI",
     description: "Data-driven non-partisan platform delivering verified election information, constituency metrics, and AI-assisted candidate record summaries to empower informed voting.",
-    coverImage: "/images/projects/electiq-constituency.png",
+    coverImage: "/images/electiq/constituency.png",
     gallery: [
-      "/images/projects/electiq-candidate-profile.png",
-      "/images/projects/electiq-ai-summary.png"
+      "/images/electiq/candidate-profile.png",
+      "/images/electiq/ai-summary.png"
     ],
     highlights: [
       "Architected Express 5 proxy layer shielding Gemini API keys from client exposure with per-IP rate limiting and Zod schema validation.",
