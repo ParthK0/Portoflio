@@ -33,13 +33,13 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      isScrolled ? 'bg-[#f4f5f7]/85 backdrop-blur-md border-b border-slate-200/80 py-4 shadow-sm' : 'bg-transparent py-7'
+      isScrolled ? 'bg-[#F8FAFC]/90 backdrop-blur-md border-b border-[#E2E8F0] py-4 shadow-xs' : 'bg-transparent py-7'
     }`}>
       <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
         
         {/* Dennis Snellenberg Interactive Brand */}
         <a href="#about" className="group flex items-center cursor-pointer select-none">
-          <div className="transition-transform duration-700 ease-out group-hover:rotate-[360deg] text-slate-700 group-hover:text-blue-600">
+          <div className="transition-transform duration-700 ease-out group-hover:rotate-[360deg] text-[#172554] group-hover:text-[#F43F5E]">
             <Copyright className="w-4 h-4" />
           </div>
 
@@ -47,18 +47,18 @@ export const Navbar: React.FC = () => {
             <span className="transition-transform duration-500 text-slate-500 group-hover:-translate-x-full">
               Code by
             </span>
-            <span className="ps-1.5 transition-transform duration-500 text-slate-900 group-hover:-translate-x-12">
+            <span className="ps-1.5 transition-transform duration-500 text-[#0F172A] group-hover:-translate-x-12">
               Parth
             </span>
-            <span className="absolute left-[92px] ps-1 transition-transform duration-500 text-blue-600 group-hover:-translate-x-12">
+            <span className="absolute left-[92px] ps-1 transition-transform duration-500 text-[#2563EB] group-hover:-translate-x-12">
               Khowal
             </span>
           </div>
         </a>
 
         {/* Center: Location & Time (Dennis Signature) */}
-        <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-slate-600">
-          <Globe className="w-3.5 h-3.5 text-blue-600 animate-spin" style={{ animationDuration: '18s' }} />
+        <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-[#0F172A]/80">
+          <Globe className="w-3.5 h-3.5 text-[#2563EB] animate-spin" style={{ animationDuration: '18s' }} />
           <span>Located in Delhi NCR, India</span>
           {time && <span className="text-slate-400">· {time}</span>}
         </div>
@@ -69,33 +69,35 @@ export const Navbar: React.FC = () => {
             href={PERSONAL_INFO.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold text-slate-600 hover:text-slate-950 transition-colors"
+            className="text-xs font-semibold text-[#0F172A] hover:text-[#2563EB] transition-colors relative py-1 group"
           >
-            GitHub ↗
+            <span>GitHub ↗</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F43F5E] group-hover:w-full transition-all duration-300" />
           </a>
 
           <a
             href={PERSONAL_INFO.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-semibold text-slate-600 hover:text-slate-950 transition-colors"
+            className="text-xs font-semibold text-[#0F172A] hover:text-[#2563EB] transition-colors relative py-1 group"
           >
-            LinkedIn ↗
+            <span>LinkedIn ↗</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F43F5E] group-hover:w-full transition-all duration-300" />
           </a>
 
           <a
             href={`mailto:${PERSONAL_INFO.email}`}
-            className="px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-[#141516] hover:bg-blue-600 transition-all flex items-center gap-1.5 shadow-sm"
+            className="px-5 py-2.5 rounded-full text-xs font-semibold text-white bg-[#172554] hover:bg-[#2563EB] transition-all flex items-center gap-1.5 shadow-sm hover:shadow-md hover:-translate-y-0.5"
           >
             <span>Let's Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#FFE4E6]" />
           </a>
         </div>
 
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-slate-800 hover:text-black p-2 cursor-pointer"
+          className="md:hidden text-[#0F172A] hover:text-[#2563EB] p-2 cursor-pointer"
           aria-label="Toggle Navigation"
         >
           {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -104,9 +106,9 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-200 px-6 py-6 flex flex-col gap-4 shadow-lg">
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-600 pb-2 border-b border-slate-100">
-            <Globe className="w-3.5 h-3.5 text-blue-600" />
+        <div className="md:hidden bg-white border-b border-[#E2E8F0] px-6 py-6 flex flex-col gap-4 shadow-lg">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#0F172A] pb-2 border-b border-[#E2E8F0]">
+            <Globe className="w-3.5 h-3.5 text-[#2563EB]" />
             <span>Delhi NCR, India · {time}</span>
           </div>
 
@@ -115,7 +117,7 @@ export const Navbar: React.FC = () => {
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-700 text-sm font-semibold hover:text-blue-600 py-1"
+              className="text-[#0F172A] text-sm font-semibold hover:text-[#2563EB] py-1"
             >
               GitHub Profile ↗
             </a>
@@ -123,14 +125,14 @@ export const Navbar: React.FC = () => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-700 text-sm font-semibold hover:text-blue-600 py-1"
+              className="text-[#0F172A] text-sm font-semibold hover:text-[#2563EB] py-1"
             >
               LinkedIn Profile ↗
             </a>
             <a
               href={`mailto:${PERSONAL_INFO.email}`}
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 text-center py-2.5 rounded-full bg-[#141516] text-white font-semibold text-sm hover:bg-blue-600 transition-colors"
+              className="mt-2 text-center py-2.5 rounded-full bg-[#172554] text-white font-semibold text-sm hover:bg-[#2563EB] transition-colors"
             >
               Let's Talk
             </a>
