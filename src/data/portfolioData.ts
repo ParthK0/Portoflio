@@ -104,6 +104,14 @@ export const PROJECTS: Project[] = [
     team: "Team of 4 • Hackathon Project",
     category: "AI & Distributed Voice Systems",
     description: "Autonomous conversational interview engine conducting real-time technical assessments with ultra-low latency voice synthesis and candidate emotion perception tracking.",
+    coverImage: "/images/projects/probe-overview.png",
+    gallery: [
+      "/images/projects/probe-dashboard.png",
+      "/images/projects/probe-interview-room.png",
+      "/images/projects/probe-perception.png",
+      "/images/projects/probe-voice-agent.png",
+      "/images/projects/probe-architecture.png"
+    ],
     highlights: [
       "Owned AI Job Match Score algorithm, job intelligence parsing, 1-click practice flow, Redis state caching, and recruiter dashboard review workflows.",
       "Integrated Agora RTC voice channels with Murf TTS and Claude LLM for responsive dynamic interview dialogues (<800ms full roundtrip).",
@@ -147,6 +155,14 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Architecture & Engine",
     category: "Financial Systems & Deterministic AI",
     description: "High-precision transaction reconciliation engine processing unstructured bank statements and internal ledgers. Implements strict mathematical guardrails to eliminate floating-point drift and LLM hallucination risk.",
+    coverImage: "/images/projects/reconcraft-benchmark.png",
+    gallery: [
+      "/images/projects/reconcraft-engine.png",
+      "/images/projects/reconcraft-paisa-validator.png",
+      "/images/projects/reconcraft-ledger-matching.png",
+      "/images/projects/reconcraft-dashboard.png",
+      "/images/projects/reconcraft-audit.png"
+    ],
     highlights: [
       "7-Stage matching engine: UTR reference matching, exact amount/date checks, tolerance windows, fuzzy description scoring, and guarded LLM reconciliation.",
       "Paisa Arithmetic Validator converts all currency into integer subunits, preventing IEEE 754 precision drift and rounding mismatches.",
@@ -193,6 +209,12 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Live Client Deployment",
     category: "Production Web & Enterprise Logistics",
     description: "Live commercial web platform for a regional logistics provider. Designed from scratch for high conversion, instant quote calculation across 18+ corridors, and reliable lead dispatch.",
+    coverImage: "/images/projects/skt-hero.png",
+    gallery: [
+      "/images/projects/skt-corridors.png",
+      "/images/projects/skt-quote.png",
+      "/images/projects/skt-fleet.png"
+    ],
     highlights: [
       "Achieved 95+ across all Google Lighthouse metrics with optimal core web vitals and structured schema markup for local SEO.",
       "Interactive pricing and route intelligence calculator spanning 18+ high-volume industrial freight corridors.",
@@ -236,6 +258,13 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Rebuild & Modernization",
     category: "Biometrics & Vector Database Systems",
     description: "Modernized an open-source JavaFX face-recognition prototype into a distributed, production-ready attendance platform with sub-second vector similarity retrieval.",
+    coverImage: "/images/projects/aetherface-dashboard.png",
+    gallery: [
+      "/images/projects/aetherface-recognition.png",
+      "/images/projects/aetherface-attendance-log.png",
+      "/images/projects/aetherface-vector-search.png",
+      "/images/projects/aetherface-admin.png"
+    ],
     highlights: [
       "Replaced linear O(N) distance loops with PostgreSQL + pgvector HNSW indexing, achieving sub-10ms facial feature matches across thousands of records.",
       "Implemented AES-256-GCM encryption for stored biometric embeddings with salted user hashes and RBAC endpoints.",
@@ -265,6 +294,11 @@ export const PROJECTS: Project[] = [
     team: "Solo Engineering • Full-Stack Platform",
     category: "Civic Tech & Grounded AI",
     description: "Data-driven non-partisan platform delivering verified election information, constituency metrics, and AI-assisted candidate record summaries to empower informed voting.",
+    coverImage: "/images/projects/electiq-constituency.png",
+    gallery: [
+      "/images/projects/electiq-candidate-profile.png",
+      "/images/projects/electiq-ai-summary.png"
+    ],
     highlights: [
       "Architected Express 5 proxy layer shielding Gemini API keys from client exposure with per-IP rate limiting and Zod schema validation.",
       "Prompt-engineered guardrails ensuring candidate summaries cite factual legislative track records without editorial bias.",

@@ -6,6 +6,8 @@ export interface Project {
   team: string;
   category: string;
   description: string;
+  coverImage?: string;
+  gallery?: string[];
   highlights: string[];
   technologies: string[];
   liveUrl?: string;
