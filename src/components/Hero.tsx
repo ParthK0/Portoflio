@@ -1,120 +1,153 @@
-import React from 'react';
-import { ArrowDown, Github, Linkedin, MapPin } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Globe, ArrowDown, Github, Linkedin } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 
 export const Hero: React.FC = () => {
+  const [time, setTime] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      }) + ' IST');
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-          
-          {/* Text Content (8 cols) */}
-          <div className="lg:col-span-8">
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-medium mb-8">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]"></span>
-              <span>{PERSONAL_INFO.statusBadge}</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.12] mb-6">
-              I build <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">deterministic software</span> and <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">AI systems</span> that solve real problems.
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-slate-300 max-w-3xl leading-relaxed mb-10">
-              B.Tech AI & Data Science scholar @ Galgotias University (<strong className="text-white font-semibold">8.89 CGPA</strong>). Full-Stack Developer Intern @ <strong className="text-white font-semibold">MSKard</strong>. <strong className="text-white font-semibold">600+ LeetCode</strong> problems solved. Focused on clean architecture, zero-tolerance financial precision, and production web engineering.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="#projects"
-                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-950 font-bold text-sm hover:from-cyan-300 hover:to-cyan-400 transition-all shadow-[0_4px_20px_rgba(0,229,255,0.35)] hover:shadow-[0_6px_28px_rgba(0,229,255,0.5)] flex items-center gap-2"
-              >
-                <span>Explore Selected Work</span>
-                <ArrowDown className="w-4 h-4" />
-              </a>
-
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold text-sm transition-all flex items-center gap-2"
-              >
-                <Github className="w-4 h-4" />
-                <span>GitHub</span>
-              </a>
-
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold text-sm transition-all flex items-center gap-2"
-              >
-                <Linkedin className="w-4 h-4 text-cyan-400" />
-                <span>LinkedIn</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Profile Card / Portrait (4 cols) */}
-          <div className="lg:col-span-4 flex justify-center lg:justify-end">
-            <div className="relative group">
-              {/* Outer Glow Ring */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-emerald-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-60 transition duration-700"></div>
-
-              {/* Portrait Frame */}
-              <div className="relative w-64 h-80 sm:w-72 sm:h-92 rounded-3xl bg-[#0f1422] border border-white/15 overflow-hidden flex flex-col justify-end shadow-2xl">
-                <img
-                  src="/images/profile.png"
-                  alt="Parth Khowal portrait"
-                  className="absolute inset-0 w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-500"
-                />
-
-                {/* Gradient Shadow Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090b10] via-transparent to-transparent opacity-80" />
-
-                {/* Name & Role Overlay */}
-                <div className="relative z-10 p-5 bg-[#090b10]/75 backdrop-blur-md border-t border-white/10">
-                  <div className="text-base font-bold text-white flex items-center justify-between">
-                    <span>Parth Khowal</span>
-                    <span className="text-[11px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">SWE</span>
-                  </div>
-                  <div className="text-xs text-slate-400 flex items-center gap-1 mt-1">
-                    <MapPin className="w-3 h-3 text-cyan-400" />
-                    <span>Delhi NCR, India</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+    <section id="about" className="relative min-h-screen flex flex-col justify-between pt-24 pb-8 overflow-hidden bg-[#0a0c10]">
+      
+      {/* Top Meta Bar (Dennis Snellenberg Style) */}
+      <div className="max-w-7xl mx-auto px-6 w-full pt-4 flex flex-wrap items-center justify-between gap-4 z-20">
+        <div className="flex items-center gap-2.5 text-xs font-mono text-slate-400">
+          <Globe className="w-4 h-4 text-cyan-400 animate-spin" style={{ animationDuration: '16s' }} />
+          <span>Located in Delhi NCR, India</span>
+          {time && <span className="text-slate-500 hidden sm:inline">· {time}</span>}
         </div>
 
-        {/* Stat Cards Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-white/10">
-          {PERSONAL_INFO.heroStats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-xl bg-[#111621]/80 backdrop-blur-md border border-white/10 hover:border-cyan-500/40 transition-all hover:-translate-y-1 shadow-md shadow-black/20"
-            >
-              <div className={`text-3xl lg:text-4xl font-extrabold font-mono mb-1 ${
-                stat.highlight === 'cyan' ? 'text-cyan-400' :
-                stat.highlight === 'emerald' ? 'text-emerald-400' :
-                stat.highlight === 'violet' ? 'text-purple-400' : 'text-slate-100'
-              }`}>
-                {stat.value}
-              </div>
-              <div className="text-xs sm:text-sm text-slate-400 font-medium">
-                {stat.label}
-              </div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-mono">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]"></span>
+          <span>{PERSONAL_INFO.statusBadge}</span>
+        </div>
+      </div>
+
+      {/* Main Center Stage: Portrait + Massive Monumental Text Behind */}
+      <div className="relative flex-1 flex flex-col items-center justify-center my-6 z-10 w-full px-4">
+        
+        {/* Subtle Ambient Radial Backlight */}
+        <div className="absolute w-[360px] h-[360px] sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-to-tr from-cyan-500/15 via-purple-500/15 to-transparent blur-3xl -z-10 pointer-events-none" />
+
+        {/* The Dennis Snellenberg Portrait Frame */}
+        <div className="relative group max-w-sm sm:max-w-md w-full flex justify-center">
+          <div className="relative w-64 h-80 sm:w-80 sm:h-96 rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-b from-[#121622] to-[#0a0c10] shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+            <img
+              src="/images/profile.png"
+              alt="Parth Khowal portrait"
+              className="w-full h-full object-cover object-top filter contrast-[1.05] brightness-95 group-hover:scale-105 transition-transform duration-700"
+            />
+            {/* Soft Shadow Vignette at Base */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0c10] via-transparent to-transparent opacity-70" />
+            
+            {/* Quick Floating Tag on Portrait */}
+            <div className="absolute bottom-3 left-3 right-3 p-3 rounded-2xl bg-[#0d1017]/80 backdrop-blur-md border border-white/10 flex items-center justify-between text-xs">
+              <span className="font-bold text-white tracking-wide">Parth Khowal</span>
+              <span className="font-mono text-cyan-400 text-[11px]">B.Tech AI & DS (8.89)</span>
             </div>
-          ))}
+          </div>
+        </div>
+
+        {/* Headline & Value Proposition */}
+        <div className="text-center mt-6 max-w-2xl px-4 z-20">
+          <p className="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">
+            Software Engineer & Full-Stack Intern @ <strong className="text-white">MSKard</strong>. Solving 600+ LeetCode problems with a core focus on deterministic financial systems and production AI architectures.
+          </p>
+
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <a
+              href="#projects"
+              className="px-5 py-2.5 rounded-full bg-white text-slate-950 font-bold text-xs hover:bg-cyan-400 transition-colors flex items-center gap-1.5 shadow-lg"
+            >
+              <span>Explore Selected Work</span>
+              <ArrowDown className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href={PERSONAL_INFO.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold text-xs transition-colors flex items-center gap-1.5"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>GitHub</span>
+            </a>
+
+            <a
+              href={PERSONAL_INFO.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white font-semibold text-xs transition-colors flex items-center gap-1.5"
+            >
+              <Linkedin className="w-3.5 h-3.5 text-cyan-400" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
         </div>
 
       </div>
+
+      {/* Massive Infinite Marquee Banner (The Dennis Signature) */}
+      <div className="relative w-full overflow-hidden py-3 bg-[#0d1017]/90 border-y border-white/10 select-none z-10">
+        <div className="animate-marquee whitespace-nowrap flex items-center gap-8">
+          {[...Array(2)].map((_, loopIdx) => (
+            <div key={loopIdx} className="flex items-center gap-8 shrink-0">
+              <span className="text-3xl sm:text-5xl lg:text-7xl font-extrabold uppercase tracking-tight text-white/90">
+                Parth Khowal
+              </span>
+              <span className="text-2xl sm:text-4xl text-cyan-400 font-light">—</span>
+              <span className="text-3xl sm:text-5xl lg:text-7xl font-extrabold uppercase tracking-tight text-slate-400 hover:text-white transition-colors">
+                Software Engineer
+              </span>
+              <span className="text-2xl sm:text-4xl text-purple-400 font-light">—</span>
+              <span className="text-3xl sm:text-5xl lg:text-7xl font-extrabold uppercase tracking-tight text-white/90">
+                Full-Stack Systems
+              </span>
+              <span className="text-2xl sm:text-4xl text-emerald-400 font-light">—</span>
+              <span className="text-3xl sm:text-5xl lg:text-7xl font-extrabold uppercase tracking-tight text-slate-400 hover:text-white transition-colors">
+                Deterministic AI
+              </span>
+              <span className="text-2xl sm:text-4xl text-cyan-400 font-light">—</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Hero Bottom Meta Strip */}
+      <div className="max-w-7xl mx-auto px-6 w-full pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 z-20">
+        {PERSONAL_INFO.heroStats.map((stat, idx) => (
+          <div
+            key={idx}
+            className="p-4 rounded-2xl bg-[#111621]/60 backdrop-blur-md border border-white/5 hover:border-cyan-500/30 transition-all hover:-translate-y-1"
+          >
+            <div className={`text-2xl lg:text-3xl font-extrabold font-mono mb-0.5 ${
+              stat.highlight === 'cyan' ? 'text-cyan-400' :
+              stat.highlight === 'emerald' ? 'text-emerald-400' :
+              stat.highlight === 'violet' ? 'text-purple-400' : 'text-slate-100'
+            }`}>
+              {stat.value}
+            </div>
+            <div className="text-[11px] sm:text-xs text-slate-400 font-medium">
+              {stat.label}
+            </div>
+          </div>
+        ))}
+      </div>
+
     </section>
   );
 };
