@@ -5,162 +5,130 @@ export interface ThemeConfig {
   name: string;
   primary: string;
   light: string;
-  glow: string;
   subtle: string;
   subtle2: string;
   subtle25: string;
   subtle3: string;
-  subtle35: string;
-  subtle4: string;
-  subtle45: string;
   borderSubtle: string;
   border: string;
   borderMedium: string;
   borderStrong: string;
-  icon: string;
+  dotColor: string;
   description: string;
 }
 
 export const THEMES: ThemeConfig[] = [
   {
     id: 'purple',
-    name: 'Electric Purple',
+    name: 'Purple',
     primary: '#9D6BEE',
     light: '#A87BF5',
-    glow: 'rgba(157, 107, 238, 0.38)',
     subtle: 'rgba(157, 107, 238, 0.12)',
-    subtle2: 'rgba(168, 123, 245, 0.06)',
-    subtle25: 'rgba(157, 107, 238, 0.16)',
-    subtle3: 'rgba(157, 107, 238, 0.20)',
-    subtle35: 'rgba(157, 107, 238, 0.25)',
-    subtle4: 'rgba(157, 107, 238, 0.30)',
-    subtle45: 'rgba(157, 107, 238, 0.35)',
+    subtle2: 'rgba(157, 107, 238, 0.20)',
+    subtle25: 'rgba(157, 107, 238, 0.25)',
+    subtle3: 'rgba(157, 107, 238, 0.30)',
     borderSubtle: 'rgba(157, 107, 238, 0.20)',
-    border: 'rgba(157, 107, 238, 0.25)',
-    borderMedium: 'rgba(157, 107, 238, 0.30)',
-    borderStrong: 'rgba(157, 107, 238, 0.45)',
-    icon: '🟣',
-    description: 'Signature Dennis Snellenberg lavender violet'
+    border: 'rgba(157, 107, 238, 0.35)',
+    borderMedium: 'rgba(157, 107, 238, 0.50)',
+    borderStrong: '#9D6BEE',
+    dotColor: '#9D6BEE',
+    description: 'Signature solid purple'
   },
   {
-    id: 'blue',
-    name: 'Cyber Sky Blue',
-    primary: '#00D2FF',
-    light: '#38BDF8',
-    glow: 'rgba(0, 210, 255, 0.38)',
-    subtle: 'rgba(0, 210, 255, 0.12)',
-    subtle2: 'rgba(56, 189, 248, 0.06)',
-    subtle25: 'rgba(0, 210, 255, 0.16)',
-    subtle3: 'rgba(0, 210, 255, 0.20)',
-    subtle35: 'rgba(0, 210, 255, 0.25)',
-    subtle4: 'rgba(0, 210, 255, 0.30)',
-    subtle45: 'rgba(0, 210, 255, 0.35)',
-    borderSubtle: 'rgba(0, 210, 255, 0.20)',
-    border: 'rgba(0, 210, 255, 0.25)',
-    borderMedium: 'rgba(0, 210, 255, 0.30)',
-    borderStrong: 'rgba(0, 210, 255, 0.45)',
-    icon: '🌐',
-    description: 'High-frequency cyber sky cyan'
+    id: 'lightblue',
+    name: 'Light Blue',
+    primary: '#38BDF8',
+    light: '#7DD3FC',
+    subtle: 'rgba(56, 189, 248, 0.12)',
+    subtle2: 'rgba(56, 189, 248, 0.20)',
+    subtle25: 'rgba(56, 189, 248, 0.25)',
+    subtle3: 'rgba(56, 189, 248, 0.30)',
+    borderSubtle: 'rgba(56, 189, 248, 0.20)',
+    border: 'rgba(56, 189, 248, 0.35)',
+    borderMedium: 'rgba(56, 189, 248, 0.50)',
+    borderStrong: '#38BDF8',
+    dotColor: '#38BDF8',
+    description: 'Crisp solid sky light blue'
   },
   {
     id: 'yellow',
-    name: 'Neon Amber',
-    primary: '#FFD000',
+    name: 'Yellow',
+    primary: '#EAB308',
     light: '#FDE047',
-    glow: 'rgba(255, 208, 0, 0.38)',
-    subtle: 'rgba(255, 208, 0, 0.13)',
-    subtle2: 'rgba(253, 224, 71, 0.06)',
-    subtle25: 'rgba(255, 208, 0, 0.16)',
-    subtle3: 'rgba(255, 208, 0, 0.20)',
-    subtle35: 'rgba(255, 208, 0, 0.25)',
-    subtle4: 'rgba(255, 208, 0, 0.30)',
-    subtle45: 'rgba(255, 208, 0, 0.35)',
-    borderSubtle: 'rgba(255, 208, 0, 0.20)',
-    border: 'rgba(255, 208, 0, 0.25)',
-    borderMedium: 'rgba(255, 208, 0, 0.30)',
-    borderStrong: 'rgba(255, 208, 0, 0.45)',
-    icon: '⚡',
-    description: 'Electric radiant golden amber'
+    subtle: 'rgba(234, 179, 8, 0.12)',
+    subtle2: 'rgba(234, 179, 8, 0.20)',
+    subtle25: 'rgba(234, 179, 8, 0.25)',
+    subtle3: 'rgba(234, 179, 8, 0.30)',
+    borderSubtle: 'rgba(234, 179, 8, 0.20)',
+    border: 'rgba(234, 179, 8, 0.35)',
+    borderMedium: 'rgba(234, 179, 8, 0.50)',
+    borderStrong: '#EAB308',
+    dotColor: '#EAB308',
+    description: 'Warm solid amber yellow'
   },
   {
     id: 'emerald',
-    name: 'Matrix Mint',
-    primary: '#00F0A0',
+    name: 'Emerald Green',
+    primary: '#10B981',
     light: '#34D399',
-    glow: 'rgba(0, 240, 160, 0.38)',
-    subtle: 'rgba(0, 240, 160, 0.12)',
-    subtle2: 'rgba(52, 211, 153, 0.06)',
-    subtle25: 'rgba(0, 240, 160, 0.16)',
-    subtle3: 'rgba(0, 240, 160, 0.20)',
-    subtle35: 'rgba(0, 240, 160, 0.25)',
-    subtle4: 'rgba(0, 240, 160, 0.30)',
-    subtle45: 'rgba(0, 240, 160, 0.35)',
-    borderSubtle: 'rgba(0, 240, 160, 0.20)',
-    border: 'rgba(0, 240, 160, 0.25)',
-    borderMedium: 'rgba(0, 240, 160, 0.30)',
-    borderStrong: 'rgba(0, 240, 160, 0.45)',
-    icon: '🟢',
-    description: 'Hyper-vibrant emerald neon mint'
+    subtle: 'rgba(16, 185, 129, 0.12)',
+    subtle2: 'rgba(16, 185, 129, 0.20)',
+    subtle25: 'rgba(16, 185, 129, 0.25)',
+    subtle3: 'rgba(16, 185, 129, 0.30)',
+    borderSubtle: 'rgba(16, 185, 129, 0.20)',
+    border: 'rgba(16, 185, 129, 0.35)',
+    borderMedium: 'rgba(16, 185, 129, 0.50)',
+    borderStrong: '#10B981',
+    dotColor: '#10B981',
+    description: 'Clean solid emerald green'
   },
   {
     id: 'coral',
-    name: 'Sunset Coral',
-    primary: '#FF6B4A',
-    light: '#FFA07A',
-    glow: 'rgba(255, 107, 74, 0.38)',
-    subtle: 'rgba(255, 107, 74, 0.12)',
-    subtle2: 'rgba(255, 160, 122, 0.06)',
-    subtle25: 'rgba(255, 107, 74, 0.16)',
-    subtle3: 'rgba(255, 107, 74, 0.20)',
-    subtle35: 'rgba(255, 107, 74, 0.25)',
-    subtle4: 'rgba(255, 107, 74, 0.30)',
-    subtle45: 'rgba(255, 107, 74, 0.35)',
-    borderSubtle: 'rgba(255, 107, 74, 0.20)',
-    border: 'rgba(255, 107, 74, 0.25)',
-    borderMedium: 'rgba(255, 107, 74, 0.30)',
-    borderStrong: 'rgba(255, 107, 74, 0.45)',
-    icon: '🔥',
-    description: 'Radiant sunset flame coral'
+    name: 'Warm Coral',
+    primary: '#F97316',
+    light: '#FB923C',
+    subtle: 'rgba(249, 115, 22, 0.12)',
+    subtle2: 'rgba(249, 115, 22, 0.20)',
+    subtle25: 'rgba(249, 115, 22, 0.25)',
+    subtle3: 'rgba(249, 115, 22, 0.30)',
+    borderSubtle: 'rgba(249, 115, 22, 0.20)',
+    border: 'rgba(249, 115, 22, 0.35)',
+    borderMedium: 'rgba(249, 115, 22, 0.50)',
+    borderStrong: '#F97316',
+    dotColor: '#F97316',
+    description: 'Solid terracotta warm coral'
   },
   {
-    id: 'pink',
-    name: 'Hot Rose',
-    primary: '#FF3385',
+    id: 'rose',
+    name: 'Rose Pink',
+    primary: '#F43F5E',
     light: '#FB7185',
-    glow: 'rgba(255, 51, 133, 0.38)',
-    subtle: 'rgba(255, 51, 133, 0.12)',
-    subtle2: 'rgba(251, 113, 133, 0.06)',
-    subtle25: 'rgba(255, 51, 133, 0.16)',
-    subtle3: 'rgba(255, 51, 133, 0.20)',
-    subtle35: 'rgba(255, 51, 133, 0.25)',
-    subtle4: 'rgba(255, 51, 133, 0.30)',
-    subtle45: 'rgba(255, 51, 133, 0.35)',
-    borderSubtle: 'rgba(255, 51, 133, 0.20)',
-    border: 'rgba(255, 51, 133, 0.25)',
-    borderMedium: 'rgba(255, 51, 133, 0.30)',
-    borderStrong: 'rgba(255, 51, 133, 0.45)',
-    icon: '🌸',
-    description: 'Synthwave neon magenta rose'
+    subtle: 'rgba(244, 63, 94, 0.12)',
+    subtle2: 'rgba(244, 63, 94, 0.20)',
+    subtle25: 'rgba(244, 63, 94, 0.25)',
+    subtle3: 'rgba(244, 63, 94, 0.30)',
+    borderSubtle: 'rgba(244, 63, 94, 0.20)',
+    border: 'rgba(244, 63, 94, 0.35)',
+    borderMedium: 'rgba(244, 63, 94, 0.50)',
+    borderStrong: '#F43F5E',
+    dotColor: '#F43F5E',
+    description: 'Solid refined rose'
   },
   {
-    id: 'lime',
-    name: 'Cyber Volt',
-    primary: '#B8FF00',
-    light: '#D9FF43',
-    glow: 'rgba(184, 255, 0, 0.35)',
-    subtle: 'rgba(184, 255, 0, 0.12)',
-    subtle2: 'rgba(217, 255, 67, 0.06)',
-    subtle25: 'rgba(184, 255, 0, 0.16)',
-    subtle3: 'rgba(184, 255, 0, 0.20)',
-    subtle35: 'rgba(184, 255, 0, 0.25)',
-    subtle4: 'rgba(184, 255, 0, 0.30)',
-    subtle45: 'rgba(184, 255, 0, 0.35)',
-    borderSubtle: 'rgba(184, 255, 0, 0.20)',
-    border: 'rgba(184, 255, 0, 0.25)',
-    borderMedium: 'rgba(184, 255, 0, 0.30)',
-    borderStrong: 'rgba(184, 255, 0, 0.45)',
-    icon: '⚡',
-    description: 'Electrifying acidic volt lime'
+    id: 'indigo',
+    name: 'Indigo',
+    primary: '#6366F1',
+    light: '#818CF8',
+    subtle: 'rgba(99, 102, 241, 0.12)',
+    subtle2: 'rgba(99, 102, 241, 0.20)',
+    subtle25: 'rgba(99, 102, 241, 0.25)',
+    subtle3: 'rgba(99, 102, 241, 0.30)',
+    borderSubtle: 'rgba(99, 102, 241, 0.20)',
+    border: 'rgba(99, 102, 241, 0.35)',
+    borderMedium: 'rgba(99, 102, 241, 0.50)',
+    borderStrong: '#6366F1',
+    dotColor: '#6366F1',
+    description: 'Solid modern indigo'
   }
 ];
 
@@ -182,32 +150,28 @@ const applyThemeToDOM = (theme: ThemeConfig) => {
   // Set all accent CSS variables
   root.style.setProperty('--accent-primary', theme.primary);
   root.style.setProperty('--accent-light', theme.light);
-  root.style.setProperty('--accent-glow', theme.glow);
   root.style.setProperty('--accent-subtle', theme.subtle);
   root.style.setProperty('--accent-subtle-2', theme.subtle2);
   root.style.setProperty('--accent-subtle-25', theme.subtle25);
   root.style.setProperty('--accent-subtle-3', theme.subtle3);
-  root.style.setProperty('--accent-subtle-35', theme.subtle35);
-  root.style.setProperty('--accent-subtle-4', theme.subtle4);
-  root.style.setProperty('--accent-subtle-45', theme.subtle45);
   root.style.setProperty('--accent-border-subtle', theme.borderSubtle);
   root.style.setProperty('--accent-border', theme.border);
   root.style.setProperty('--accent-border-medium', theme.borderMedium);
   root.style.setProperty('--accent-border-strong', theme.borderStrong);
 };
 
-const triggerTapRipple = (x: number, y: number, color: string, glow: string) => {
+// Subtle, clean, non-neon flat circular wave at tap location
+const triggerTapRipple = (x: number, y: number, color: string) => {
   const ripple = document.createElement('div');
-  ripple.className = 'theme-ripple';
+  ripple.className = 'tap-color-ripple';
   ripple.style.left = `${x}px`;
   ripple.style.top = `${y}px`;
-  ripple.style.boxShadow = `0 0 40px ${glow}`;
   ripple.style.borderColor = color;
   document.body.appendChild(ripple);
 
   setTimeout(() => {
     ripple.remove();
-  }, 700);
+  }, 550);
 };
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -243,7 +207,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       applyThemeToDOM(nextTheme);
 
       if (e && typeof e.clientX === 'number' && typeof e.clientY === 'number') {
-        triggerTapRipple(e.clientX, e.clientY, nextTheme.primary, nextTheme.glow);
+        triggerTapRipple(e.clientX, e.clientY, nextTheme.primary);
       }
 
       return nextTheme;
@@ -269,7 +233,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      // Ignore if clicking on interactive controls
+      // Ignore if clicking on interactive controls or dismiss buttons
       const interactive = target.closest(
         'a, button, input, textarea, select, [role="button"], [data-no-cycle], .no-theme-cycle, [data-interactive="true"]'
       );
