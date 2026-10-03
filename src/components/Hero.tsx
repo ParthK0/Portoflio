@@ -886,37 +886,6 @@ export const Hero: React.FC = () => {
 
             {/* Center Sliding Dot Indicator */}
             <div className="sl-line pointer-events-none z-20" />
-
-            {/* Footer Bar */}
-            <footer className={`absolute inset-x-0 bottom-0 h-16 border-t border-white/10 flex items-center justify-between px-6 sm:px-16 font-outfit text-sm text-[#EEECE6]/55 z-20 bg-[#101010]/80 backdrop-blur-sm transition-all duration-1000 delay-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              hasEntered ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-            }`}>
-              <span>© parth 2026 — built with passion, code &amp; AI.</span>
-              <button
-                onClick={() => setPrivacyOpen(true)}
-                className="hover:text-white transition-colors cursor-pointer"
-              >
-                Privacy
-              </button>
-              <span className="flex items-center gap-5">
-                <a
-                  href="https://github.com/ParthK0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/parth-khowal-a37903294"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  LinkedIn
-                </a>
-              </span>
-            </footer>
           </div>
 
           {/* ========================================================

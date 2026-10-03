@@ -24,7 +24,7 @@ export const ContactPage: React.FC = () => {
             GET IN TOUCH
           </h1>
           <p className="text-[#888888] text-sm sm:text-base max-w-3xl font-mono leading-relaxed">
-            I am actively interviewing for Summer 2026 Software Engineering Internships and high-impact full-stack roles. Fill in the transmission console below or reach out via direct channels.
+            Reach out via the transmission console below or direct channels for full-stack engineering, production systems, and AI product collaboration.
           </p>
         </div>
 

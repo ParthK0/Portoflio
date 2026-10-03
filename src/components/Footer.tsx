@@ -44,15 +44,6 @@ export const Footer: React.FC = () => {
       {/* Main "Let's Build Something Together" Content */}
       <div className="max-w-7xl mx-auto px-6 sm:px-10 pt-20 pb-16 relative z-10">
         
-        {/* Top Header Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono tracking-wider uppercase text-[#AAAAAA] mb-6">
-          <span 
-            className="w-2 h-2 rounded-full animate-pulse" 
-            style={{ backgroundColor: accentColor }}
-          />
-          <span>{PERSONAL_INFO.statusBadge}</span>
-        </div>
-
         {/* 2-Column Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 pb-16 border-b border-white/10">
           
@@ -64,7 +55,7 @@ export const Footer: React.FC = () => {
               </h2>
 
               <p className="text-[#AAAAAA] text-sm sm:text-base leading-relaxed mb-8 max-w-xl font-mono">
-                Actively seeking <strong className="text-[#FFFFFF]">Software Engineering Internships (Summer 2026)</strong> and high-impact full-stack or AI systems engineering opportunities. Whether you have an open role, an engineering challenge, or want to discuss system architectures, my inbox is always open.
+                Building high-impact full-stack software and AI systems. Whether you have an engineering challenge or want to discuss system architectures, my inbox is always open.
               </p>
 
               {/* Channels List */}

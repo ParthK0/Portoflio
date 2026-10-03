@@ -58,7 +58,7 @@ export const BeyondPage: React.FC = () => {
               INTERESTED IN COLLABORATING OR HIRING?
             </h3>
             <p className="text-xs sm:text-sm text-[#888888] font-mono max-w-xl">
-              Open for Summer 2026 Software Engineering Internships and production roles worldwide.
+              Available for full-stack engineering, production systems, and AI product roles worldwide.
             </p>
           </div>
           <Link

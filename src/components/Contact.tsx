@@ -31,7 +31,7 @@ export const Contact: React.FC = () => {
               </h2>
 
               <p className="text-[#A0A0A0] text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
-                I am actively seeking <strong className="text-[#FFFFFF]">Software Engineering Internships (Summer 2026)</strong> and impactful full-stack or systems engineering opportunities. Whether you have an open role, an engineering challenge, or want to discuss system architectures, my inbox is always open.
+                Building high-impact full-stack software and AI systems. Whether you have an engineering challenge or want to discuss system architectures, my inbox is always open.
               </p>
 
               {/* Channels List */}
@@ -101,7 +101,7 @@ export const Contact: React.FC = () => {
 
             <div className="mt-8 pt-6 border-t border-[#262626] flex items-center gap-2 text-xs font-mono text-[#707070]">
               <span className="w-2 h-2 rounded-full bg-[#9D6BEE]"></span>
-              <span>Available for Summer 2026 roles · Delhi NCR / Remote</span>
+              <span>Based in Delhi NCR · Available Worldwide</span>
             </div>
           </div>
 
