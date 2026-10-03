@@ -248,23 +248,93 @@
   transform-style: preserve-3d;
 }
 
-.font-mono-custom {
-  font-family: 'JetBrains Mono', monospace;
+.font-outfit {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Dennis Snellenberg-style Smooth Marquee */
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+.font-inter-tight {
+  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 28s linear infinite;
-  will-change: transform;
+/* Sliding dot scroll indicator */
+.sl-line {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  width: 1px;
+  height: 90px;
+  background: rgba(238, 236, 230, 0.35);
 }
 
-.animate-marquee:hover {
-  animation-play-state: paused;
+.sl-line::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #EEECE6;
+  animation: sl-drift 2.2s infinite;
+}
+
+@keyframes sl-drift {
+  0% { top: 0; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Dynamic strikethrough and underline for Manifest */
+.strike-anim {
+  text-decoration: none;
+  position: relative;
+}
+
+.strike-anim::after {
+  content: "";
+  position: absolute;
+  left: -2%;
+  top: 52%;
+  height: 0.08em;
+  width: 104%;
+  background: currentColor;
+  transform: scaleX(var(--s, 0));
+  transform-origin: left;
+}
+
+.underline-anim {
+  text-decoration: none;
+  position: relative;
+}
+
+.underline-anim::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.08em;
+  height: 0.09em;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(var(--u, 0));
+  transform-origin: left;
+}
+
+/* Floating Vertical Status Tab */
+.vertical-tab {
+  position: fixed;
+  left: 0;
+  top: 46%;
+  z-index: 30;
+  width: 48px;
+  height: 180px;
+  background: #ffffff;
+  color: #000000;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: grid;
+  place-items: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
 }
