@@ -155,12 +155,6 @@ export const Hero: React.FC = () => {
     setSoundEnabled(next);
   };
 
-  // Switch orbit mode
-  const toggleOrbit = (e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    sound.playWarp();
-    setOrbitMode((prev) => (prev === 'orbit' ? 'docked' : 'orbit'));
-  };
 
   // 1. Initial Typewriter & Upward Intro Transition
   useEffect(() => {
@@ -729,11 +723,6 @@ export const Hero: React.FC = () => {
         className="fixed z-[99999] left-0 top-0 w-2.5 h-2.5 -m-[5px] rounded-full pointer-events-none transition-[width,height,margin,background-color] duration-250 ease-out"
       />
 
-      {/* Floating Status Tab */}
-      <div className="vertical-tab hidden sm:grid">
-        <span>Open to work</span>
-      </div>
-
       {/* Intro Center Tagline */}
       <div
         id="tg"
@@ -749,39 +738,9 @@ export const Hero: React.FC = () => {
       <canvas id="lg" ref={orbitalCanvasRef} className="fixed inset-0 z-25 pointer-events-none" />
 
       {/* Top Navigation Bar */}
-      <header className={`fixed inset-x-0 top-0 z-30 flex justify-between items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-1000 delay-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      <header className={`fixed inset-x-0 top-0 z-30 flex justify-end items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-1000 delay-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         hasEntered ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'
       }`}>
-        <div className="flex items-center gap-4 sm:gap-6 pointer-events-auto">
-          {/* Lowercase Wordmark */}
-          <a
-            href="#"
-            className={`font-outfit font-extrabold text-3xl sm:text-[34px] tracking-tight relative transition-colors duration-500 ${
-              isSheetOver ? 'text-[#101010]' : ''
-            }`}
-            style={{ color: isSheetOver ? '#101010' : accentColor }}
-          >
-            parth
-            <span
-              className="absolute -right-2 top-1.5 w-1.5 h-1.5 rounded-full"
-              style={{ backgroundColor: isSheetOver ? '#101010' : accentColor }}
-            />
-          </a>
-
-          {/* Gravitize Button */}
-          <button
-            id="gz"
-            onClick={toggleOrbit}
-            className="chip flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-mono text-[11px] tracking-widest uppercase bg-[#101010]/60 backdrop-blur-md border border-white/20 text-[#EEECE6] hover:border-white transition-colors cursor-pointer"
-          >
-            <span
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ backgroundColor: accentColor }}
-            />
-            <span>{orbitMode === 'orbit' ? '● ORBITING' : '● GRAVITIZE'}</span>
-          </button>
-        </div>
-
         {/* Right Controls */}
         <div className="flex items-center gap-3 pointer-events-auto">
           <button
@@ -864,10 +823,10 @@ export const Hero: React.FC = () => {
             >
               <div id="copy" ref={copyBlockRef} className="space-y-2.5 sm:space-y-3.5">
                 {/* 1. Parth Khowal */}
-                <h1 className="font-inter-tight font-extrabold text-[clamp(44px,6.8vw,106px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6] flex items-center gap-3">
+                <h1 className="font-inter-tight font-extrabold text-[clamp(36px,5.4vw,84px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6] flex items-center gap-3">
                   <span>{typedName || 'Parth Khowal'}</span>
                   <i
-                    className="inline-block w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full transition-colors duration-500 shrink-0"
+                    className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors duration-500 shrink-0"
                     style={{ backgroundColor: accentColor }}
                   />
                 </h1>
