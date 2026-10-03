@@ -779,7 +779,7 @@ export const Hero: React.FC = () => {
 
             {/* Masked Portrait with Natural Blend & Depth Tilt: Staggered slow emergence */}
             <div
-              className={`absolute right-4 sm:right-10 lg:right-16 xl:right-24 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
+              className={`absolute right-3 sm:right-8 lg:right-14 xl:right-20 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
                 }`}
             >
               <img
@@ -795,7 +795,7 @@ export const Hero: React.FC = () => {
                     target.src = FALLBACK_PORTRAIT;
                   }
                 }}
-                className="h-[70vh] sm:h-[76vh] lg:h-[80vh] w-auto max-w-[65vw] sm:max-w-[42vw] lg:max-w-[36vw] xl:max-w-[32vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
+                className="h-[78vh] sm:h-[84vh] lg:h-[88vh] xl:h-[92vh] w-auto max-w-[75vw] sm:max-w-[50vw] lg:max-w-[44vw] xl:max-w-[38vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
                 style={{
                   maskImage:
                     'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
