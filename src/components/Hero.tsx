@@ -616,10 +616,12 @@ export const Hero: React.FC = () => {
                 target.src = FALLBACK_PORTRAIT;
               }
             }}
-            className="absolute right-0 bottom-0 h-full w-full sm:w-[54%] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] opacity-100 transition-transform duration-75 pointer-events-none z-10"
+            className="absolute right-0 bottom-0 h-[70vh] sm:h-[76vh] lg:h-[80vh] w-auto max-w-[65vw] sm:max-w-[42vw] lg:max-w-[36vw] xl:max-w-[32vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] opacity-100 transition-transform duration-75 pointer-events-none z-10"
             style={{
-              maskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 18%, #000 40%)',
-              WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 18%, #000 40%)',
+              maskImage:
+                'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
             }}
           />
 
