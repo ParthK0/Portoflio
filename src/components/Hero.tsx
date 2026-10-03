@@ -779,7 +779,7 @@ export const Hero: React.FC = () => {
 
             {/* Masked Portrait with Natural Blend & Depth Tilt: Staggered slow emergence */}
             <div
-              className={`absolute right-0 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
+              className={`absolute right-4 sm:right-10 lg:right-16 xl:right-24 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
                 }`}
             >
               <img
@@ -810,7 +810,7 @@ export const Hero: React.FC = () => {
               className="absolute inset-0 pointer-events-none z-15"
               style={{
                 background:
-                  'radial-gradient(ellipse at 72% 45%, transparent 38%, #101010 100%), linear-gradient(#101010, transparent 16%)',
+                  'radial-gradient(ellipse at 68% 45%, transparent 38%, #101010 100%), linear-gradient(#101010, transparent 16%)',
               }}
             />
 
