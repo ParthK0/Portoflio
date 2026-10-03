@@ -172,14 +172,14 @@ export const Hero: React.FC = () => {
       setHasEntered(true);
       setOrbitMode('docked');
       // Typewriter name delayed so the slow upward emergence from bottom is savored
-      const full = 'PARTH KHOWAL'.split('').join(' ');
+      const full = 'Parth Khowal';
       let i = 0;
       typeStartTimer = setTimeout(() => {
         typeTimer = setInterval(() => {
           setTypedName(full.slice(0, ++i));
           if (i >= full.length && typeTimer) clearInterval(typeTimer);
-        }, 40);
-      }, 700);
+        }, 50);
+      }, 600);
     };
 
     const handleReveal = () => {
@@ -856,50 +856,30 @@ export const Hero: React.FC = () => {
               }}
             />
 
-            {/* Hero Typography & Lines: Emerges slowly upward */}
+            {/* Hero Typography: Emerges slowly upward */}
             <div
-              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[15vh] max-w-[64vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[16vh] max-w-[64vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.96]'
               }`}
             >
-              <div id="copy" ref={copyBlockRef}>
-                {/* Telemetry */}
-                <div className="font-mono text-xs tracking-wider text-[#EEECE6]/60 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
-                  <span>SYS_READY // 1.00</span>
-                  <span className="text-[#444444]">|</span>
-                  <b className="text-[#97b6da] font-medium">60 FPS DETERMINISTIC</b>
-                </div>
-
-                {/* Typewriter Name */}
-                <div className="font-inter-tight font-extrabold text-[15px] tracking-[0.38em] text-[#EEECE6] my-6 min-h-[1.3em] flex items-center gap-2.5">
-                  <span>{typedName}</span>
+              <div id="copy" ref={copyBlockRef} className="space-y-2.5 sm:space-y-3.5">
+                {/* 1. Parth Khowal */}
+                <h1 className="font-inter-tight font-extrabold text-[clamp(44px,6.8vw,106px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6] flex items-center gap-3">
+                  <span>{typedName || 'Parth Khowal'}</span>
                   <i
-                    className="inline-block w-2.5 h-2.5 rounded-full transition-colors duration-500"
+                    className="inline-block w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full transition-colors duration-500 shrink-0"
                     style={{ backgroundColor: accentColor }}
                   />
-                </div>
-
-                {/* Monumental Headline */}
-                <h1 className="font-inter-tight font-extrabold text-[clamp(44px,6.6vw,112px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6]">
-                  <div className="overflow-hidden pb-1">
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#CCCCCC] to-[#97b6da]">
-                      full-stack developer
-                    </span>
-                  </div>
-                  <div className="overflow-hidden pb-1">
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#CCCCCC] to-[#97b6da]">
-                      &amp; AI engineer
-                      <em className="not-italic transition-colors duration-500" style={{ color: accentColor }}>
-                        .
-                      </em>
-                    </span>
-                  </div>
                 </h1>
 
-                {/* Sub-description */}
-                <p className="mt-4 max-w-[46ch] text-[clamp(14px,1.2vw,18px)] leading-relaxed text-[#EEECE6]/60">
-                  Specializing in deterministic software, production web systems and AI-powered products.
+                {/* 2. Software Engineer */}
+                <h2 className="font-inter-tight font-bold text-[clamp(26px,3.6vw,54px)] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#DDDDDD] to-[#97b6da]">
+                  Software Engineer
+                </h2>
+
+                {/* 3. Building full-stack software with AI. */}
+                <p className="font-outfit text-[clamp(17px,1.6vw,24px)] text-[#EEECE6]/80 font-normal leading-relaxed max-w-[34ch] pt-1">
+                  Building full-stack software with AI.
                 </p>
               </div>
             </div>
@@ -998,7 +978,7 @@ export const Hero: React.FC = () => {
                 Architecture first, then speed: typed boundaries, tests that mean something, and models that sit behind systems instead of replacing them.
               </p>
               <p>
-                B.Tech student in AI &amp; Data Science and full-stack developer intern, shipping across fintech, automation and open source.
+                Full-stack software engineer shipping across production web systems, real-time architectures and AI products.
               </p>
             </div>
 
