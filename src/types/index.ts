@@ -3,6 +3,7 @@ export interface Project {
   title: string;
   tagline: string;
   tier: 'tier1' | 'tier2' | 'tier3';
+  displayCategory?: 'featured' | 'engineering' | 'supporting';
   team: string;
   category: string;
   description: string;
@@ -75,4 +76,23 @@ export interface MetricProof {
   title: string;
   description: string;
   colorClass: string;
+}
+
+export interface Certification {
+  id: string;
+  title: string;
+  issuer: string;
+  year: string;
+  description: string;
+  skills: string[];
+}
+
+export interface EducationItem {
+  id: string;
+  institution: string;
+  degree: string;
+  period: string;
+  score: string;
+  coursework?: string[];
+  location: string;
 }

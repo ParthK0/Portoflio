@@ -1,0 +1,136 @@
+/* Orbital Tech Stack Styles & Keyframe Animations */
+
+@keyframes orbit-spin-cw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin-ccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+
+@keyframes counter-spin-cw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes counter-spin-ccw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes core-pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 25px var(--accent-glow, rgba(168, 123, 245, 0.35)),
+                0 0 60px var(--accent-subtle, rgba(168, 123, 245, 0.15)),
+                inset 0 0 20px rgba(255, 255, 255, 0.04);
+  }
+  50% {
+    transform: scale(1.025);
+    box-shadow: 0 0 45px var(--accent-glow, rgba(168, 123, 245, 0.55)),
+                0 0 90px var(--accent-subtle, rgba(168, 123, 245, 0.25)),
+                inset 0 0 30px rgba(255, 255, 255, 0.08);
+  }
+}
+
+@keyframes dash-rotate {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 100;
+  }
+}
+
+.orbital-container {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.orbital-stage {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orbital-ring-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.orbital-ring-container.spin-cw {
+  animation: orbit-spin-cw var(--orbit-duration, 40s) linear infinite;
+}
+
+.orbital-ring-container.spin-ccw {
+  animation: orbit-spin-ccw var(--orbit-duration, 40s) linear infinite;
+}
+
+/* Pause animation when container or node is paused */
+.orbital-stage.is-paused .orbital-ring-container,
+.orbital-stage.is-paused .orbital-node-counter {
+  animation-play-state: paused !important;
+}
+
+/* Counter spin to keep tech node icons and labels upright */
+.orbital-node-counter.counter-cw {
+  animation: counter-spin-cw var(--orbit-duration, 40s) linear infinite;
+}
+
+.orbital-node-counter.counter-ccw {
+  animation: counter-spin-ccw var(--orbit-duration, 40s) linear infinite;
+}
+
+/* Core pulsating glow */
+.orbital-core-pulse {
+  animation: core-pulse-glow 4s ease-in-out infinite;
+}
+
+/* Orbital track dashed svg stroke */
+.orbital-track-dash {
+  animation: dash-rotate 60s linear infinite;
+}
+
+/* Smooth glass effect for nodes and core */
+.orbital-glass {
+  background: rgba(22, 22, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.orbital-node-glass {
+  background: rgba(20, 20, 20, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .orbital-ring-container,
+  .orbital-node-counter,
+  .orbital-core-pulse,
+  .orbital-track-dash {
+    animation: none !important;
+  }
+}
