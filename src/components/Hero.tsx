@@ -1,7 +1,20 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { sound } from '../utils/audio';
-import { Volume2, VolumeX, ShieldCheck, X } from 'lucide-react';
+import { 
+  Volume2, 
+  VolumeX, 
+  ShieldCheck, 
+  X,
+  Code2,
+  Cpu,
+  Layers,
+  Server,
+  Sparkles,
+  GraduationCap,
+  Wrench,
+  Users
+} from 'lucide-react';
 
 const FALLBACK_PORTRAIT =
   "data:image/svg+xml;utf8," +
@@ -9,17 +22,80 @@ const FALLBACK_PORTRAIT =
     "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800'><defs><radialGradient id='g' cx='50%' cy='28%' r='60%'><stop offset='0' stop-color='#777'/><stop offset='1' stop-color='#181818'/></radialGradient></defs><rect width='600' height='800' fill='#121212'/><path d='M50 800c0-170 90-250 250-270 160 20 250 100 250 270z' fill='url(#g)'/><ellipse cx='300' cy='290' rx='105' ry='135' fill='url(#g)'/></svg>"
   );
 
-const TECH_ITEMS = [
-  'React',
-  'Next.js',
-  'TypeScript',
-  'Python',
-  'Three.js',
-  'GSAP',
-  'Node.js',
-  'PostgreSQL',
-  'TensorFlow',
-  'LLM agents',
+export interface TechDomain {
+  id: string;
+  name: string;
+  shortName: string;
+  icon: React.ElementType;
+  skills: string[];
+  tagline: string;
+}
+
+export const TECH_DOMAINS: TechDomain[] = [
+  {
+    id: 'languages',
+    name: 'Programming Languages',
+    shortName: 'Languages',
+    icon: Code2,
+    skills: ['Java', 'Python', 'C', 'C++', 'TypeScript', 'SQL'],
+    tagline: 'Deterministic engines, strictly typed contracts & algorithmic foundations',
+  },
+  {
+    id: 'ml-vision',
+    name: 'ML & Computer Vision',
+    shortName: 'ML & Vision',
+    icon: Cpu,
+    skills: ['OpenCV', 'FaceNet', 'LBPH', 'Scikit-learn'],
+    tagline: 'Biometric embeddings, face recognition & computer vision pipelines',
+  },
+  {
+    id: 'frontend',
+    name: 'Web & Frontend',
+    shortName: 'Frontend',
+    icon: Layers,
+    skills: ['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS'],
+    tagline: 'High-performance interactive interfaces, App Router & modern CSS',
+  },
+  {
+    id: 'backend',
+    name: 'Backend & Databases',
+    shortName: 'Backend & DB',
+    icon: Server,
+    skills: ['Node.js', 'Express.js', 'FastAPI', 'Prisma', 'PostgreSQL', 'MySQL', 'Redis'],
+    tagline: 'Asynchronous microservices, relational schemas, ORMs & cache tiers',
+  },
+  {
+    id: 'ai-realtime',
+    name: 'AI, Multi-Agent & Real-Time',
+    shortName: 'AI & Real-Time',
+    icon: Sparkles,
+    skills: ['Gemini API', 'Claude AI', 'LangGraph', 'WebSocket', 'Agora', 'Firecrawl'],
+    tagline: 'Multi-agent workflows, prompt steering, voice streaming & real-time push',
+  },
+  {
+    id: 'coursework',
+    name: 'Coursework',
+    shortName: 'Coursework',
+    icon: GraduationCap,
+    skills: ['DSA', 'Computer Vision', 'DBMS', 'OOP', 'Probability & Statistics', 'Operating Systems', 'Linear Algebra'],
+    tagline: 'Core CS foundations across data structures, system architecture & mathematics',
+  },
+  {
+    id: 'tools',
+    name: 'Tools & Platforms',
+    shortName: 'Tools & Cloud',
+    icon: Wrench,
+    skills: ['Git', 'GitHub', 'Maven', 'Firebase'],
+    tagline: 'Version control, build automation, CI pipelines & cloud infrastructure',
+  },
+  {
+    id: 'soft-skills',
+    name: 'Soft Skills',
+    shortName: 'Soft Skills',
+    icon: Users,
+    skills: ['Teamwork', 'Communication', 'Leadership', 'Adaptability'],
+    tagline: 'Cross-functional collaboration, technical communication & engineering leadership',
+  },
 ];
 
 const MARQUEE_ITEMS = [
@@ -50,6 +126,10 @@ export const Hero: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const orbRingRef = useRef<HTMLDivElement>(null);
   const orbContainerRef = useRef<HTMLDivElement>(null);
+  const orbWireframeRef = useRef<HTMLDivElement>(null);
+  const resetCylinderRef = useRef<() => void>(() => {});
+  const rotateToDomainRef = useRef<(idx: number) => void>(() => {});
+  const isCylinderHoveredRef = useRef<boolean>(false);
 
   // States
   const [orbitMode, setOrbitMode] = useState<'intro' | 'docked' | 'orbit'>('intro');
@@ -57,6 +137,12 @@ export const Hero: React.FC = () => {
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(sound.isEnabled());
   const [isSheetOver, setIsSheetOver] = useState(false);
+  const [hoveredDomainIndex, setHoveredDomainIndex] = useState<number | null>(null);
+  const [selectedDomainIndex, setSelectedDomainIndex] = useState<number | null>(null);
+  const [hasEntered, setHasEntered] = useState<boolean>(false);
+
+  const activeDomainIndex = hoveredDomainIndex !== null ? hoveredDomainIndex : selectedDomainIndex;
+  const activeDomain = activeDomainIndex !== null ? TECH_DOMAINS[activeDomainIndex] : null;
 
   // Math helper
   const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
@@ -76,27 +162,40 @@ export const Hero: React.FC = () => {
     setOrbitMode((prev) => (prev === 'orbit' ? 'docked' : 'orbit'));
   };
 
-  // 1. Initial Typewriter & Intro Transition
+  // 1. Initial Typewriter & Upward Intro Transition
   useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let animTimer: ReturnType<typeof setTimeout> | null = null;
+    let typeStartTimer: ReturnType<typeof setTimeout> | null = null;
+    let typeTimer: ReturnType<typeof setInterval> | null = null;
 
     const startAnimation = () => {
+      setHasEntered(true);
       setOrbitMode('docked');
-      // Typewriter name
+      // Typewriter name delayed so the slow upward emergence from bottom is savored
       const full = 'PARTH KHOWAL'.split('').join(' ');
       let i = 0;
-      const timer = setInterval(() => {
-        setTypedName(full.slice(0, ++i));
-        if (i >= full.length) clearInterval(timer);
-      }, 45);
+      typeStartTimer = setTimeout(() => {
+        typeTimer = setInterval(() => {
+          setTypedName(full.slice(0, ++i));
+          if (i >= full.length && typeTimer) clearInterval(typeTimer);
+        }, 40);
+      }, 700);
     };
 
-    if (prefersReduced) {
+    const handleReveal = () => {
+      if (animTimer) clearTimeout(animTimer);
       startAnimation();
-    } else {
-      const timeout = setTimeout(startAnimation, 1800);
-      return () => clearTimeout(timeout);
-    }
+    };
+
+    window.addEventListener('hero-reveal', handleReveal);
+    animTimer = setTimeout(startAnimation, 2800);
+
+    return () => {
+      if (animTimer) clearTimeout(animTimer);
+      if (typeStartTimer) clearTimeout(typeStartTimer);
+      if (typeTimer) clearInterval(typeTimer);
+      window.removeEventListener('hero-reveal', handleReveal);
+    };
   }, []);
 
   // 2. Mouse Tracking & Fluid Custom Cursor
@@ -449,33 +548,73 @@ export const Hero: React.FC = () => {
     };
   }, [orbitMode, isSheetOver, accentColor]);
 
-  // 5. Interactive 3D Orbit Cylinder Drag
+  // 5. Omnidirectional 360° Interactive 3D Orbit Cylinder Drag & Auto-Adjusting Billboards
   useEffect(() => {
     const o = orbContainerRef.current;
     const rg = orbRingRef.current;
+    const wf = orbWireframeRef.current;
     if (!o || !rg) return;
 
-    let ang = 0;
-    let v = 0.15;
-    let dn = 0;
-    let lx = 0;
+    let rotX = 14; // Default slight tilt so 3D cylinder depth is immediately apparent
+    let rotY = 0;
+    let velX = 0;
+    let velY = 0.12;
+    let isDragging = false;
+    let lastX = 0;
+    let lastY = 0;
     let animId: number;
 
-    const onPointerDown = (e: PointerEvent) => {
-      dn = 1;
-      lx = e.clientX;
-      o.setPointerCapture(e.pointerId);
+    resetCylinderRef.current = () => {
+      rotX = 14;
+      rotY = 0;
+      velX = 0;
+      velY = 0.12;
+      setSelectedDomainIndex(null);
+      setHoveredDomainIndex(null);
+      sound.playWarp();
     };
 
-    const onPointerUp = () => {
-      dn = 0;
+    rotateToDomainRef.current = (idx: number) => {
+      const baseAngle = (idx * 360) / TECH_DOMAINS.length;
+      rotY = -baseAngle;
+      rotX = 12;
+      velX = 0;
+      velY = 0.04;
+      sound.playClick(650, 0.03);
+      setSelectedDomainIndex(idx);
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      isDragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      velX = 0;
+      velY = 0;
+      try {
+        o.setPointerCapture(e.pointerId);
+      } catch {}
+      o.style.touchAction = 'none';
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      isDragging = false;
+      try {
+        o.releasePointerCapture(e.pointerId);
+      } catch {}
+      o.style.touchAction = 'pan-y';
     };
 
     const onPointerMove = (e: PointerEvent) => {
-      if (dn) {
-        v = (e.clientX - lx) * 0.3;
-        lx = e.clientX;
-      }
+      if (!isDragging) return;
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      lastX = e.clientX;
+      lastY = e.clientY;
+
+      velY = dx * 0.35;
+      velX = -dy * 0.35;
+      rotY += velY;
+      rotX += velX;
     };
 
     o.addEventListener('pointerdown', onPointerDown);
@@ -484,18 +623,86 @@ export const Hero: React.FC = () => {
 
     const its = Array.from(rg.children) as HTMLElement[];
 
+    const cleanupFns: Array<() => void> = [];
+
+    its.forEach((el, index) => {
+      const onEnter = () => {
+        isCylinderHoveredRef.current = true;
+        setHoveredDomainIndex(index);
+        sound.playBlip(720 + index * 25, 0.015);
+      };
+      const onLeave = () => {
+        isCylinderHoveredRef.current = false;
+        setHoveredDomainIndex(null);
+      };
+      const onClick = (e: MouseEvent) => {
+        e.stopPropagation();
+        setSelectedDomainIndex((prev) => (prev === index ? null : index));
+        sound.playClick(600, 0.03);
+      };
+
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+      el.addEventListener('click', onClick);
+
+      cleanupFns.push(() => {
+        el.removeEventListener('mouseenter', onEnter);
+        el.removeEventListener('mouseleave', onLeave);
+        el.removeEventListener('click', onClick);
+      });
+    });
+
     const loop = () => {
-      ang += v;
-      if (!dn) v += (0.15 - v) * 0.03;
-      const R = Math.min(window.innerWidth * 0.36, 440);
+      if (!isDragging) {
+        rotY += velY;
+        rotX += velX;
+        // Natural friction & ambient drift (slows to pause when category is hovered or locked)
+        const isHoveredOrSelected = isCylinderHoveredRef.current;
+        velY = velY * 0.94 + (isHoveredOrSelected ? 0 : 0.09) * 0.06;
+        velX = velX * 0.94;
+      }
+
+      const w = window.innerWidth;
+      const R = Math.min(Math.max(w * 0.38, 250), 450);
+
+      // Update 3D wireframe rings container
+      if (wf) {
+        wf.style.transform = `translate(-50%, -50%) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(${R / 380})`;
+      }
+
+      const phi = (rotX * Math.PI) / 180;
+      const cosPhi = Math.cos(phi);
+      const sinPhi = Math.sin(phi);
 
       its.forEach((e, i) => {
-        const a = ang + (i * 360) / its.length;
-        const rad = (a * Math.PI) / 180;
-        const c = Math.cos(rad);
-        e.style.transform = `translate(-50%, -50%) rotateY(${a}deg) translateZ(${R}px) rotateY(${-a}deg)`;
-        e.style.opacity = `${(0.18 + (0.82 * (c + 1)) / 2).toFixed(2)}`;
-        e.style.zIndex = `${(c * 100) | 0}`;
+        const baseAngle = (i * 360) / its.length;
+        const theta = ((baseAngle + rotY) * Math.PI) / 180;
+
+        // Stagger vertical elevation into 3 tiers (-58px, 0px, +58px)
+        const tier = (i % 3) - 1;
+        const yOffset = tier * 58;
+
+        // Position on cylinder before pitch tilt
+        const x1 = R * Math.sin(theta);
+        const y1 = yOffset;
+        const z1 = R * Math.cos(theta);
+
+        // Apply pitch tilt around X axis (rotX)
+        const x2 = x1;
+        const y2 = y1 * cosPhi - z1 * sinPhi;
+        const z2 = y1 * sinPhi + z1 * cosPhi;
+
+        // Calculate depth metrics
+        const depthNorm = Math.max(0, Math.min(1, (z2 + R) / (2 * R)));
+        const scale = 0.72 + depthNorm * 0.38;
+        const opacity = 0.22 + 0.78 * Math.pow(depthNorm, 1.25);
+        const zIndex = Math.round(depthNorm * 100);
+
+        // Billboard transform: Element stays completely upright and faces camera in all 360°
+        e.style.transform = `translate3d(${x2.toFixed(1)}px, ${y2.toFixed(1)}px, ${z2.toFixed(1)}px) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
+        e.style.opacity = opacity.toFixed(2);
+        e.style.zIndex = String(zIndex);
+        e.style.pointerEvents = depthNorm > 0.35 ? 'auto' : 'none';
       });
 
       animId = requestAnimationFrame(loop);
@@ -508,6 +715,7 @@ export const Hero: React.FC = () => {
       o.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
       o.removeEventListener('pointermove', onPointerMove);
+      cleanupFns.forEach((fn) => fn());
     };
   }, []);
 
@@ -541,7 +749,9 @@ export const Hero: React.FC = () => {
       <canvas id="lg" ref={orbitalCanvasRef} className="fixed inset-0 z-25 pointer-events-none" />
 
       {/* Top Navigation Bar */}
-      <header className="fixed inset-x-0 top-0 z-30 flex justify-between items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none">
+      <header className={`fixed inset-x-0 top-0 z-30 flex justify-between items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-1000 delay-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        hasEntered ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'
+      }`}>
         <div className="flex items-center gap-4 sm:gap-6 pointer-events-auto">
           {/* Lowercase Wordmark */}
           <a
@@ -599,118 +809,135 @@ export const Hero: React.FC = () => {
       <main ref={mainTrackRef} className="relative w-full h-[420vh]">
         <div id="stage" className="sticky top-0 h-screen w-full overflow-hidden bg-[#101010] select-none">
           
-          {/* Particle Network Canvas */}
-          <canvas id="pc" ref={particleCanvasRef} className="absolute inset-0 z-0 pointer-events-none" />
-
-          {/* Masked Portrait with Natural Blend & Depth Tilt */}
-          <img
-            id="me"
-            ref={meImgRef}
-            src="/me.jpg"
-            alt="Portrait of Parth Khowal"
-            onError={(e) => {
-              const target = e.currentTarget;
-              if (target.src !== window.location.origin + '/images/new.png') {
-                target.src = '/images/new.png';
-              } else {
-                target.src = FALLBACK_PORTRAIT;
-              }
-            }}
-            className="absolute right-0 bottom-0 h-[70vh] sm:h-[76vh] lg:h-[80vh] w-auto max-w-[65vw] sm:max-w-[42vw] lg:max-w-[36vw] xl:max-w-[32vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] opacity-100 transition-transform duration-75 pointer-events-none z-10"
-            style={{
-              maskImage:
-                'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
-              WebkitMaskImage:
-                'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
-            }}
-          />
-
-          {/* Radial Vignette */}
+          {/* Main Hero Viewport Wrapper: Emerges slowly upward from bottom in sync with purple curved lift */}
           <div
-            className="absolute inset-0 pointer-events-none z-15"
-            style={{
-              background:
-                'radial-gradient(ellipse at 72% 45%, transparent 38%, #101010 100%), linear-gradient(#101010, transparent 16%)',
-            }}
-          />
-
-          {/* Hero Typography & Lines */}
-          <div
-            id="copy"
-            ref={copyBlockRef}
-            className="absolute left-[clamp(24px,6vw,115px)] bottom-[15vh] max-w-[64vw] z-20 will-change-transform"
+            className={`relative w-full h-full transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-28 opacity-0 scale-[0.98]'
+            }`}
           >
-            {/* Telemetry */}
-            <div className="font-mono text-xs tracking-wider text-[#EEECE6]/60 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
-              <span>SYS_READY // 1.00</span>
-              <span className="text-[#444444]">|</span>
-              <b className="text-[#97b6da] font-medium">60 FPS DETERMINISTIC</b>
-            </div>
+            {/* Particle Network Canvas */}
+            <canvas id="pc" ref={particleCanvasRef} className="absolute inset-0 z-0 pointer-events-none" />
 
-            {/* Typewriter Name */}
-            <div className="font-inter-tight font-extrabold text-[15px] tracking-[0.38em] text-[#EEECE6] my-6 min-h-[1.3em] flex items-center gap-2.5">
-              <span>{typedName}</span>
-              <i
-                className="inline-block w-2.5 h-2.5 rounded-full transition-colors duration-500"
-                style={{ backgroundColor: accentColor }}
+            {/* Masked Portrait with Natural Blend & Depth Tilt: Staggered slow emergence */}
+            <div
+              className={`absolute right-0 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
+              }`}
+            >
+              <img
+                id="me"
+                ref={meImgRef}
+                src="/me.jpg"
+                alt="Portrait of Parth Khowal"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src !== window.location.origin + '/images/new.png') {
+                    target.src = '/images/new.png';
+                  } else {
+                    target.src = FALLBACK_PORTRAIT;
+                  }
+                }}
+                className="h-[70vh] sm:h-[76vh] lg:h-[80vh] w-auto max-w-[65vw] sm:max-w-[42vw] lg:max-w-[36vw] xl:max-w-[32vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
+                style={{
+                  maskImage:
+                    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
+                  WebkitMaskImage:
+                    'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
+                }}
               />
             </div>
 
-            {/* Monumental Headline */}
-            <h1 className="font-inter-tight font-extrabold text-[clamp(44px,6.6vw,112px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6]">
-              <div className="overflow-hidden pb-1">
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#CCCCCC] to-[#97b6da]">
-                  full-stack developer
-                </span>
-              </div>
-              <div className="overflow-hidden pb-1">
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#CCCCCC] to-[#97b6da]">
-                  &amp; AI engineer
-                  <em className="not-italic transition-colors duration-500" style={{ color: accentColor }}>
-                    .
-                  </em>
-                </span>
-              </div>
-            </h1>
+            {/* Radial Vignette */}
+            <div
+              className="absolute inset-0 pointer-events-none z-15"
+              style={{
+                background:
+                  'radial-gradient(ellipse at 72% 45%, transparent 38%, #101010 100%), linear-gradient(#101010, transparent 16%)',
+              }}
+            />
 
-            {/* Sub-description */}
-            <p className="mt-4 max-w-[46ch] text-[clamp(14px,1.2vw,18px)] leading-relaxed text-[#EEECE6]/60">
-              Specializing in deterministic software, production web systems and AI-powered products.
-            </p>
-          </div>
-
-          {/* Center Sliding Dot Indicator */}
-          <div className="sl-line pointer-events-none z-20" />
-
-          {/* Footer Bar */}
-          <footer className="absolute inset-x-0 bottom-0 h-16 border-t border-white/10 flex items-center justify-between px-6 sm:px-16 font-outfit text-sm text-[#EEECE6]/55 z-20 bg-[#101010]/80 backdrop-blur-sm">
-            <span>© parth 2026 — built with passion, code &amp; AI.</span>
-            <button
-              onClick={() => setPrivacyOpen(true)}
-              className="hover:text-white transition-colors cursor-pointer"
+            {/* Hero Typography & Lines: Emerges slowly upward */}
+            <div
+              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[15vh] max-w-[64vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.96]'
+              }`}
             >
-              Privacy
-            </button>
-            <span className="flex items-center gap-5">
-              <a
-                href="https://github.com/ParthK0"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+              <div id="copy" ref={copyBlockRef}>
+                {/* Telemetry */}
+                <div className="font-mono text-xs tracking-wider text-[#EEECE6]/60 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
+                  <span>SYS_READY // 1.00</span>
+                  <span className="text-[#444444]">|</span>
+                  <b className="text-[#97b6da] font-medium">60 FPS DETERMINISTIC</b>
+                </div>
+
+                {/* Typewriter Name */}
+                <div className="font-inter-tight font-extrabold text-[15px] tracking-[0.38em] text-[#EEECE6] my-6 min-h-[1.3em] flex items-center gap-2.5">
+                  <span>{typedName}</span>
+                  <i
+                    className="inline-block w-2.5 h-2.5 rounded-full transition-colors duration-500"
+                    style={{ backgroundColor: accentColor }}
+                  />
+                </div>
+
+                {/* Monumental Headline */}
+                <h1 className="font-inter-tight font-extrabold text-[clamp(44px,6.6vw,112px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6]">
+                  <div className="overflow-hidden pb-1">
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#CCCCCC] to-[#97b6da]">
+                      full-stack developer
+                    </span>
+                  </div>
+                  <div className="overflow-hidden pb-1">
+                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#CCCCCC] to-[#97b6da]">
+                      &amp; AI engineer
+                      <em className="not-italic transition-colors duration-500" style={{ color: accentColor }}>
+                        .
+                      </em>
+                    </span>
+                  </div>
+                </h1>
+
+                {/* Sub-description */}
+                <p className="mt-4 max-w-[46ch] text-[clamp(14px,1.2vw,18px)] leading-relaxed text-[#EEECE6]/60">
+                  Specializing in deterministic software, production web systems and AI-powered products.
+                </p>
+              </div>
+            </div>
+
+            {/* Center Sliding Dot Indicator */}
+            <div className="sl-line pointer-events-none z-20" />
+
+            {/* Footer Bar */}
+            <footer className={`absolute inset-x-0 bottom-0 h-16 border-t border-white/10 flex items-center justify-between px-6 sm:px-16 font-outfit text-sm text-[#EEECE6]/55 z-20 bg-[#101010]/80 backdrop-blur-sm transition-all duration-1000 delay-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              hasEntered ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+            }`}>
+              <span>© parth 2026 — built with passion, code &amp; AI.</span>
+              <button
+                onClick={() => setPrivacyOpen(true)}
+                className="hover:text-white transition-colors cursor-pointer"
               >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/parth-khowal-a37903294"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
-              >
-                LinkedIn
-              </a>
-            </span>
-          </footer>
+                Privacy
+              </button>
+              <span className="flex items-center gap-5">
+                <a
+                  href="https://github.com/ParthK0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/parth-khowal-a37903294"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  LinkedIn
+                </a>
+              </span>
+            </footer>
+          </div>
 
           {/* ========================================================
               THE RISING ACCENT SHEET CURTAIN ("MANIFEST")
@@ -794,41 +1021,284 @@ export const Hero: React.FC = () => {
         </div>
       </main>
 
-      {/* 3D Interactive Rotating Cylinder of Technologies */}
+      {/* 3D Interactive Rotating Cylinder of Technologies & Competencies */}
       <section
         id="orbit"
-        className="relative z-10 bg-[#101010] py-20 px-6 overflow-hidden select-none"
+        className="relative z-30 bg-[#0c0c0c] border-t border-white/10 py-16 sm:py-24 px-4 sm:px-8 overflow-hidden select-none"
       >
+        {/* Section Header */}
+        <div className="max-w-6xl mx-auto text-center mb-6 relative z-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#161616] border border-white/10 rounded-full font-mono text-[11px] tracking-widest uppercase text-[#888888] mb-3">
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
+            <span>[3D INTERACTIVE DOMAIN CYLINDER // 360° ORBIT]</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-[#EEECE6] tracking-tight font-headline">
+            TECHNICAL MATRIX
+          </h2>
+          <p className="mt-2 text-sm sm:text-base font-mono text-[#888888] max-w-2xl mx-auto">
+            08 specialized engineering disciplines spanning production full-stack systems, real-time voice, computer vision &amp; deterministic algorithms.
+          </p>
+        </div>
+
+        {/* Quick Domain Selector Pills */}
+        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-2 mb-6 relative z-20 px-2">
+          {TECH_DOMAINS.map((domain, idx) => {
+            const isSelected = activeDomainIndex === idx;
+            const Icon = domain.icon;
+            return (
+              <button
+                key={domain.id}
+                onClick={() => rotateToDomainRef.current(idx)}
+                onMouseEnter={() => {
+                  isCylinderHoveredRef.current = true;
+                  setHoveredDomainIndex(idx);
+                }}
+                onMouseLeave={() => {
+                  isCylinderHoveredRef.current = false;
+                  setHoveredDomainIndex(null);
+                }}
+                className={`px-3 py-1.5 rounded-full font-mono text-xs transition-all duration-200 cursor-pointer flex items-center gap-2 border ${
+                  isSelected
+                    ? 'bg-[#222222] border-white text-white shadow-lg scale-105'
+                    : 'bg-[#141414]/90 border-white/10 text-[#888888] hover:text-[#EEECE6] hover:border-white/30'
+                }`}
+                style={{
+                  borderColor: isSelected ? accentColor : undefined,
+                  boxShadow: isSelected ? `0 0 15px ${accentColor}40` : undefined,
+                }}
+              >
+                <Icon className="w-3.5 h-3.5" style={{ color: isSelected ? accentColor : undefined }} />
+                <span>{domain.shortName}</span>
+                <span className="text-[10px] opacity-60">({domain.skills.length})</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* 3D Orbit Stage */}
         <div
           id="orb"
           ref={orbContainerRef}
-          className="relative h-[78vh] perspective-[1100px] cursor-grab active:cursor-grabbing touch-pan-y overflow-hidden flex items-center justify-center"
+          className="relative h-[60vh] sm:h-[70vh] perspective-[1200px] cursor-grab active:cursor-grabbing touch-pan-y overflow-hidden flex items-center justify-center max-w-7xl mx-auto"
         >
-          {/* Central Glowing Core */}
+          {/* Subtle Ambient Radial Glow */}
           <div
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(16vw,150px)] aspect-square rounded-full transition-colors duration-500 shadow-2xl"
-            style={{
-              backgroundColor: accentColor,
-              boxShadow: `0 0 80px ${accentColor}50`,
-            }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(45vw,420px)] aspect-square rounded-full pointer-events-none opacity-30 blur-3xl transition-colors duration-500"
+            style={{ backgroundColor: accentColor }}
           />
 
-          {/* 3D Cylinder Ring Container */}
-          <div ref={orbRingRef} className="absolute left-1/2 top-1/2 preserve-3d">
-            {TECH_ITEMS.map((item) => (
-              <div
-                key={item}
-                className="absolute left-0 top-0 font-outfit font-extrabold text-[clamp(22px,3.2vw,54px)] text-[#EEECE6] whitespace-nowrap tracking-tight transition-opacity duration-75 select-none"
-              >
-                {item}
-              </div>
-            ))}
+          {/* 3D Wireframe Cylinder Latitudes / Guide Rings */}
+          <div
+            ref={orbWireframeRef}
+            className="absolute left-1/2 top-1/2 preserve-3d pointer-events-none will-change-transform"
+          >
+            {/* Top Ring */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] rounded-full border border-white/10"
+              style={{
+                transform: 'translate(-50%, -50%) translateY(-58px) rotateX(90deg)',
+              }}
+            />
+            {/* Center Equator Ring */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] rounded-full border border-dashed"
+              style={{
+                borderColor: `${accentColor}40`,
+                transform: 'translate(-50%, -50%) rotateX(90deg)',
+              }}
+            />
+            {/* Bottom Ring */}
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[760px] h-[760px] rounded-full border border-white/10"
+              style={{
+                transform: 'translate(-50%, -50%) translateY(58px) rotateX(90deg)',
+              }}
+            />
+          </div>
+
+          {/* Central Glowing Core with Dynamic Pulse (z-50) */}
+          <div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(16vw,120px)] aspect-square rounded-full transition-colors duration-500 pointer-events-none z-50 flex items-center justify-center shadow-2xl"
+            style={{
+              backgroundColor: accentColor,
+              boxShadow: `0 0 90px ${accentColor}60, inset 0 0 25px rgba(255,255,255,0.4)`,
+            }}
+          >
+            <div className="w-1/2 h-1/2 rounded-full bg-white/40 blur-sm animate-pulse" />
+          </div>
+
+          {/* 3D Cylinder Ring Container for the 8 Category Nodes */}
+          <div ref={orbRingRef} className="absolute left-1/2 top-1/2">
+            {TECH_DOMAINS.map((domain, index) => {
+              const Icon = domain.icon;
+              const isActive = activeDomainIndex === index;
+              return (
+                <div
+                  key={domain.id}
+                  className="absolute left-0 top-0 whitespace-nowrap tracking-tight select-none cursor-pointer transition-all duration-300"
+                  style={{ willChange: 'transform, opacity' }}
+                >
+                  <div
+                    className={`px-3.5 sm:px-5 py-2 sm:py-3 rounded-2xl border backdrop-blur-xl transition-all duration-300 flex items-center gap-3 shadow-2xl ${
+                      isActive
+                        ? 'bg-[#202020] border-white scale-110 shadow-[0_0_30px_rgba(255,255,255,0.25)]'
+                        : 'bg-[#121212]/92 border-white/15 hover:border-white/50 text-[#EEECE6]'
+                    }`}
+                    style={{
+                      borderColor: isActive ? accentColor : undefined,
+                      boxShadow: isActive ? `0 0 35px ${accentColor}50` : undefined,
+                    }}
+                  >
+                    <div
+                      className="p-1.5 sm:p-2 rounded-xl border flex items-center justify-center transition-colors"
+                      style={{
+                        backgroundColor: isActive ? `${accentColor}25` : 'rgba(255,255,255,0.05)',
+                        borderColor: isActive ? accentColor : 'rgba(255,255,255,0.1)',
+                        color: isActive ? accentColor : '#EEECE6',
+                      }}
+                    >
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <div className="flex items-center gap-2">
+                        <span className="font-outfit font-extrabold text-sm sm:text-lg lg:text-xl text-[#EEECE6] tracking-tight">
+                          {domain.name}
+                        </span>
+                        <span
+                          className="text-[10px] font-mono px-2 py-0.5 rounded-full border"
+                          style={{
+                            backgroundColor: `${accentColor}15`,
+                            borderColor: `${accentColor}35`,
+                            color: accentColor,
+                          }}
+                        >
+                          {domain.skills.length}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[10px] text-[#888888] hidden sm:block">
+                        {domain.skills.slice(0, 3).join(' · ')}...
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <p className="text-center font-mono text-xs text-[#EEECE6]/50 tracking-[0.2em] uppercase mt-4">
-          DRAG TO ORBIT
-        </p>
+        {/* Interactive Skills Inspection HUD */}
+        <div className="max-w-4xl mx-auto mt-4 px-4 relative z-20">
+          {activeDomain ? (
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#141414]/95 backdrop-blur-xl border border-white/15 shadow-2xl transition-all duration-300">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10 mb-4">
+                <div className="flex items-center gap-3.5">
+                  <div
+                    className="p-2.5 rounded-xl border flex items-center justify-center shadow-lg"
+                    style={{
+                      backgroundColor: `${accentColor}20`,
+                      borderColor: accentColor,
+                      color: accentColor,
+                    }}
+                  >
+                    <activeDomain.icon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-mono tracking-widest uppercase text-[#888888] flex items-center gap-2">
+                      <span>DOMAIN 0{activeDomainIndex! + 1} // 08</span>
+                      {selectedDomainIndex !== null && (
+                        <span
+                          className="px-2 py-0.5 rounded font-mono text-[9px] uppercase font-bold"
+                          style={{ backgroundColor: `${accentColor}30`, color: accentColor }}
+                        >
+                          LOCKED IN HUD
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-xl sm:text-3xl font-extrabold text-[#EEECE6] tracking-tight font-headline">
+                      {activeDomain.name}
+                    </h3>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 self-start sm:self-auto">
+                  <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 font-mono text-xs text-[#AAAAAA]">
+                    {activeDomain.skills.length} competencies
+                  </span>
+                  {selectedDomainIndex !== null && (
+                    <button
+                      onClick={() => setSelectedDomainIndex(null)}
+                      className="px-2.5 py-1 rounded-full font-mono text-xs text-[#888888] hover:text-white hover:bg-white/10 border border-white/10 transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                      <span>UNLOCK</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <p className="font-mono text-xs sm:text-sm text-[#AAAAAA] mb-5 leading-relaxed">
+                {activeDomain.tagline}
+              </p>
+
+              {/* Skills Chips */}
+              <div className="flex flex-wrap gap-2.5">
+                {activeDomain.skills.map((skill) => (
+                  <div
+                    key={skill}
+                    className="group px-4 py-2 rounded-xl bg-[#1b1b1b] border border-white/10 hover:border-white text-xs sm:text-sm font-mono text-[#EEECE6] transition-all hover:scale-105 cursor-default flex items-center gap-2.5 shadow-sm"
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full transition-transform group-hover:scale-125"
+                      style={{ backgroundColor: accentColor }}
+                    />
+                    <span className="font-medium text-[#FFFFFF]">{skill}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#121212]/80 backdrop-blur-md border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div className="flex items-center gap-3.5">
+                <div
+                  className="p-2.5 rounded-xl border flex items-center justify-center"
+                  style={{
+                    backgroundColor: `${accentColor}15`,
+                    borderColor: `${accentColor}30`,
+                    color: accentColor,
+                  }}
+                >
+                  <Sparkles className="w-5 h-5 flex-shrink-0" />
+                </div>
+                <div>
+                  <div className="font-outfit font-bold text-sm sm:text-base text-[#EEECE6]">
+                    08 Engineering Domains · 43 Specialized Technologies
+                  </div>
+                  <p className="font-mono text-[11px] sm:text-xs text-[#777777] mt-0.5">
+                    Hover over or click any 3D node above to reveal its full skill matrix.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="px-3.5 py-1.5 rounded-full font-mono text-[10px] tracking-widest uppercase bg-white/5 border border-white/10 text-[#AAAAAA]">
+                  360° INTERACTIVE
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer Hint & Reset Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 relative z-20">
+          <p className="font-mono text-xs text-[#EEECE6]/50 tracking-[0.2em] uppercase flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
+            <span>DRAG ANY DIRECTION FOR 360° ORBIT · HOVER NODE TO INSPECT</span>
+          </p>
+          <button
+            onClick={() => resetCylinderRef.current()}
+            className="px-3 py-1 rounded-full font-mono text-[11px] tracking-wider uppercase bg-[#181818] border border-white/15 text-[#AAAAAA] hover:text-white hover:border-white transition-colors cursor-pointer"
+          >
+            ↺ RESET VIEW
+          </button>
+        </div>
       </section>
 
       {/* Infinite Smooth Marquee Ticker */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Command, ArrowRight, Palette, Volume2, VolumeX, Mail, Github, Linkedin, Check, X } from 'lucide-react';
+import { Search, Command, ArrowRight, Palette, Volume2, VolumeX, Mail, Github, Linkedin, Check, X, Terminal } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { sound } from '../utils/audio';
 
@@ -90,10 +90,10 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'nav-stack',
       category: 'Navigation',
-      label: 'Tech Stack // 3D Orbital Rings',
-      detail: '08 domains · 40+ technologies interactive system',
+      label: 'Tech Stack // 3D Interactive Cylinder',
+      detail: 'Core technologies & rotating 3D orbit',
       icon: <ArrowRight className="w-4 h-4" />,
-      perform: () => scrollTo('tech-stack'),
+      perform: () => scrollTo('orbit'),
     },
     {
       id: 'nav-exp',
@@ -138,6 +138,17 @@ export const CommandPalette: React.FC = () => {
       },
     })),
     // Quick Actions
+    {
+      id: 'act-replay-boot',
+      category: 'Actions',
+      label: 'Replay Boot Sequence // Loading Screen',
+      detail: 'Experience the 3D orbital startup animation',
+      icon: <Terminal className="w-4 h-4" />,
+      perform: () => {
+        setIsOpen(false);
+        window.dispatchEvent(new CustomEvent('replay-boot-sequence'));
+      },
+    },
     {
       id: 'act-cycle-theme',
       category: 'Actions',

@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import { Hero } from '../components/Hero';
 import { Pillars } from '../components/Pillars';
 import { Journey } from '../components/Journey';
-import { OrbitalTechStack } from '../components/orbital/OrbitalTechStack';
 import { Experience } from '../components/Experience';
 import { HomeProjects } from '../components/HomeProjects';
-import { Contact } from '../components/Contact';
 
 export const HomePage: React.FC = () => {
   useEffect(() => {
@@ -14,7 +12,7 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col">
-      {/* 1. Hero Section */}
+      {/* 1. Hero Section (Includes 3D Tech Orbit Cylinder) */}
       <Hero />
 
       {/* 2. About + My Journey */}
@@ -23,17 +21,11 @@ export const HomePage: React.FC = () => {
         <Journey />
       </div>
 
-      {/* 3. Tech Stack */}
-      <OrbitalTechStack />
-
-      {/* 4. Experience */}
+      {/* 3. Experience */}
       <Experience />
 
-      {/* 5. Top 5 Projects (PROBE, ReconCraft, Shree Krishna, AetherFace, ElectIQ) */}
+      {/* 4. Top 5 Projects (PROBE, ReconCraft, Shree Krishna, AetherFace, ElectIQ) */}
       <HomeProjects />
-
-      {/* 6. Contact */}
-      <Contact />
     </div>
   );
 };
