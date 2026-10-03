@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { sound } from '../utils/audio';
-import { 
-  Volume2, 
-  VolumeX, 
-  ShieldCheck, 
+import {
+  Volume2,
+  VolumeX,
+  ShieldCheck,
   X,
   Code2,
   Cpu,
@@ -127,8 +127,8 @@ export const Hero: React.FC = () => {
   const orbRingRef = useRef<HTMLDivElement>(null);
   const orbContainerRef = useRef<HTMLDivElement>(null);
   const orbWireframeRef = useRef<HTMLDivElement>(null);
-  const resetCylinderRef = useRef<() => void>(() => {});
-  const rotateToDomainRef = useRef<(idx: number) => void>(() => {});
+  const resetCylinderRef = useRef<() => void>(() => { });
+  const rotateToDomainRef = useRef<(idx: number) => void>(() => { });
   const isCylinderHoveredRef = useRef<boolean>(false);
 
   // States
@@ -154,6 +154,7 @@ export const Hero: React.FC = () => {
     const next = sound.toggle();
     setSoundEnabled(next);
   };
+
 
 
   // 1. Initial Typewriter & Upward Intro Transition
@@ -586,7 +587,7 @@ export const Hero: React.FC = () => {
       velY = 0;
       try {
         o.setPointerCapture(e.pointerId);
-      } catch {}
+      } catch { }
       o.style.touchAction = 'none';
     };
 
@@ -594,7 +595,7 @@ export const Hero: React.FC = () => {
       isDragging = false;
       try {
         o.releasePointerCapture(e.pointerId);
-      } catch {}
+      } catch { }
       o.style.touchAction = 'pan-y';
     };
 
@@ -723,12 +724,12 @@ export const Hero: React.FC = () => {
         className="fixed z-[99999] left-0 top-0 w-2.5 h-2.5 -m-[5px] rounded-full pointer-events-none transition-[width,height,margin,background-color] duration-250 ease-out"
       />
 
+
       {/* Intro Center Tagline */}
       <div
         id="tg"
-        className={`fixed z-[26] left-[calc(50%+110px)] top-1/2 -translate-y-1/2 font-outfit font-semibold text-[22px] tracking-wide pointer-events-none transition-opacity duration-700 ${
-          orbitMode === 'intro' ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`fixed z-[26] left-[calc(50%+110px)] top-1/2 -translate-y-1/2 font-outfit font-semibold text-[22px] tracking-wide pointer-events-none transition-opacity duration-700 ${orbitMode === 'intro' ? 'opacity-100' : 'opacity-0'
+          }`}
         style={{ color: accentColor }}
       >
         build · ship · iterate
@@ -738,9 +739,9 @@ export const Hero: React.FC = () => {
       <canvas id="lg" ref={orbitalCanvasRef} className="fixed inset-0 z-25 pointer-events-none" />
 
       {/* Top Navigation Bar */}
-      <header className={`fixed inset-x-0 top-0 z-30 flex justify-end items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-1000 delay-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        hasEntered ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'
-      }`}>
+      <header className={`fixed inset-x-0 top-0 z-30 flex justify-end items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-1000 delay-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'
+        }`}>
+
         {/* Right Controls */}
         <div className="flex items-center gap-3 pointer-events-auto">
           <button
@@ -767,21 +768,19 @@ export const Hero: React.FC = () => {
       {/* 420vh Sticky Stage Wrapper */}
       <main ref={mainTrackRef} className="relative w-full h-[420vh]">
         <div id="stage" className="sticky top-0 h-screen w-full overflow-hidden bg-[#101010] select-none">
-          
+
           {/* Main Hero Viewport Wrapper: Emerges slowly upward from bottom in sync with purple curved lift */}
           <div
-            className={`relative w-full h-full transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-28 opacity-0 scale-[0.98]'
-            }`}
+            className={`relative w-full h-full transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-28 opacity-0 scale-[0.98]'
+              }`}
           >
             {/* Particle Network Canvas */}
             <canvas id="pc" ref={particleCanvasRef} className="absolute inset-0 z-0 pointer-events-none" />
 
             {/* Masked Portrait with Natural Blend & Depth Tilt: Staggered slow emergence */}
             <div
-              className={`absolute right-0 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
-              }`}
+              className={`absolute right-0 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
+                }`}
             >
               <img
                 id="me"
@@ -817,9 +816,8 @@ export const Hero: React.FC = () => {
 
             {/* Hero Typography: Emerges slowly upward */}
             <div
-              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[16vh] max-w-[64vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.96]'
-              }`}
+              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[16vh] max-w-[64vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.96]'
+                }`}
             >
               <div id="copy" ref={copyBlockRef} className="space-y-2.5 sm:space-y-3.5">
                 {/* 1. Parth Khowal */}
@@ -965,11 +963,10 @@ export const Hero: React.FC = () => {
                   isCylinderHoveredRef.current = false;
                   setHoveredDomainIndex(null);
                 }}
-                className={`px-3 py-1.5 rounded-full font-mono text-xs transition-all duration-200 cursor-pointer flex items-center gap-2 border ${
-                  isSelected
+                className={`px-3 py-1.5 rounded-full font-mono text-xs transition-all duration-200 cursor-pointer flex items-center gap-2 border ${isSelected
                     ? 'bg-[#222222] border-white text-white shadow-lg scale-105'
                     : 'bg-[#141414]/90 border-white/10 text-[#888888] hover:text-[#EEECE6] hover:border-white/30'
-                }`}
+                  }`}
                 style={{
                   borderColor: isSelected ? accentColor : undefined,
                   boxShadow: isSelected ? `0 0 15px ${accentColor}40` : undefined,
@@ -1047,11 +1044,10 @@ export const Hero: React.FC = () => {
                   style={{ willChange: 'transform, opacity' }}
                 >
                   <div
-                    className={`px-3.5 sm:px-5 py-2 sm:py-3 rounded-2xl border backdrop-blur-xl transition-all duration-300 flex items-center gap-3 shadow-2xl ${
-                      isActive
+                    className={`px-3.5 sm:px-5 py-2 sm:py-3 rounded-2xl border backdrop-blur-xl transition-all duration-300 flex items-center gap-3 shadow-2xl ${isActive
                         ? 'bg-[#202020] border-white scale-110 shadow-[0_0_30px_rgba(255,255,255,0.25)]'
                         : 'bg-[#121212]/92 border-white/15 hover:border-white/50 text-[#EEECE6]'
-                    }`}
+                      }`}
                     style={{
                       borderColor: isActive ? accentColor : undefined,
                       boxShadow: isActive ? `0 0 35px ${accentColor}50` : undefined,

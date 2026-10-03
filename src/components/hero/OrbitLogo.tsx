@@ -178,7 +178,7 @@ export const OrbitLogo: React.FC<OrbitLogoProps> = ({ onOrbitStateChange }) => {
       onMouseLeave={handleMouseLeave}
       onClick={handleToggle}
       className="relative flex items-center cursor-pointer select-none group py-2"
-      title={isOrbiting ? "Click to collapse logo" : "Click to gravitize orbital logo"}
+      title="Orbital Logo"
     >
       {/* 3D / 2D Orbital Stage */}
       <div className={`relative transition-all duration-500 ease-out ${isOrbiting ? 'w-28 h-24 -ml-4 -mr-2' : 'w-10 h-11 mr-2'}`}>
@@ -298,17 +298,6 @@ export const OrbitLogo: React.FC<OrbitLogoProps> = ({ onOrbitStateChange }) => {
             )}
           </span>
         ))}
-      </div>
-
-      {/* Orbit Status Pill on hover */}
-      <div className="ml-3 hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-[#222222] bg-[#141414] text-[10px] font-mono text-[#888888]">
-        <span
-          className="w-1.5 h-1.5 rounded-full animate-pulse"
-          style={{ backgroundColor: isOrbiting ? '#A87BFF' : '#97B6DA' }}
-        />
-        <span className="uppercase tracking-wider">
-          {isOrbiting ? 'ORBIT ACTIVE' : 'GRAVITIZE'}
-        </span>
       </div>
     </div>
   );
