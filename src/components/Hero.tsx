@@ -598,9 +598,9 @@ export const Hero: React.FC = () => {
                   Software Engineer
                 </h2>
 
-                {/* 3. Building full-stack software with AI. */}
+                {/* 3. Building full-stack software with AI */}
                 <p className="font-outfit text-[clamp(24px,2.3vw,35px)] text-[#EEECE6]/80 font-normal leading-relaxed max-w-[42ch] mt-2 sm:mt-2.5">
-                  Building full-stack software with AI.
+                  Building full-stack software with AI
                 </p>
               </div>
             </div>
@@ -610,21 +610,17 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* ========================================================
-              THE RISING ACCENT SHEET CURTAIN ("MANIFEST")
+              THE RISING ACCENT SHEET CURTAIN ("ABOUT ME")
              ======================================================== */}
           <section
             id="sheet"
             ref={sheetRef}
-            className="absolute inset-0 z-20 transition-colors duration-500 pt-[13vh] px-6 sm:px-16 text-[#101010] pointer-events-auto"
+            className="absolute inset-0 z-20 transition-colors duration-500 pt-[12vh] sm:pt-[14vh] px-6 sm:px-16 text-[#101010] pointer-events-auto"
             style={{
               backgroundColor: accentColor,
               clipPath: 'ellipse(100% 0% at 50% 100%)',
             }}
           >
-            <div className="text-center font-outfit font-semibold text-xs tracking-[0.35em] text-white/85">
-              MANIFEST
-            </div>
-
             {/* Scaling Central Geometric Hole/Ring */}
             <div
               id="ring"
@@ -637,38 +633,48 @@ export const Hero: React.FC = () => {
               }}
             />
 
-            {/* Split 3-Column Monumental Header */}
+            {/* Split Monumental Header: Top-Aligned Left, Center (ABOUT ME), and Right */}
             <div
               id="cols"
               ref={colsRef}
-              className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-[4vw] mt-[2vh] font-outfit font-extrabold text-[clamp(40px,5.6vw,104px)] leading-[0.93] tracking-[-0.01em] uppercase text-[#101010]"
+              className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-start gap-4 md:gap-[2.5vw] lg:gap-[4vw] text-[#101010]"
             >
-              <div>
-                Build<br />
-                Ship<br />
-                Iterate.
+              {/* Left Column: THINK BUILD QUESTION (shifted more right, top-aligned) */}
+              <div className="order-2 md:order-1 font-outfit font-extrabold text-[clamp(34px,5vw,92px)] leading-[0.93] tracking-[-0.01em] uppercase md:pl-14 lg:pl-24 xl:pl-28 whitespace-nowrap">
+                THINK<br />
+                BUILD<br />
+                QUESTION
               </div>
-              <div className="text-center">Not</div>
-              <div className="text-right">
-                <span className="strike-anim">Guess.</span><br />
-                Measure.
+
+              {/* Center Column: ABOUT ME (top-aligned to match Left and Right) */}
+              <div className="order-1 md:order-2 text-center font-outfit font-bold text-[clamp(18px,1.8vw,24px)] tracking-[0.35em] text-white/95 uppercase pt-2 md:pt-3.5 lg:pt-4 whitespace-nowrap select-none">
+                ABOUT ME
+              </div>
+
+              {/* Right Column: UNDERSTAND REFINE (top-aligned to match ABOUT ME) */}
+              <div className="order-3 md:order-3 font-outfit font-extrabold text-[clamp(34px,5vw,92px)] leading-[0.93] tracking-[-0.01em] uppercase text-left md:text-right whitespace-nowrap">
+                UNDERSTAND<br />
+                REFINE
               </div>
             </div>
 
-            {/* Manifest Body Paragraphs */}
+            {/* Manifest / About Me Body Paragraphs */}
             <div
               id="body"
               ref={bodyTextRef}
-              className="relative mt-[5vh] md:ml-[46%] max-w-full md:max-w-[50%] font-outfit font-semibold text-[clamp(14px,1.2vw,20px)] leading-[1.45] text-[#101010]/90 space-y-4"
+              className="relative mt-5 md:mt-2 md:ml-[44%] lg:ml-[46%] max-w-full md:max-w-[54%] font-outfit font-medium text-[clamp(13px,1.15vw,17px)] leading-[1.48] text-[#101010]/95 space-y-2.5 sm:space-y-3"
             >
               <p>
-                I build production web systems and AI products where behavior is predictable and failures are visible.
+                I’ve always been drawn to problems that don’t have an obvious answer.
               </p>
               <p>
-                Architecture first, then speed: typed boundaries, tests that mean something, and models that sit behind systems instead of replacing them.
+                Mathematics taught me to think logically. Software taught me to turn that thinking into systems. AI taught me to question what those systems can actually understand.
               </p>
               <p>
-                Full-stack software engineer shipping across production web systems, real-time architectures and AI products.
+                Somewhere between the three, I found what I enjoy most — taking an idea apart, understanding how it works, and building something better from it.
+              </p>
+              <p>
+                I’m curious about what lies beneath the surface: the logic behind an algorithm, the architecture behind a system, and the decisions that make it reliable.
               </p>
             </div>
 
@@ -676,14 +682,14 @@ export const Hero: React.FC = () => {
             <div
               id="big"
               ref={bigTextRef}
-              className="absolute left-6 sm:left-16 right-6 sm:right-16 bottom-[8vh] flex items-center gap-[2vw] font-outfit font-extrabold text-[clamp(34px,5.6vw,104px)] leading-none text-[#EEECE6]"
+              className="absolute left-6 sm:left-16 right-6 sm:right-16 bottom-[5vh] sm:bottom-[7vh] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-[2vw] font-outfit text-[#EEECE6]"
             >
-              <span>
-                Built to <span className="underline-anim">ship</span>.
+              <span className="font-extrabold text-[clamp(28px,5vw,94px)] leading-none">
+                Built to <span className="underline-anim">understand</span>
               </span>
               <hr className="flex-1 border-0 h-[1px] bg-[#EEECE6]/60 hidden sm:block" />
-              <small className="font-outfit font-semibold text-[clamp(12px,1.1vw,18px)] text-[#EEECE6]/80 whitespace-nowrap">
-                for startups, fintech and AI products
+              <small className="font-outfit font-semibold text-[clamp(12px,1.15vw,18px)] text-[#EEECE6]/90 whitespace-nowrap">
+                curious by nature. engineering by choice.
               </small>
             </div>
           </section>
