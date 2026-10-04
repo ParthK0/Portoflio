@@ -31,13 +31,25 @@ export const Experience: React.FC = () => {
               <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#9D6BEE] to-[#A87BF5]" />
 
               <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-                <div>
-                  <h3 className="text-2xl font-bold text-[#FFFFFF] tracking-tight mb-1">
-                    {item.role}
-                  </h3>
-                  <div className="text-lg font-semibold text-[#A87BF5] flex items-center gap-2">
-                    <Briefcase className="w-4 h-4 text-[#9D6BEE]" />
-                    <span>{item.company}</span>
+                <div className="flex items-center gap-4 sm:gap-5">
+                  {item.logo && (
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2 border border-white/20 shadow-lg flex items-center justify-center shrink-0 overflow-hidden">
+                      <img
+                        src={item.logo}
+                        alt={`${item.company} logo`}
+                        className="w-full h-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="text-2xl font-bold text-[#FFFFFF] tracking-tight mb-1">
+                      {item.role}
+                    </h3>
+                    <div className="text-lg font-semibold text-[#A87BF5] flex items-center gap-2">
+                      <Briefcase className="w-4 h-4 text-[#9D6BEE]" />
+                      <span>{item.company}</span>
+                    </div>
                   </div>
                 </div>
 

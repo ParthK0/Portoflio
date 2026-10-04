@@ -94,6 +94,7 @@ export const EXPERIENCE_ITEMS: ExperienceItem[] = [
     company: "MSKard Business Solutions",
     period: "May 2025 – Present",
     type: "Internship",
+    logo: "/images/mskard.jpg",
     bullets: [
       "Building, scaling, and maintaining a production full-stack e-commerce platform using Next.js 16, Node.js/Express, and PostgreSQL with strict TypeScript contracts.",
       "Developing accessible and responsive UI component libraries with Tailwind CSS, ensuring cross-device consistency and optimal rendering lifecycles.",

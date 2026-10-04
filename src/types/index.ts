@@ -41,6 +41,7 @@ export interface ExperienceItem {
   type: string;
   bullets: string[];
   technologies: string[];
+  logo?: string;
 }
 
 export interface JourneyStage {
