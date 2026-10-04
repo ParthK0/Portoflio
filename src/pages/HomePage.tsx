@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Hero } from '../components/Hero';
-import { Pillars } from '../components/Pillars';
 import { Journey } from '../components/Journey';
 import { Experience } from '../components/Experience';
 import { HomeProjects } from '../components/HomeProjects';
@@ -17,7 +16,6 @@ export const HomePage: React.FC = () => {
 
       {/* 2. About + My Journey */}
       <div id="about">
-        <Pillars />
         <Journey />
       </div>
 

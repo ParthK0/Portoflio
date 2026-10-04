@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Pillars } from '../components/Pillars';
 import { Journey } from '../components/Journey';
 import { Experience } from '../components/Experience';
 import { EducationCertifications } from '../components/EducationCertifications';
@@ -222,8 +221,6 @@ export const ManifestoPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Engineering Pillars (Imported Directly) */}
-      <Pillars />
 
       {/* Evolution Timeline (The Journey) */}
       <Journey />

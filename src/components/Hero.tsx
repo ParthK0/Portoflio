@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { sound } from '../utils/audio';
 import {
@@ -756,6 +757,13 @@ export const Hero: React.FC = () => {
             )}
           </button>
 
+          <Link
+            to="/work"
+            className="pill px-4 py-2 rounded-full font-mono text-xs tracking-wider uppercase text-[#EEECE6] bg-[#101010]/60 backdrop-blur-md border border-white/20 hover:border-white transition-all cursor-pointer"
+          >
+            WORK ↗
+          </Link>
+
           <a
             href="#contact"
             className="pill px-4 py-2 rounded-full font-mono text-xs tracking-wider uppercase text-[#EEECE6] bg-[#101010]/60 backdrop-blur-md border border-white/20 hover:border-white transition-all cursor-pointer"
@@ -779,7 +787,7 @@ export const Hero: React.FC = () => {
 
             {/* Masked Portrait with Natural Blend & Depth Tilt: Staggered slow emergence */}
             <div
-              className={`absolute right-3 sm:right-8 lg:right-14 xl:right-20 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
+              className={`absolute right-2 sm:right-6 lg:right-10 xl:right-16 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
                 }`}
             >
               <img
@@ -795,7 +803,7 @@ export const Hero: React.FC = () => {
                     target.src = FALLBACK_PORTRAIT;
                   }
                 }}
-                className="h-[78vh] sm:h-[84vh] lg:h-[88vh] xl:h-[92vh] w-auto max-w-[75vw] sm:max-w-[50vw] lg:max-w-[44vw] xl:max-w-[38vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
+                className="h-[85vh] sm:h-[90vh] lg:h-[94vh] xl:h-[98vh] w-auto max-w-[80vw] sm:max-w-[56vw] lg:max-w-[48vw] xl:max-w-[42vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
                 style={{
                   maskImage:
                     'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',

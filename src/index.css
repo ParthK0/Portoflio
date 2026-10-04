@@ -256,14 +256,14 @@
   font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Sliding dot scroll indicator */
+/* Sliding dot scroll indicator - anchored to bottom and drifting upwards */
 .sl-line {
   position: absolute;
   left: 50%;
-  bottom: 64px;
+  bottom: 0;
   width: 1px;
-  height: 90px;
-  background: rgba(238, 236, 230, 0.35);
+  height: 96px;
+  background: linear-gradient(to top, rgba(238, 236, 230, 0.45), rgba(238, 236, 230, 0.05));
 }
 
 .sl-line::after {
@@ -274,14 +274,14 @@
   height: 5px;
   border-radius: 50%;
   background: #EEECE6;
-  animation: sl-drift 2.2s infinite;
+  animation: sl-drift-up 2.2s infinite;
 }
 
-@keyframes sl-drift {
-  0% { top: 0; opacity: 0; }
+@keyframes sl-drift-up {
+  0% { top: 100%; opacity: 0; }
   20% { opacity: 1; }
   80% { opacity: 1; }
-  100% { top: 100%; opacity: 0; }
+  100% { top: 0%; opacity: 0; }
 }
 
 /* Dynamic strikethrough and underline for Manifest */
