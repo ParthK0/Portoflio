@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Copyright, Globe } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { useTheme } from '../context/ThemeContext';
@@ -8,8 +8,7 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [time, setTime] = useState<string>('');
-  const location = useLocation();
-  const { currentTheme, cycleTheme, setThemeById, themes } = useTheme();
+  const { currentTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -114,24 +113,8 @@ export const Navbar: React.FC = () => {
           ))}
         </nav>
 
-        {/* Right: Solid Color Cycle, Location/Time & Let's Talk CTA */}
+        {/* Right: Location/Time & Let's Talk CTA */}
         <div className="hidden lg:flex items-center gap-4">
-          {/* Quick Solid Color Cycle Button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              cycleTheme(e);
-            }}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181818] border border-[#262626] hover:border-[var(--accent-primary)] text-xs font-mono text-[#A0A0A0] hover:text-[#FFFFFF] transition-all cursor-pointer group"
-            title={`Active Solid Color: ${currentTheme.name} (Click or tap anywhere on page to cycle)`}
-          >
-            <span
-              className="w-2 h-2 rounded-full inline-block transition-transform duration-300 group-hover:scale-125"
-              style={{ backgroundColor: currentTheme.primary }}
-            />
-            <span className="text-[11px] font-medium uppercase tracking-wide">{currentTheme.name}</span>
-          </button>
-
           <div className="flex items-center gap-2 text-xs font-mono text-[#A0A0A0]">
             <Globe className="w-3.5 h-3.5 text-[var(--accent-primary)] animate-spin" style={{ animationDuration: '18s' }} />
             <span>Delhi NCR</span>
@@ -149,22 +132,6 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Toggle Button */}
         <div className="md:hidden flex items-center gap-2">
-          {/* Mobile Color Cycle Trigger */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              cycleTheme(e);
-            }}
-            className="p-2 rounded-full bg-[#181818] border border-[#262626] cursor-pointer"
-            title={`Active: ${currentTheme.name}`}
-            aria-label="Cycle Color Theme"
-          >
-            <span
-              className="w-3 h-3 rounded-full block"
-              style={{ backgroundColor: currentTheme.primary }}
-            />
-          </button>
-
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="text-[#E0E0E0] hover:text-[var(--accent-primary)] p-2 cursor-pointer transition-colors"
@@ -221,39 +188,6 @@ export const Navbar: React.FC = () => {
                 )}
               </NavLink>
             ))}
-          </div>
-
-          {/* Solid Color Selector in Mobile Drawer */}
-          <div className="py-2 border-t border-[#262626] flex flex-col gap-2">
-            <div className="flex items-center justify-between text-xs font-mono text-[#A0A0A0]">
-              <span>[SOLID ACCENT]</span>
-              <span className="text-[11px] text-[#707070]">{currentTheme.name}</span>
-            </div>
-            <div className="grid grid-cols-7 gap-1.5 pt-1">
-              {themes.map((theme) => {
-                const isActive = theme.id === currentTheme.id;
-                return (
-                  <button
-                    key={theme.id}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setThemeById(theme.id);
-                    }}
-                    className={`p-2 rounded-xl border transition-all flex items-center justify-center cursor-pointer ${
-                      isActive
-                        ? 'bg-[#1F1F1F] border-[var(--accent-primary)]'
-                        : 'border-[#262626] bg-[#181818] hover:border-[#383838]'
-                    }`}
-                    title={theme.name}
-                  >
-                    <span
-                      className="w-3 h-3 rounded-full block"
-                      style={{ backgroundColor: theme.primary }}
-                    />
-                  </button>
-                );
-              })}
-            </div>
           </div>
 
           {/* Socials & Talk CTA */}

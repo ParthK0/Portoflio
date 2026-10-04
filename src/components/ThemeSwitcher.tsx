@@ -5,7 +5,6 @@ import { Palette, ChevronRight, Check } from 'lucide-react';
 export const ThemeSwitcher: React.FC = () => {
   const { currentTheme, cycleTheme, setThemeById, themes } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [showTip, setShowTip] = useState(true);
 
   return (
     <aside
@@ -13,30 +12,6 @@ export const ThemeSwitcher: React.FC = () => {
       data-no-cycle="true"
       className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2.5 pointer-events-auto select-none no-theme-cycle"
     >
-      {/* Floating subtle hint pill */}
-      {showTip && (
-        <div
-          data-no-cycle="true"
-          className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#181818]/95 backdrop-blur-md border border-[#262626] text-xs font-mono text-[#A0A0A0] shadow-lg shadow-black/50"
-        >
-          <span
-            className="w-2 h-2 rounded-full inline-block shrink-0 transition-colors duration-300"
-            style={{ backgroundColor: currentTheme.primary }}
-          />
-          <span>Tap anywhere on the website to cycle colors</span>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowTip(false);
-            }}
-            className="text-[#707070] hover:text-[#FFFFFF] text-xs px-1 cursor-pointer ml-1"
-            aria-label="Dismiss color shift hint"
-          >
-            ✕
-          </button>
-        </div>
-      )}
-
       {/* Expanded Palette Tray */}
       {isOpen && (
         <div
@@ -80,10 +55,6 @@ export const ThemeSwitcher: React.FC = () => {
                 </button>
               );
             })}
-          </div>
-
-          <div className="pt-2 border-t border-[#262626] text-[10px] font-mono text-[#707070] text-center">
-            Tap background anywhere to shift
           </div>
         </div>
       )}

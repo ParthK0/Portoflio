@@ -227,13 +227,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     applyThemeToDOM(target);
   }, []);
 
-  // Global Tap Listener: Tap anywhere on website (excluding interactive inputs/buttons/links) to cycle color
+  // Global Click Listener: Click anywhere on background to cycle solid color silently
   useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
 
-      // Ignore if clicking on interactive controls or dismiss buttons
+      // Ignore interactive controls so buttons/links still perform their own actions
       const interactive = target.closest(
         'a, button, input, textarea, select, [role="button"], [data-no-cycle], .no-theme-cycle, [data-interactive="true"]'
       );
@@ -241,7 +241,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return;
       }
 
-      // Ignore if user is selecting/highlighting text
+      // Ignore text selection so user can highlight text without cycling
       const selection = window.getSelection();
       if (selection && selection.toString().trim().length > 0) {
         return;

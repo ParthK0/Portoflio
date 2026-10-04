@@ -208,13 +208,13 @@ export const Hero: React.FC = () => {
     let H = (pc.height = cv.height = window.innerHeight);
     let kk = clamp(W / 1500, 0.62, 1);
 
-    // Particle network
+    // Constellation particle network (balanced midpoint)
     let pts = Array.from({ length: Math.round(W / 16) }, () => ({
-      x: Math.random() * W * 0.62,
+      x: Math.random() * W * 0.67,
       y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      r: Math.random() * 1.5 + 0.6,
+      vx: (Math.random() - 0.5) * 0.32,
+      vy: (Math.random() - 0.5) * 0.32,
+      r: Math.random() * 1.75 + 0.9,
     }));
 
     const onResize = () => {
@@ -222,11 +222,11 @@ export const Hero: React.FC = () => {
       H = pc.height = cv.height = window.innerHeight;
       kk = clamp(W / 1500, 0.62, 1);
       pts = Array.from({ length: Math.round(W / 16) }, () => ({
-        x: Math.random() * W * 0.62,
+        x: Math.random() * W * 0.67,
         y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.6,
+        vx: (Math.random() - 0.5) * 0.32,
+        vy: (Math.random() - 0.5) * 0.32,
+        r: Math.random() * 1.75 + 0.9,
       }));
     };
     window.addEventListener('resize', onResize);
@@ -275,48 +275,66 @@ export const Hero: React.FC = () => {
       orb += ((orbitMode === 'orbit' ? 1 : 0) - orb) * 0.05;
       sh += ((isSheetOver ? 1 : 0) - sh) * 0.1;
 
-      // 1. PARTICLES NETWORK
+      // 1. PARTICLES & CONSTELLATION NETWORK
       pg.clearRect(0, 0, W, H);
       const pa = 1 - clamp(p * 3, 0, 1);
-      pg.globalAlpha = pa;
-      pg.fillStyle = accentColor;
-      pg.strokeStyle = accentColor;
+      if (pa > 0.01) {
+        const maxX = W * 0.67;
+        pg.fillStyle = accentColor;
+        pg.strokeStyle = accentColor;
 
-      pts.forEach((q) => {
-        q.x += q.vx;
-        q.y += q.vy;
-        if (q.x < 0 || q.x > W * 0.62) q.vx *= -1;
-        if (q.y < 0 || q.y > H) q.vy *= -1;
+        pts.forEach((q) => {
+          q.x += q.vx;
+          q.y += q.vy;
+          if (q.x < 0 || q.x > maxX) q.vx *= -1;
+          if (q.y < 0 || q.y > H) q.vy *= -1;
 
-        // Repel from mouse
-        const dx = q.x - mx;
-        const dy = q.y - my;
-        const d = Math.hypot(dx, dy);
-        if (d < 120 && d > 0) {
-          q.x += (dx / d) * 1.2;
-          q.y += (dy / d) * 1.2;
-        }
+          // Repel gently from mouse
+          const dx = q.x - mx;
+          const dy = q.y - my;
+          const d = Math.hypot(dx, dy);
+          if (d < 130 && d > 0) {
+            q.x += (dx / d) * 1.2;
+            q.y += (dy / d) * 1.2;
+          }
 
-        pg.beginPath();
-        pg.arc(q.x, q.y, q.r, 0, Math.PI * 2);
-        pg.fill();
-      });
+          // Render star node with balanced visibility
+          pg.globalAlpha = pa * 0.9;
+          pg.beginPath();
+          pg.arc(q.x, q.y, q.r, 0, Math.PI * 2);
+          pg.fill();
+        });
 
-      // Connections between nearby particles
-      pg.lineWidth = 0.5;
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
-          if (d < 95) {
-            pg.globalAlpha = pa * (1 - d / 95) * 0.35;
-            pg.beginPath();
-            pg.moveTo(pts[i].x, pts[i].y);
-            pg.lineTo(pts[j].x, pts[j].y);
-            pg.stroke();
+        // Balanced constellation connections between nearby particles
+        const maxDist = 110;
+        pg.lineWidth = 0.75;
+        for (let i = 0; i < pts.length; i++) {
+          for (let j = i + 1; j < pts.length; j++) {
+            const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
+            if (d < maxDist) {
+              const alphaRatio = 1 - d / maxDist;
+              pg.globalAlpha = pa * alphaRatio * 0.50;
+              pg.beginPath();
+              pg.moveTo(pts[i].x, pts[i].y);
+              pg.lineTo(pts[j].x, pts[j].y);
+              pg.stroke();
+            }
+          }
+
+          // Subtle interactive connection from nearby star node to mouse cursor
+          if (mx > 0 && my > 0 && mx < maxX + 50) {
+            const dm = Math.hypot(pts[i].x - mx, pts[i].y - my);
+            if (dm < 125) {
+              pg.globalAlpha = pa * (1 - dm / 125) * 0.50;
+              pg.beginPath();
+              pg.moveTo(pts[i].x, pts[i].y);
+              pg.lineTo(mx, my);
+              pg.stroke();
+            }
           }
         }
+        pg.globalAlpha = 1;
       }
-      pg.globalAlpha = 1;
 
       // 2. 3-BODY ORBITAL LOGO SYSTEM
       x.clearRect(0, 0, W, H);
@@ -526,7 +544,7 @@ export const Hero: React.FC = () => {
 
             {/* Masked Portrait with Natural Blend & Depth Tilt: Staggered slow emergence */}
             <div
-              className={`absolute right-2 sm:right-6 lg:right-10 xl:right-16 bottom-0 pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.95]'
+              className={`absolute right-5 sm:right-10 lg:right-16 xl:right-24 -bottom-[20%] origin-bottom pointer-events-none z-10 will-change-transform transition-all duration-[1500ms] delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-[1.17]' : 'translate-y-36 opacity-0 scale-[1.06]'
                 }`}
             >
               <img
@@ -542,7 +560,7 @@ export const Hero: React.FC = () => {
                     target.src = FALLBACK_PORTRAIT;
                   }
                 }}
-                className="h-[85vh] sm:h-[90vh] lg:h-[94vh] xl:h-[98vh] w-auto max-w-[80vw] sm:max-w-[56vw] lg:max-w-[48vw] xl:max-w-[42vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
+                className="h-[85vh] sm:h-[90vh] lg:h-[94vh] xl:h-[98vh] w-auto max-w-[85vw] sm:max-w-[60vw] lg:max-w-[52vw] xl:max-w-[46vw] object-cover object-[55%_top] filter grayscale contrast-[1.08] brightness-[0.94] pointer-events-none"
                 style={{
                   maskImage:
                     'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.6) 22%, #000 45%), linear-gradient(to bottom, black 88%, transparent 100%)',
@@ -557,32 +575,31 @@ export const Hero: React.FC = () => {
               className="absolute inset-0 pointer-events-none z-15"
               style={{
                 background:
-                  'radial-gradient(ellipse at 68% 45%, transparent 38%, #101010 100%), linear-gradient(#101010, transparent 16%)',
+                  'radial-gradient(ellipse at 63% 54%, transparent 50%, #101010 100%), linear-gradient(#101010, transparent 16%)',
               }}
             />
 
             {/* Hero Typography: Emerges slowly upward */}
             <div
-              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[16vh] max-w-[64vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.96]'
+              className={`absolute left-[clamp(24px,6vw,115px)] bottom-[16vh] max-w-[72vw] z-20 will-change-transform transition-all duration-[1400ms] delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-36 opacity-0 scale-[0.96]'
                 }`}
             >
-              <div id="copy" ref={copyBlockRef} className="space-y-2.5 sm:space-y-3.5">
+              <div id="copy" ref={copyBlockRef} className="flex flex-col">
                 {/* 1. Parth Khowal */}
-                <h1 className="font-inter-tight font-extrabold text-[clamp(36px,5.4vw,84px)] leading-[0.98] tracking-[-0.035em] text-[#EEECE6] flex items-center gap-3">
+                <h1
+                  className="font-inter-tight font-extrabold text-[clamp(43px,6.5vw,101px)] leading-[0.98] tracking-[-0.035em] transition-colors duration-500"
+                  style={{ color: accentColor }}
+                >
                   <span>{typedName || 'Parth Khowal'}</span>
-                  <i
-                    className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-colors duration-500 shrink-0"
-                    style={{ backgroundColor: accentColor }}
-                  />
                 </h1>
 
                 {/* 2. Software Engineer */}
-                <h2 className="font-inter-tight font-bold text-[clamp(26px,3.6vw,54px)] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#DDDDDD] to-[#97b6da]">
+                <h2 className="font-inter-tight font-bold text-[clamp(31px,4.3vw,65px)] leading-[1.05] tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#EEECE6] via-[#DDDDDD] to-[#97b6da] mt-3 sm:mt-4">
                   Software Engineer
                 </h2>
 
                 {/* 3. Building full-stack software with AI. */}
-                <p className="font-outfit text-[clamp(17px,1.6vw,24px)] text-[#EEECE6]/80 font-normal leading-relaxed max-w-[34ch] pt-1">
+                <p className="font-outfit text-[clamp(24px,2.3vw,35px)] text-[#EEECE6]/80 font-normal leading-relaxed max-w-[42ch] mt-2 sm:mt-2.5">
                   Building full-stack software with AI.
                 </p>
               </div>

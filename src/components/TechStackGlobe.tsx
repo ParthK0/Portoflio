@@ -76,7 +76,7 @@ for (let i = 0; i < n; i++) {
     .map((p, j) => [j, p[0] * categoryPoints[i][0] + p[1] * categoryPoints[i][1] + p[2] * categoryPoints[i][2]] as [number, number])
     .filter((a) => a[0] !== i)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 2);
+    .slice(0, 3);
 
   neighbors.forEach(([j]) => {
     if (!constellationPairs.some((p) => (p[0] === i && p[1] === j) || (p[0] === j && p[1] === i))) {
@@ -333,11 +333,13 @@ export const TechStackGlobe: React.FC = () => {
         }
       }
 
-      // 4. Constellation connecting lines
-      ctx.lineWidth = 1;
+      // 4. Constellation connecting lines (balanced midpoint)
+      ctx.lineWidth = 1.15;
       for (const [i, j] of constellationPairs) {
-        const al = 0.16 * (projected[i].k + projected[j].k) * e;
-        ctx.strokeStyle = `rgba(${r},${g},${b},${al})`;
+        const isPairActive = openIdx === i || openIdx === j;
+        const depthFactor = Math.min(1, (projected[i].k + projected[j].k) * 0.75);
+        const al = (isPairActive ? 0.60 : 0.28) * depthFactor * e;
+        ctx.strokeStyle = `rgba(${r},${g},${b},${Math.min(1, al).toFixed(3)})`;
         ctx.beginPath();
         ctx.moveTo(projected[i].x, projected[i].y);
         ctx.lineTo(projected[j].x, projected[j].y);

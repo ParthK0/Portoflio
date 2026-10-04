@@ -5,7 +5,6 @@ import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
-import { ThemeSwitcher } from './components/ThemeSwitcher';
 import { CommandPalette } from './components/CommandPalette';
 import { LoadingScreen } from './components/LoadingScreen';
 import { HomePage } from './pages/HomePage';
@@ -47,7 +46,6 @@ export const App: React.FC = () => {
             </Routes>
           </main>
           <Footer />
-          <ThemeSwitcher />
           <CommandPalette />
         </div>
       </BrowserRouter>
