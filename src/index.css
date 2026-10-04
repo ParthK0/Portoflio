@@ -338,3 +338,51 @@
   font-size: 12px;
   letter-spacing: 0.08em;
 }
+
+/* ========================================================
+   SELECTED WORKS SOLID ACCENT BACKGROUND & OVER-SCROLL
+   Matches the solid UI color theme and updates accordingly
+   ======================================================== */
+.solid-selected-bg {
+  background-color: #08080a;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% 0%, var(--accent-subtle-2) 0%, transparent 70%),
+    radial-gradient(circle at 10% 40%, var(--accent-subtle) 0%, transparent 45%),
+    radial-gradient(circle at 90% 60%, var(--accent-subtle) 0%, transparent 45%),
+    linear-gradient(180deg, #050507 0%, #0b0b0e 50%, #050507 100%);
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+@keyframes floatAmbientOrb1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(45px, -35px) scale(1.15);
+    opacity: 0.55;
+  }
+}
+
+@keyframes floatAmbientOrb2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50px, 40px) scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+.theme-ambient-orb-1 {
+  animation: floatAmbientOrb1 14s ease-in-out infinite;
+  transition: background-color 0.6s ease;
+}
+
+.theme-ambient-orb-2 {
+  animation: floatAmbientOrb2 16s ease-in-out infinite;
+  transition: background-color 0.6s ease;
+}
+
+

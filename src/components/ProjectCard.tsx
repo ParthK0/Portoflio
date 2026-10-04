@@ -25,7 +25,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             <img
               src={project.coverImage}
               alt={`${project.title} UI preview`}
-              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 filter grayscale contrast-125 brightness-95"
+              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60 group-hover/img:opacity-20 transition-opacity" />

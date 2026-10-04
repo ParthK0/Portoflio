@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Hero } from '../components/Hero';
-import { Journey } from '../components/Journey';
 import { Experience } from '../components/Experience';
 import { HomeProjects } from '../components/HomeProjects';
 
@@ -11,19 +10,14 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="flex flex-col">
-      {/* 1. Hero Section (Includes 3D Tech Orbit Cylinder) */}
+      {/* 1. Hero Section (Includes 3D Tech Orbit Cylinder & About Me Curtain) */}
       <Hero />
 
-      {/* 2. About + My Journey */}
-      <div id="about">
-        <Journey />
-      </div>
-
-      {/* 3. Experience */}
-      <Experience />
-
-      {/* 4. Top 5 Projects (PROBE, ReconCraft, Shree Krishna, AetherFace, ElectIQ) */}
+      {/* 2. Selected Works (Top 5 Projects: PROBE, ReconCraft, Shree Krishna, AetherFace, ElectIQ) */}
       <HomeProjects />
+
+      {/* 3. Industry Experience */}
+      <Experience />
     </div>
   );
 };

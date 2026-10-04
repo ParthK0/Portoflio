@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { Journey } from '../components/Journey';
 import { Experience } from '../components/Experience';
 import { EducationCertifications } from '../components/EducationCertifications';
 import { Proof } from '../components/Proof';
@@ -221,9 +220,6 @@ export const ManifestoPage: React.FC = () => {
         </div>
       </section>
 
-
-      {/* Evolution Timeline (The Journey) */}
-      <Journey />
 
       {/* Industry Field Experience */}
       <Experience />

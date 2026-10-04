@@ -82,10 +82,10 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'nav-about',
       category: 'Navigation',
-      label: 'About // Journey & Story',
-      detail: 'Career path and personal evolution',
+      label: 'About // Engineering Manifesto',
+      detail: 'Core doctrine, tenets & about me',
       icon: <ArrowRight className="w-4 h-4" />,
-      perform: () => scrollTo('about'),
+      perform: () => scrollTo('sheet'),
     },
     {
       id: 'nav-stack',
