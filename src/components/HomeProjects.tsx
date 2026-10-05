@@ -19,8 +19,6 @@ interface EditorialProjectCard {
   decision2Title: string;
   decision2Detail: string;
   techList: string[];
-  resultBig: string;
-  resultSmall: string;
   coverImage: string;
   liveUrl?: string;
   githubUrl?: string;
@@ -54,8 +52,6 @@ const EDITORIAL_PROJECTS: EditorialProjectCard[] = [
       'Three.js',
       'MediaPipe',
     ],
-    resultBig: '<800ms',
-    resultSmall: 'Voice Turn Latency',
     coverImage: '/images/probe/dashboardhero.png',
     githubUrl: 'https://github.com/ParthK0',
   },
@@ -84,8 +80,6 @@ const EDITORIAL_PROJECTS: EditorialProjectCard[] = [
       'Docker',
       'Tally XML',
     ],
-    resultBig: '0.0%',
-    resultSmall: 'False Positive Rate',
     coverImage: '/images/reconcraft/hero.png',
     githubUrl: 'https://github.com/ParthK0',
   },
@@ -114,8 +108,6 @@ const EDITORIAL_PROJECTS: EditorialProjectCard[] = [
       'EmailJS',
       'WhatsApp API',
     ],
-    resultBig: '95+',
-    resultSmall: 'Lighthouse Score',
     coverImage: '/images/shree-krishna-transport/hero1.png',
     liveUrl: 'https://shree-krishna-transport.org',
     githubUrl: 'https://github.com/ParthK0',
@@ -145,8 +137,6 @@ const EDITORIAL_PROJECTS: EditorialProjectCard[] = [
       'WebSocket',
       'Docker',
     ],
-    resultBig: '<1.5ms',
-    resultSmall: 'Vector Search Latency',
     coverImage: '/images/aetherface/hero.png',
     githubUrl: 'https://github.com/ParthK0',
   },
@@ -176,8 +166,6 @@ const EDITORIAL_PROJECTS: EditorialProjectCard[] = [
       'Vitest',
       'Tailwind CSS',
     ],
-    resultBig: '98+',
-    resultSmall: 'Lighthouse Score',
     coverImage: '/images/electiq/hero.png',
     githubUrl: 'https://github.com/ParthK0',
   },
@@ -230,24 +218,24 @@ export const HomeProjects: React.FC = () => {
                 key={item.id}
                 className={`sticky will-change-transform ${
                   index === EDITORIAL_PROJECTS.length - 1
-                    ? 'mb-8'
-                    : 'mb-[30vh] sm:mb-[40vh]'
+                    ? 'mb-0'
+                    : 'mb-[20vh] sm:mb-[28vh]'
                 }`}
                 style={{
-                  top: `calc(5rem + ${index * 16}px)`,
+                  top: `calc(5rem + ${index * 14}px)`,
                   zIndex: index + 10,
                 }}
               >
                 {/* Project Card: Clean Editorial Black & White Theme */}
-                <article className="p-6 sm:p-8 md:p-10 bg-[#000000] text-white border-2 border-white/20 hover:border-white/50 rounded-2xl sm:rounded-3xl shadow-[0_-25px_60px_rgba(0,0,0,0.65),0_35px_70px_rgba(0,0,0,0.75)] transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative group overflow-hidden">
+                <article className="p-5 sm:p-6 md:p-7 min-h-[500px] lg:min-h-[570px] bg-[#000000] text-white border-2 border-white/20 hover:border-white/50 rounded-2xl sm:rounded-3xl shadow-[0_-20px_50px_rgba(0,0,0,0.6),0_30px_60px_rgba(0,0,0,0.7)] transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-center relative group overflow-hidden">
                   {/* Subtle top edge highlight */}
                   <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
 
                   {/* Left Column: Details, Engineering & Technology (7 cols) */}
-                  <div className="lg:col-span-7 flex flex-col justify-between">
+                  <div className="lg:col-span-7 h-full flex flex-col justify-between">
                     <div>
                       {/* Top Hierarchy: Number, Category, Role · Status */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-white/10 text-xs">
+                      <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-white/10 text-xs">
                         <div className="flex items-center gap-2.5">
                           <span
                             className="font-mono font-bold tracking-wider transition-colors duration-300"
@@ -267,31 +255,31 @@ export const HomeProjects: React.FC = () => {
 
                       {/* Project Name */}
                       <h3
-                        className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase font-headline tracking-tight mb-1 transition-colors duration-300 group-hover:brightness-110"
+                        className="text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase font-headline tracking-tight mb-1 transition-colors duration-300 group-hover:brightness-110"
                         style={{ color: currentTheme.primary }}
                       >
                         {item.name}
                       </h3>
 
                       {/* One-line Project Type */}
-                      <div className="text-sm sm:text-base font-medium text-neutral-300 mb-3">
+                      <div className="text-xs sm:text-sm font-medium text-neutral-300 mb-2">
                         {item.projectType}
                       </div>
 
                       {/* Short Description */}
-                      <p className="text-sm text-neutral-300 font-normal leading-relaxed mb-5">
+                      <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed mb-4">
                         {item.shortDescription}
                       </p>
 
                       {/* Engineering: Two Technical Decisions */}
-                      <div className="mb-5 pt-3.5 border-t border-white/10">
+                      <div className="mb-4 pt-2.5 border-t border-white/10">
                         <div
-                          className="text-xs uppercase tracking-wider font-semibold mb-3 transition-colors duration-300"
+                          className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold mb-2 transition-colors duration-300"
                           style={{ color: currentTheme.primary }}
                         >
                           Engineering
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                           <div>
                             <div className="text-xs font-semibold text-white mb-0.5">
                               {item.decision1Title}
@@ -312,9 +300,9 @@ export const HomeProjects: React.FC = () => {
                       </div>
 
                       {/* Technology: Tech Stack */}
-                      <div className="mb-6 pt-3.5 border-t border-white/10">
+                      <div className="mb-4 pt-2.5 border-t border-white/10">
                         <div
-                          className="text-xs uppercase tracking-wider font-semibold mb-2.5 transition-colors duration-300"
+                          className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold mb-2 transition-colors duration-300"
                           style={{ color: currentTheme.primary }}
                         >
                           Technology
@@ -323,40 +311,20 @@ export const HomeProjects: React.FC = () => {
                           {item.techList.map((tech, idx) => (
                             <span
                               key={idx}
-                              className="text-xs font-mono px-2.5 py-1 bg-[#121214] text-neutral-300 border border-neutral-800 rounded-md hover:border-white hover:text-white transition-colors"
+                              className="text-[11px] sm:text-xs font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 bg-[#121214] text-neutral-300 border border-neutral-800 rounded-md hover:border-white hover:text-white transition-colors"
                             >
                               {tech}
                             </span>
                           ))}
                         </div>
                       </div>
-                      {/* Result */}
-                      <div className="mb-6 pt-3.5 border-t border-white/10">
-                        <div
-                          className="text-xs uppercase tracking-wider font-semibold mb-1.5 transition-colors duration-300"
-                          style={{ color: currentTheme.primary }}
-                        >
-                          Result
-                        </div>
-                        <div className="flex items-baseline gap-2.5">
-                          <span
-                            className="text-2xl sm:text-3xl font-bold font-mono tracking-tight transition-colors duration-300"
-                            style={{ color: currentTheme.primary }}
-                          >
-                            {item.resultBig}
-                          </span>
-                          <span className="text-xs sm:text-sm text-neutral-300 font-medium">
-                            {item.resultSmall}
-                          </span>
-                        </div>
-                      </div>
                     </div>
 
                     {/* View System · Source Links */}
-                    <div className="flex flex-wrap items-center gap-3 pt-3.5 border-t border-white/10 text-xs font-semibold">
+                    <div className="flex flex-wrap items-center gap-2.5 pt-3 border-t border-white/10 text-xs font-semibold">
                       <button
                         onClick={() => setSelectedProject(originalProject || null)}
-                        className="px-4 py-2 bg-white text-black border border-white rounded-lg hover:bg-neutral-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm"
+                        className="px-3.5 py-1.5 sm:px-4 sm:py-2 bg-white text-black border border-white rounded-lg hover:bg-neutral-200 transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm"
                       >
                         <Eye className="w-3.5 h-3.5" />
                         <span>View System</span>
@@ -367,7 +335,7 @@ export const HomeProjects: React.FC = () => {
                           href={item.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-4 py-2 bg-neutral-900 border border-neutral-700 text-white rounded-lg hover:border-white transition-colors flex items-center gap-1.5"
+                          className="px-3.5 py-1.5 sm:px-4 sm:py-2 bg-neutral-900 border border-neutral-700 text-white rounded-lg hover:border-white transition-colors flex items-center gap-1.5"
                         >
                           <span>Live System ↗</span>
                         </a>
@@ -378,7 +346,7 @@ export const HomeProjects: React.FC = () => {
                           href={item.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-4 py-2 bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg hover:text-white hover:border-neutral-600 transition-colors flex items-center gap-1.5"
+                          className="px-3.5 py-1.5 sm:px-4 sm:py-2 bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg hover:text-white hover:border-neutral-600 transition-colors flex items-center gap-1.5"
                         >
                           <span>Source ↗</span>
                         </a>
@@ -386,11 +354,11 @@ export const HomeProjects: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Right Column: Completely Clean Photo (5 cols) */}
+                  {/* Right Column: Clean Photo (5 cols) */}
                   <div className="lg:col-span-5 flex flex-col justify-center">
                     <div
                       onClick={() => setSelectedProject(originalProject || null)}
-                      className="overflow-hidden rounded-xl sm:rounded-2xl border border-white/20 bg-black group/img cursor-pointer aspect-[16/11] shadow-2xl transition-all duration-300 hover:border-white/60"
+                      className="overflow-hidden rounded-xl sm:rounded-2xl border border-white/20 bg-black group/img cursor-pointer aspect-[16/10] max-h-[340px] shadow-2xl transition-all duration-300 hover:border-white/60"
                     >
                       <img
                         src={item.coverImage}
