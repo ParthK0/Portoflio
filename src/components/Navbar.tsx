@@ -34,11 +34,16 @@ export const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
-  const navLinks = [
+  interface NavLinkItem {
+    name: string;
+    path: string;
+    badge?: string;
+  }
+
+  const navLinks: NavLinkItem[] = [
     { name: 'Home', path: '/' },
     { name: 'Work', path: '/work' },
     { name: 'About', path: '/about' },
-    { name: 'Beyond', path: '/beyond', badge: 'More About Me' },
     { name: 'Contact', path: '/contact' },
   ];
 

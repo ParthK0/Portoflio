@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface PageTransitionProps {
@@ -9,37 +9,38 @@ interface PageTransitionProps {
 const pageVariants = {
   initial: {
     opacity: 0,
-    y: 20,
-    filter: 'blur(6px)',
+    y: 8,
   },
   animate: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: {
-      duration: 0.45,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      duration: 0.24,
+      ease: [0.25, 1, 0.5, 1] as [number, number, number, number],
     },
   },
   exit: {
     opacity: 0,
-    y: -16,
-    filter: 'blur(6px)',
+    y: -6,
     transition: {
-      duration: 0.2,
-      ease: [0.4, 0, 1, 1] as [number, number, number, number],
+      duration: 0.16,
+      ease: [0.25, 1, 0.5, 1] as [number, number, number, number],
     },
   },
 };
 
 export const PageTransition: React.FC<PageTransitionProps> = ({ children, className = '' }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <motion.div
       variants={pageVariants}
       initial="initial"
       animate="animate"
       exit="exit"
-      className={`w-full flex-1 flex flex-col will-change-transform ${className}`}
+      className={`w-full flex-1 flex flex-col ${className}`}
     >
       {children}
     </motion.div>

@@ -42,8 +42,8 @@ export const Proof: React.FC = () => {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-[#262626] flex items-center justify-between text-[11px] font-mono text-[#707070]">
-                <span>VERIFIED METRIC</span>
+              <div className="mt-6 pt-4 border-t border-[#262626] flex items-center justify-between text-xs font-medium text-[#707070]">
+                <span>Verified Metric</span>
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#9D6BEE]" />
               </div>
             </div>

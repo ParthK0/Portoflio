@@ -126,11 +126,15 @@ export const ContactPage: React.FC = () => {
           {/* ── HEADER ── */}
           <div className="mb-6 pb-5 border-b border-[#1c1c1c] flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#FFFFFF] tracking-tight uppercase font-headline mb-2">
-                GET IN TOUCH
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161616] border border-[#2a2a2a] text-xs font-medium text-[#A87BF5] mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-primary)]" />
+                <span>Contact &amp; Connect</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#FFFFFF] tracking-tight font-headline mb-2">
+                Get in Touch
               </h1>
-              <p className="text-[#888888] text-sm max-w-xl font-mono leading-relaxed">
-                Reach out via the channels below or send a direct message for engineering, systems & AI collaboration.
+              <p className="text-[#A0A0A0] text-sm max-w-xl leading-relaxed">
+                Reach out via the channels below or send a direct message for engineering, systems &amp; AI collaboration.
               </p>
             </div>
 
@@ -152,7 +156,7 @@ export const ContactPage: React.FC = () => {
                 href="/Parth_Khowal_Resume.pdf"
                 download="Parth_Khowal_Resume.pdf"
                 onClick={() => sound.playClick(750, 0.04)}
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#141414] hover:bg-[#1f1f1f] border border-white/10 hover:border-white/30 text-white text-xs font-mono transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#141414] hover:bg-[#1f1f1f] border border-white/10 hover:border-white/30 text-white text-xs font-medium transition-all duration-200 cursor-pointer"
                 title="Download PDF directly"
               >
                 <Download className="w-4 h-4" style={{ color: accentColor }} />
@@ -182,7 +186,7 @@ export const ContactPage: React.FC = () => {
                     <Mail className="w-5 h-5" />
                   </div>
                   <div className="min-w-0">
-                    <div className="text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-0.5">Email Address</div>
+                    <div className="text-xs font-medium text-[#888888] mb-0.5">Email Address</div>
                     <div className="text-sm font-semibold text-white group-hover:underline truncate">
                       {PERSONAL_INFO.email}
                     </div>
@@ -191,7 +195,7 @@ export const ContactPage: React.FC = () => {
 
                 <button
                   onClick={handleCopyEmail}
-                  className="px-4 rounded-2xl bg-[#111111] hover:bg-white/[0.06] border border-white/[0.07] hover:border-white/20 transition-all text-xs font-mono flex flex-col items-center justify-center gap-1 shrink-0 cursor-pointer shadow-lg min-w-[64px]"
+                  className="px-4 rounded-2xl bg-[#111111] hover:bg-white/[0.06] border border-white/[0.07] hover:border-white/20 transition-all text-xs flex flex-col items-center justify-center gap-1 shrink-0 cursor-pointer shadow-lg min-w-[64px]"
                   title="Copy Email"
                 >
                   {copied ? (
@@ -202,7 +206,7 @@ export const ContactPage: React.FC = () => {
                   ) : (
                     <>
                       <Copy className="w-4 h-4 text-white/60" />
-                      <span className="text-[10px] text-white/60">Copy</span>
+                      <span className="text-[10px] text-white/60 font-medium">Copy</span>
                     </>
                   )}
                 </button>
@@ -220,7 +224,7 @@ export const ContactPage: React.FC = () => {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-0.5">Direct Line & WhatsApp</div>
+                  <div className="text-xs font-medium text-[#888888] mb-0.5">Direct Line &amp; WhatsApp</div>
                   <div className="text-sm font-semibold text-white group-hover:underline">
                     {PERSONAL_INFO.phone}
                   </div>
@@ -241,7 +245,7 @@ export const ContactPage: React.FC = () => {
                   <Github className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-0.5">GitHub</div>
+                  <div className="text-xs font-medium text-[#888888] mb-0.5">GitHub</div>
                   <div className="text-sm font-semibold text-white group-hover:underline truncate">
                     github.com/ParthK0
                   </div>
@@ -263,7 +267,7 @@ export const ContactPage: React.FC = () => {
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-0.5">LinkedIn</div>
+                  <div className="text-xs font-medium text-[#888888] mb-0.5">LinkedIn</div>
                   <div className="text-sm font-semibold text-white group-hover:underline truncate">
                     linkedin.com/in/parth-khowal
                   </div>
@@ -278,7 +282,7 @@ export const ContactPage: React.FC = () => {
                     <Clock className="w-4 h-4" style={{ color: accentColor }} />
                     <span className="text-xs font-bold text-white font-headline">Response SLA</span>
                   </div>
-                  <p className="font-mono text-[11px] text-[#777777] leading-snug">
+                  <p className="text-xs text-[#888888] leading-snug">
                     Typically answered within &lt;24 hours.
                   </p>
                 </div>
@@ -287,7 +291,7 @@ export const ContactPage: React.FC = () => {
                     <MapPin className="w-4 h-4" style={{ color: accentColor }} />
                     <span className="text-xs font-bold text-white font-headline">Location</span>
                   </div>
-                  <p className="font-mono text-[11px] text-[#777777] leading-snug">
+                  <p className="text-xs text-[#888888] leading-snug">
                     Delhi NCR · Open to Remote Worldwide.
                   </p>
                 </div>
@@ -306,7 +310,7 @@ export const ContactPage: React.FC = () => {
                     style={{ backgroundColor: accentColor }}
                   />
                 </div>
-                <p className="text-[11px] font-mono text-[#666666] mb-5">
+                <p className="text-xs text-[#888888] mb-5">
                   Dispatched directly to my primary inbox. All fields are required.
                 </p>
 
@@ -319,7 +323,7 @@ export const ContactPage: React.FC = () => {
                   {/* Name & Email Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-1.5">Your Name</label>
+                      <label className="block text-xs font-medium text-[#A0A0A0] mb-1.5">Your Name</label>
                       <input
                         type="text"
                         name="name"
@@ -338,7 +342,7 @@ export const ContactPage: React.FC = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-1.5">Email Address</label>
+                      <label className="block text-xs font-medium text-[#A0A0A0] mb-1.5">Email Address</label>
                       <input
                         type="email"
                         name="email"
@@ -360,7 +364,7 @@ export const ContactPage: React.FC = () => {
 
                   {/* Subject line */}
                   <div>
-                    <label className="block text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-1.5">Subject</label>
+                    <label className="block text-xs font-medium text-[#A0A0A0] mb-1.5">Subject</label>
                     <input
                       type="text"
                       name="subject"
@@ -380,7 +384,7 @@ export const ContactPage: React.FC = () => {
 
                   {/* Message */}
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-[10px] font-mono text-[#666666] uppercase tracking-wider mb-1.5">Message</label>
+                    <label className="block text-xs font-medium text-[#A0A0A0] mb-1.5">Message</label>
                     <textarea
                       name="message"
                       required
@@ -401,7 +405,7 @@ export const ContactPage: React.FC = () => {
 
                   {/* Status Feedback */}
                   {status === 'success' && (
-                    <div className="flex items-start gap-2.5 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs">
+                    <div className="flex items-start gap-2.5 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium">
                       <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
                       <span>Message sent successfully! I'll get back to you shortly.</span>
                     </div>
@@ -413,7 +417,7 @@ export const ContactPage: React.FC = () => {
                         <AlertCircle className="w-4 h-4 shrink-0" />
                         <span className="font-semibold">Unable to send message</span>
                       </div>
-                      <span className="text-[11px] text-rose-300/90 leading-relaxed">
+                      <span className="text-xs text-rose-300/90 leading-relaxed">
                         {errorMessage}
                       </span>
                     </div>
@@ -423,7 +427,7 @@ export const ContactPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="w-full py-3.5 rounded-xl font-bold text-sm uppercase tracking-widest text-[#0a0a0a] transition-all flex items-center justify-center gap-2 cursor-pointer hover:opacity-90 active:scale-[0.99] shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full py-3.5 rounded-xl font-bold text-sm tracking-wide text-[#0a0a0a] transition-all flex items-center justify-center gap-2 cursor-pointer hover:opacity-90 active:scale-[0.99] shrink-0 disabled:opacity-60 disabled:cursor-not-allowed shadow-md"
                     style={{
                       backgroundColor: accentColor,
                       boxShadow: `0 0 24px ${accentColor}40`
@@ -444,8 +448,8 @@ export const ContactPage: React.FC = () => {
                 </form>
 
                 {/* Bottom status */}
-                <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/[0.05] text-[10px] font-mono text-[#555555]">
-                  <Globe className="w-3 h-3" style={{ color: accentColor }} />
+                <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/[0.05] text-xs text-[#666666]">
+                  <Globe className="w-3.5 h-3.5" style={{ color: accentColor }} />
                   <span>Based in Delhi NCR · Available Worldwide</span>
                 </div>
               </div>
