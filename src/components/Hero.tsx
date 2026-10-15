@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { sound } from '../utils/audio';
 import {
-  Volume2,
-  VolumeX,
   ShieldCheck,
   X
 } from 'lucide-react';
@@ -49,20 +46,13 @@ export const Hero: React.FC = () => {
   const [orbitMode, setOrbitMode] = useState<'intro' | 'docked' | 'orbit'>('intro');
   const [typedName, setTypedName] = useState('');
   const [privacyOpen, setPrivacyOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(sound.isEnabled());
   const [isSheetOver, setIsSheetOver] = useState(false);
   const [hasEntered, setHasEntered] = useState<boolean>(false);
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
   // Math helper
   const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-  // Sound toggle
-  const toggleSound = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const next = sound.toggle();
-    setSoundEnabled(next);
-  };
 
 
 
@@ -186,6 +176,8 @@ export const Hero: React.FC = () => {
     // Toggle inverted header style when sheet dominates viewport
     const sheetDominated = a > 0.7 && rect.bottom > window.innerHeight * 0.45;
     setIsSheetOver(sheetDominated);
+
+    setIsScrolled(window.scrollY > 20);
   }, []);
 
   useEffect(() => {
@@ -496,43 +488,31 @@ export const Hero: React.FC = () => {
       {/* Fixed Fullscreen 3-Body Orbital Physics Canvas */}
       <canvas id="lg" ref={orbitalCanvasRef} className="fixed inset-0 z-25 pointer-events-none" />
 
-      {/* Top Navigation Bar */}
-      <header className={`fixed inset-x-0 top-0 z-30 flex justify-end items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-1000 delay-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${hasEntered ? 'translate-y-0 opacity-100' : '-translate-y-12 opacity-0'
-        }`}>
-
-        {/* Right Controls */}
-        <div className="flex items-center gap-3 pointer-events-auto">
-          <button
-            onClick={toggleSound}
-            aria-label="Toggle audio"
-            className="p-2 rounded-full font-mono text-xs text-[#888888] hover:text-[#FFFFFF] bg-[#161616]/70 backdrop-blur-md border border-white/15 transition-colors cursor-pointer"
-          >
-            {soundEnabled ? (
-              <Volume2 className="w-3.5 h-3.5" style={{ color: accentColor }} />
-            ) : (
-              <VolumeX className="w-3.5 h-3.5 opacity-60" />
-            )}
-          </button>
-
-          <Link
-            to="/work"
-            className="pill px-4 py-2 rounded-full font-mono text-xs tracking-wider uppercase text-[#EEECE6] bg-[#101010]/60 backdrop-blur-md border border-white/20 hover:border-white transition-all cursor-pointer"
-          >
-            WORK ↗
-          </Link>
-
-          <a
-            href="#contact"
-            className="pill px-4 py-2 rounded-full font-mono text-xs tracking-wider uppercase text-[#EEECE6] bg-[#101010]/60 backdrop-blur-md border border-white/20 hover:border-white transition-all cursor-pointer"
-          >
-            CONTACT ↗
-          </a>
-        </div>
-      </header>
-
       {/* 420vh Sticky Stage Wrapper */}
       <main ref={mainTrackRef} className="relative w-full h-[420vh]">
         <div id="stage" className="sticky top-0 h-screen w-full overflow-hidden bg-[#101010] select-none">
+
+          {/* Top Navigation Bar: Scoped strictly to hero stage, hides smoothly on scroll */}
+          <header className={`absolute inset-x-0 top-0 z-30 flex justify-end items-center px-6 sm:px-16 py-8 sm:py-10 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            hasEntered && !isScrolled ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0 pointer-events-none'
+          }`}>
+            {/* Right Controls */}
+            <div className={`flex items-center gap-3 ${hasEntered && !isScrolled ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+              <Link
+                to="/work"
+                className="pill px-4 py-2 rounded-full font-mono text-xs tracking-wider uppercase text-[#EEECE6] bg-[#101010]/60 backdrop-blur-md border border-white/20 hover:border-white transition-all cursor-pointer"
+              >
+                WORK ↗
+              </Link>
+
+              <Link
+                to="/contact"
+                className="pill px-4 py-2 rounded-full font-mono text-xs tracking-wider uppercase text-[#EEECE6] bg-[#101010]/60 backdrop-blur-md border border-white/20 hover:border-white transition-all cursor-pointer"
+              >
+                CONTACT ↗
+              </Link>
+            </div>
+          </header>
 
           {/* Main Hero Viewport Wrapper: Emerges slowly upward from bottom in sync with purple curved lift */}
           <div

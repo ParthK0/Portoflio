@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Command, ArrowRight, Palette, Volume2, VolumeX, Mail, Github, Linkedin, Check, X, Terminal } from 'lucide-react';
+import { Search, Command, ArrowRight, Palette, Volume2, VolumeX, Mail, Github, Linkedin, Check, X, Terminal, FileText } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { sound } from '../utils/audio';
 
@@ -138,6 +138,18 @@ export const CommandPalette: React.FC = () => {
       },
     })),
     // Quick Actions
+    {
+      id: 'act-view-resume',
+      category: 'Actions',
+      label: 'View / Download Resume (PDF)',
+      detail: 'Parth Khowal ATS Software Engineering CV',
+      icon: <FileText className="w-4 h-4" />,
+      perform: () => {
+        setIsOpen(false);
+        sound.playClick(650, 0.04);
+        window.open('/Parth_Khowal_Resume.pdf', '_blank', 'noopener,noreferrer');
+      },
+    },
     {
       id: 'act-replay-boot',
       category: 'Actions',

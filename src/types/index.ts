@@ -97,3 +97,22 @@ export interface EducationItem {
   coursework?: string[];
   location: string;
 }
+
+export interface JobPreferences {
+  status: string;
+  statusBadge: string;
+  seeking: string[];
+  noticePeriod: string;
+  locations: string[];
+  preferredStack: string[];
+  workModels: string[];
+}
+
+export interface InquiryType {
+  id: string;
+  label: string;
+  icon: string;
+  subjectDefault: string;
+  placeholder: string;
+}
+

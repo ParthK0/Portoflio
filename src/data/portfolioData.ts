@@ -6,8 +6,11 @@ import {
   LeadershipItem, 
   MetricProof, 
   Certification, 
-  EducationItem 
+  EducationItem,
+  JobPreferences,
+  InquiryType
 } from '../types';
+
 
 export const PERSONAL_INFO = {
   name: "Parth Khowal",
@@ -18,6 +21,7 @@ export const PERSONAL_INFO = {
   phone: "+91 8079086274",
   github: "https://github.com/ParthK0",
   linkedin: "https://linkedin.com/in/parth-khowal-a37903294",
+  resume: "/Parth_Khowal_Resume.pdf",
   bio: "B.Tech AI & Data Science scholar @ Galgotias University (8.89 CGPA). International Maths Olympiad Bronze Medallist. Full-Stack Developer Intern @ MSKard. 600+ LeetCode problems solved. Focused on clean architecture, high precision deterministic pipelines, and resilient production systems.",
   heroStats: [
     { label: "LeetCode Solved (1600 Rating)", value: "600+", highlight: "cyan" },
@@ -581,3 +585,68 @@ export const PROOF_METRICS: MetricProof[] = [
     colorClass: "text-cyan-400"
   }
 ];
+
+export const JOB_PREFERENCES: JobPreferences = {
+  status: "Actively Interviewing",
+  statusBadge: "Available Summer 2026",
+  seeking: [
+    "Summer 2026 Software Engineering Internships",
+    "Full-Stack Engineering Roles (React 19 / Python / Java)",
+    "AI Systems & Voice Agent Engineering"
+  ],
+  noticePeriod: "Immediate Availability / Summer 2026",
+  locations: [
+    "Delhi NCR, India",
+    "Bengaluru, India",
+    "Mumbai, India",
+    "Remote Worldwide"
+  ],
+  preferredStack: [
+    "React 19",
+    "TypeScript",
+    "Next.js 16",
+    "Python / FastAPI",
+    "Spring Boot 3",
+    "PostgreSQL & pgvector",
+    "Redis",
+    "Docker"
+  ],
+  workModels: [
+    "Full-Time Internship",
+    "Software Engineer (Full-Time)",
+    "Contract / High-Impact MVP Build",
+    "Remote / Hybrid"
+  ]
+};
+
+export const INQUIRY_TYPES: InquiryType[] = [
+  {
+    id: "fulltime",
+    label: "Full-Time Offer",
+    icon: "💼",
+    subjectDefault: "[Job Opportunity] Full-Time Software Engineer Role",
+    placeholder: "Hi Parth, we loved your work and would love to discuss a Full-Time Software Engineer position at..."
+  },
+  {
+    id: "internship",
+    label: "Internship Offer",
+    icon: "🚀",
+    subjectDefault: "[Internship] Summer 2026 Software Engineering Opportunity",
+    placeholder: "Hi Parth, our engineering team is hiring interns for Summer 2026 and we think your background in..."
+  },
+  {
+    id: "freelance",
+    label: "Freelance / MVP Build",
+    icon: "⚡",
+    subjectDefault: "[Project] High-Impact Production System / MVP Build",
+    placeholder: "Hi Parth, we are looking for a skilled developer to build a performant system / prototype for..."
+  },
+  {
+    id: "chat",
+    label: "Engineering Chat",
+    icon: "☕",
+    subjectDefault: "[Connect] Engineering Discussion & Tech Exchange",
+    placeholder: "Hey Parth, saw your portfolio and would love to exchange thoughts on AI architectures, algorithms, or..."
+  }
+];
+

@@ -385,4 +385,30 @@
   transition: background-color 0.6s ease;
 }
 
+/* ========================================================
+   PRINT STYLES FOR RESUME
+   ======================================================== */
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+  }
+  header, footer, .no-print, [data-no-print="true"] {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .resume-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    color: #111111 !important;
+  }
+}
+
+
 
