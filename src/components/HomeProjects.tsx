@@ -179,7 +179,7 @@ export const HomeProjects: React.FC = () => {
     <section
       id="projects"
       data-section="featured-projects"
-      className="py-16 sm:py-24 relative select-none transition-colors duration-500 text-[#101010]"
+      className="pt-14 pb-10 sm:pt-20 sm:pb-12 relative select-none transition-colors duration-500 text-[#101010]"
       style={{
         backgroundColor: currentTheme.primary,
       }}
@@ -209,7 +209,7 @@ export const HomeProjects: React.FC = () => {
         </div>
 
         {/* Top 5 Project Cards Layered Stacking Over-Scrolling Deck */}
-        <div className="relative pb-16 sm:pb-24">
+        <div className="relative pb-4 sm:pb-6">
           {EDITORIAL_PROJECTS.map((item, index) => {
             const originalProject = PROJECTS.find((p) => p.id === item.id);
 
@@ -375,7 +375,7 @@ export const HomeProjects: React.FC = () => {
         </div>
 
         {/* View All Work CTA Bar - Clean Editorial Styling */}
-        <div className="mt-8 sm:mt-12 p-8 sm:p-10 bg-[#000000] text-white border-2 border-black rounded-2xl sm:rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left shadow-2xl">
+        <div className="mt-4 sm:mt-6 p-6 sm:p-8 bg-[#000000] text-white border-2 border-black rounded-2xl sm:rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left shadow-2xl">
           <div>
             <div
               className="text-xs uppercase tracking-wider mb-1 font-bold transition-colors duration-300"

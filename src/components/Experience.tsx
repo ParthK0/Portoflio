@@ -4,11 +4,11 @@ import { EXPERIENCE_ITEMS } from '../data/portfolioData';
 
 export const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-24 bg-[#111111] border-y border-[#262626] relative">
+    <section id="experience" className="py-12 sm:py-16 bg-[#111111] border-y border-[#262626] relative">
       <div className="max-w-5xl mx-auto px-6">
 
         {/* Section Header */}
-        <div className="mb-14">
+        <div className="mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9D6BEE]/10 border border-[#9D6BEE]/25 text-[#A87BF5] text-xs font-mono font-semibold uppercase tracking-wider mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-[#9D6BEE]"></span>
             Work Experience

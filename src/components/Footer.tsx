@@ -144,10 +144,10 @@ export const Footer: React.FC = () => {
           Spacious, beautifully balanced & responsive
          ======================================================== */}
       {!isContactPage && (
-        <div className="max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-12 flex flex-col justify-between min-h-[calc(100vh-80px)] py-8 sm:py-12 lg:py-16 relative z-10">
+        <div className="max-w-7xl mx-auto w-full px-5 sm:px-8 lg:px-12 flex flex-col justify-between py-6 sm:py-10 relative z-10">
 
           {/* Header Block: Prominent, elegant and impactful */}
-          <div className="pb-6 sm:pb-8 shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-white/[0.08]">
+          <div className="pb-5 sm:pb-6 shrink-0 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-white/[0.08]">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono mb-3">
                 <span className="w-2 h-2 rounded-full animate-ping" style={{ backgroundColor: accentColor }} />
@@ -178,7 +178,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* 2-Column Responsive Contact Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch py-6 flex-1">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch py-4 sm:py-5 flex-1">
 
             {/* ── Left Column: Direct Channels (Increased Boxes for Email, GitHub, LinkedIn + Info) ── */}
             <div className="lg:col-span-6 flex flex-col justify-between gap-3.5">
