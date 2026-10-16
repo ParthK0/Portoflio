@@ -38,7 +38,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="h-24 rounded-xl bg-[#181818] border border-[#262626] mb-4 flex items-center justify-center text-[#707070] font-mono text-xs">
             <span className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#9D6BEE]" />
-              {project.id === 'sparkx' ? 'Upcoming Platform · In Active Development' : 'System Architecture'}
+              System Architecture
             </span>
           </div>
         )}

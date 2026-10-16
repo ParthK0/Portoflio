@@ -16,18 +16,18 @@ export const PERSONAL_INFO = {
   name: "Parth Khowal",
   title: "Software Engineer & Full-Stack Developer",
   statusBadge: "Open for Summer 2026 Software Engineering Internships",
-  location: "Greater Noida / Delhi NCR, India (Open to Remote / Relocation)",
+  location: "Greater Noida, Uttar Pradesh, India (Open to Remote / Relocation)",
   email: "parthkhowal222@gmail.com",
   phone: "+91 8079086274",
   github: "https://github.com/ParthK0",
   linkedin: "https://linkedin.com/in/parth-khowal-a37903294",
   resume: "/Parth_Khowal_Resume.pdf",
-  bio: "B.Tech AI & Data Science scholar @ Galgotias University (8.89 CGPA). International Maths Olympiad Bronze Medallist. Full-Stack Developer Intern @ MSKard. 600+ LeetCode problems solved. Focused on clean architecture, high precision deterministic pipelines, and resilient production systems.",
+  bio: "B.Tech AI & Data Science scholar @ Galgotias University (8.93 CGPA). International Maths Olympiad Bronze Medallist. Full-Stack Developer Intern @ MSKard. 600+ LeetCode problems solved (~1600 rating). Focused on clean architecture, high precision deterministic pipelines, and resilient production systems.",
   heroStats: [
     { label: "LeetCode Solved (1600 Rating)", value: "600+", highlight: "cyan" },
     { label: "Reconciliation Precision (101 Tests)", value: "100%", highlight: "emerald" },
     { label: "Lighthouse Score in Production", value: "95+", highlight: "violet" },
-    { label: "Academic CGPA (B.Tech AI & DS)", value: "8.89", highlight: "default" },
+    { label: "Academic CGPA (B.Tech AI & DS)", value: "8.93", highlight: "default" },
   ]
 };
 
@@ -116,7 +116,7 @@ export const PROJECTS: Project[] = [
     tagline: "Adaptive Multi-Agent AI Voice Interview Platform",
     tier: "tier1",
     displayCategory: "featured",
-    team: "Team of 4 • Agora Hackathon Track",
+    team: "Team of 4 (jatingarg850, dpp0007, ParthK, akaronak) • Agora Hackathon Track",
     category: "AI & Distributed Voice Systems",
     description: "Live voice-based mock interview platform where a 3-person AI panel (Technical — Abhinav, Product — Anisha, HR — Alia) conducts realistic, resume-grounded interviews with 3D lip-synced avatars, MediaPipe gaze proctoring, and evidence-based scoring.",
     coverImage: "/images/probe/dashboardhero.png",
@@ -129,13 +129,13 @@ export const PROJECTS: Project[] = [
       "/images/probe/voice-agent.png"
     ],
     highlights: [
-      "Architected 3-layer interview intelligence: dynamic Competency Graph, multi-agent Interviewer Debate engine, and Counterfactual Interviewing module to evaluate genuine understanding over memorized answers.",
-      "Engineered AI Match Score & 1-click Practice flow: parses live job listings via JobSpy + BeautifulSoup, scores resume-to-job percentage fit, and grounds questions in real postings.",
-      "Real-time voice orchestration with Agora RTC/RTM + Murf TTS (<800ms full roundtrip) and word-timed ARKit viseme scheduling (15 mouth blend shapes) at 60fps on rigged 3D models.",
+      "Engineered multi-agent voice orchestration with Agora RTC/RTM + Murf TTS (<800ms full roundtrip) and 60 FPS word-timed ARKit viseme scheduling on rigged 3D GLB models.",
+      "Architected dynamic panel handoffs (Technical — Abhinav / en-IN-rohan, Product — Anisha / en-IN-alia, HR — Alia / en-IN-aarav) via graceful pipeline restart, with generation-counted turn tracking to avoid race conditions.",
+      "Built AI Match Score & 1-click Practice flow: parses live job postings via JobSpy + BeautifulSoup, scores percentage role-fit, and grounds questions in real postings.",
       "Zero-server-upload in-browser proctoring via MediaPipe Tasks Vision (iris + head-pose tracking, <16ms latency) and prompt-injection defense (`_untrusted()` fencing)."
     ],
-    technologies: ["Next.js 16", "React 19", "Claude LLM", "Agora RTC/RTM", "Murf TTS", "Python FastAPI", "MongoDB", "Redis", "Three.js", "MediaPipe"],
-    githubUrl: "https://github.com/ParthK0",
+    technologies: ["Next.js 16", "React 19", "TypeScript", "FastAPI", "Python", "Claude 3.5", "Agora RTC/RTM", "Murf AI TTS", "Deepgram STT", "MongoDB", "Redis", "Three.js", "MediaPipe"],
+    githubUrl: "https://github.com/jatingarg850/Knotic.git",
     metrics: [
       { label: "Voice Turn Latency", value: "<800ms", color: "cyan" },
       { label: "Panel Avatars", value: "3 Personas", color: "violet" },
@@ -143,12 +143,13 @@ export const PROJECTS: Project[] = [
       { label: "Avatar Lip-Sync", value: "60 FPS ARKit", color: "cyan" }
     ],
     architecture: {
-      title: "Real-time Voice Pipeline",
+      title: "Real-time Voice & Handoff Pipeline",
       steps: [
-        "Candidate Voice Stream (Agora RTC / STT)",
-        "Panel Orchestrator (Claude Reasoning + Redis Context)",
-        "Murf TTS Dynamic Voice Handoff",
-        "React Three Fiber ARKit 3D Lip-Sync (60 FPS)"
+        "Candidate Voice Ingress (Agora Web RTC / Deepgram Nova 3 STT)",
+        "Panel Orchestration Loop (Claude 3.5 Reasoning over Live Transcripts)",
+        "Dynamic Handoff via Graceful Pipeline Restart (Murf TTS Persona Voices)",
+        "Generation-Counted Turn-ID Offset Sync (MongoDB Persistence Without Collisions)",
+        "Client 3D Viseme Scheduling (15 ARKit blend shapes at 60 FPS) + MediaPipe Proctoring"
       ]
     },
     caseStudy: {
@@ -176,7 +177,7 @@ export const PROJECTS: Project[] = [
     tagline: "Deterministic Financial Reconciliation with LLM Verification",
     tier: "tier1",
     displayCategory: "featured",
-    team: "Solo Engineering • Razorpay AI Buildathon (AI Finance Controller Track)",
+    team: "Solo Developer (Full-Stack + AI System Design) • Razorpay AI Buildathon (Track 04: AI Finance Controller)",
     category: "Financial Systems & Deterministic AI",
     description: "AI-powered 3-way financial reconciliation engine that matches Razorpay settlement reports, bank statements, and ERP invoices using a 7-stage deterministic rule engine first and an LLM verification engine only for ambiguous residuals — with every AI decision independently verified by paisa-exact arithmetic before acceptance.",
     coverImage: "/images/reconcraft/hero.png",
@@ -192,7 +193,7 @@ export const PROJECTS: Project[] = [
       "7-Stage deterministic rule engine resolves 90–95% of records at zero AI cost (Order ID, exact UTR, same-day amount, date window, statutory rate card, tolerance, FX corridor).",
       "Paisa Arithmetic Validator independently re-derives every AI claim using Python Decimal (`invoice - deductions == settlement` to ₹0.01) — confidence is grounded in a `==` check, not model self-report.",
       "101 automated unit/integration tests with 79% statement coverage, 100% precision (0 false positives), 100% recall, and 0.29s engine execution for 100 records.",
-      "1-Click ERP journal voucher export (Tally Prime XML, Zoho Books CSV, NetSuite JSON) and 30+ category exception taxonomy across 8 domains."
+      "1-Click ERP journal voucher export (Tally Prime XML, Zoho Books CSV, NetSuite JSON) and 30+ category exception taxonomy across 8 domains with Persistent Feedback Memory."
     ],
     technologies: ["FastAPI", "Python", "Pydantic v2", "PostgreSQL", "Pandas", "Pytest", "Docker", "Tally Prime XML"],
     githubUrl: "https://github.com/ParthK0",
@@ -205,12 +206,12 @@ export const PROJECTS: Project[] = [
     architecture: {
       title: "7-Stage Reconciliation Flow",
       steps: [
-        "1. Reference ID & UTR Match (Exact)",
-        "2. Exact Amount + Same Day Window",
-        "3. Tolerance Window & Statutory Rate Card",
-        "4. Finance Verification Engine (GPT-5.6 / Gemini Pro)",
-        "5. Zero-Trust Paisa Arithmetic Validator Gate (₹0.01)",
-        "6. 1-Click ERP Export (Tally Prime XML / Zoho / NetSuite)"
+        "1. Reference ID & UTR Match (Exact Match Stage)",
+        "2. Exact Amount + Same Day Settlement Window",
+        "3. Tolerance Window & Statutory Rate Card (MDR/GST/TDS)",
+        "4. Finance Verification Engine (GPT-4o / Gemini Pro Structured Hypotheses)",
+        "5. Zero-Trust Paisa Arithmetic Validator Gate (Python Decimal == check to ₹0.01)",
+        "6. Persistent Feedback Memory & 1-Click ERP Export (Tally/Zoho/NetSuite)"
       ]
     },
     caseStudy: {
@@ -238,7 +239,7 @@ export const PROJECTS: Project[] = [
     tagline: "Commercial Logistics & Route Intelligence Platform",
     tier: "tier1",
     displayCategory: "featured",
-    team: "Solo Engineering • Live Client Production (shree-krishna-transport.org)",
+    team: "Solo Full-Stack Developer & Technical Architect • Live Commercial Production",
     category: "Production Web & Enterprise Logistics",
     description: "Live commercial web platform connecting North-Western Indian industrial shippers (marble, FMCG, steel, textiles) with verified fleet operators across 18+ high-density corridors with programmatic route SEO and automated dual-dispatch.",
     coverImage: "/images/shree-krishna-transport/hero1.png",
@@ -249,8 +250,8 @@ export const PROJECTS: Project[] = [
       "/images/shree-krishna-transport/4.png"
     ],
     highlights: [
-      "Achieved 95+ across all Google Lighthouse metrics with optimal core web vitals and sub-1.5s First Contentful Paint.",
-      "Dynamic programmatic route engine powering 18+ corridors (Jaipur to Delhi, Mumbai, Ahmedabad, Indore) with JSON-LD LogisticsService and FAQPage schemas.",
+      "Achieved 95+ across all Google Lighthouse metrics with optimal core web vitals and sub-1.2s First Contentful Paint.",
+      "Dynamic programmatic route engine powering 18+ corridors (Jaipur to Delhi, Mumbai, Ahmedabad, Indore) with Schema.org JSON-LD LogisticsService and FAQPage schemas.",
       "Dual-channel zero-loss dispatch: automated quote delivery to dispatchers via asynchronous EmailJS combined with pre-formatted WhatsApp chat payloads (`wa.me`).",
       "Interactive GIS route corridor map powered by Leaflet and dynamic rate card matrices for 5-ton, 15-ton, and container freight."
     ],
@@ -266,10 +267,11 @@ export const PROJECTS: Project[] = [
     architecture: {
       title: "High-Performance Logistics Pipeline",
       steps: [
-        "Client UI: React 19 + Tailwind v4 + Framer Motion",
-        "Dynamic Rate Card & Corridor Calculator",
-        "Dual Lead Dispatch: WhatsApp Cloud API + EmailJS",
-        "Programmatic SEO Engine with Schema.org JSON-LD"
+        "1. Client UI & Corridors: React 19 + Tailwind v4 + Parametric Template Engine",
+        "2. Dynamic Rate Card & Corridor Calculator (Typed Static In-Code Registry)",
+        "3. Interactive GIS Corridor Mapping (Leaflet with Viewport-Deferred Mounting)",
+        "4. Dual-Channel Zero-Loss Dispatch: WhatsApp Pre-filled API + EmailJS",
+        "5. Programmatic SEO Engine with Schema.org JSON-LD Schemas"
       ]
     },
     caseStudy: {
@@ -283,6 +285,10 @@ export const PROJECTS: Project[] = [
         {
           decision: "Typed Static Config Registry vs Dynamic Database",
           rationale: "Tariff updates occur weekly/monthly; an in-code typed registry delivers sub-1ms query latency, zero database connection pool overhead, and zero hosting costs."
+        },
+        {
+          decision: "Dual-Channel Dispatch (WhatsApp + EmailJS) vs Backend SMTP",
+          rationale: "Direct pre-filled WhatsApp click-to-chat allows instant real-time freight negotiation while background EmailJS guarantees a permanent audit trail without SMTP server maintenance."
         }
       ]
     }
@@ -293,7 +299,7 @@ export const PROJECTS: Project[] = [
     tagline: "Enterprise Biometrics & Vector Attendance Intelligence Platform",
     tier: "tier2",
     displayCategory: "engineering",
-    team: "Solo Engineering • 7-Phase Architecture Modernization",
+    team: "Solo Full-Stack Engineer + Architect + DevOps • 7-Phase Architecture Modernization",
     category: "Biometrics & Vector Database Systems",
     description: "Cloud-native real-time facial recognition attendance platform built with Spring Boot 3, React 19, and PostgreSQL pgvector — replacing legacy O(N) brute force search with sub-millisecond HNSW vector similarity search.",
     coverImage: "/images/aetherface/hero.png",
@@ -310,8 +316,8 @@ export const PROJECTS: Project[] = [
       "WebSocket STOMP real-time push (`/topic/attendance`) cutting event delivery from 5,000ms polling to <50ms for 100+ concurrent viewers.",
       "Browser WebRTC face detection (SSD MobileNet) + 512-D descriptor extraction with >97% verification accuracy at 0.65 threshold."
     ],
-    technologies: ["Java 21", "Spring Boot 3", "React 19", "PostgreSQL 16", "pgvector (HNSW)", "AES-256-GCM", "WebSocket STOMP", "Docker Compose"],
-    githubUrl: "https://github.com/ParthK0",
+    technologies: ["Java 21", "Spring Boot 3", "React 19", "PostgreSQL 16", "pgvector (HNSW)", "AES-256-GCM", "WebSocket STOMP", "Docker Compose", "Nginx"],
+    githubUrl: "https://github.com/ParthK0/FaceRecognitionJavaFX",
     metrics: [
       { label: "Vector Search Latency", value: "<1.5ms", color: "cyan" },
       { label: "Search Speedup", value: "120×", color: "emerald" },
@@ -321,10 +327,11 @@ export const PROJECTS: Project[] = [
     architecture: {
       title: "Vector Search & Real-Time Pipeline",
       steps: [
-        "Frame Capture & 512-D Embedding (face-api.js WebRTC)",
-        "Biometric Security Service (AES-256-GCM Fail-Closed)",
-        "PostgreSQL pgvector HNSW Nearest Neighbor (<1.5ms)",
-        "Spring Boot WebSocket STOMP Push (<50ms)"
+        "1. Frame Capture & 512-D Embedding Extraction (face-api.js WebRTC)",
+        "2. Biometric Security Service (AES-256-GCM Fail-Closed Authenticated Encryption)",
+        "3. PostgreSQL 16 pgvector HNSW Nearest Neighbor (<1.5ms for 10k faces)",
+        "4. Spring Boot 3 WebSocket STOMP Broker Push (/topic/attendance, <50ms)",
+        "5. Layered Spring Boot Services + JWT Stateless RBAC + Docker Compose Nginx"
       ]
     },
     caseStudy: {
@@ -338,6 +345,10 @@ export const PROJECTS: Project[] = [
         {
           decision: "pgvector HNSW over Dedicated Vector Database",
           rationale: "pgvector runs inside PostgreSQL, providing shared ACID transactions with relational student rosters and zero external infrastructure costs."
+        },
+        {
+          decision: "AES-256-GCM Authenticated Encryption over AES-CBC",
+          rationale: "Combines confidentiality and authenticity into a single cryptographic primitive with random 12-byte IVs, preventing replay attacks and ciphertext tampering."
         }
       ]
     }
@@ -348,7 +359,7 @@ export const PROJECTS: Project[] = [
     tagline: "AI-Powered Civic Education & Election Intelligence Platform",
     tier: "tier2",
     displayCategory: "engineering",
-    team: "Solo Full-Stack Engineer • Capstone Platform",
+    team: "Solo Full-Stack & AI Engineer • Lead Architect",
     category: "Civic Tech & Grounded AI",
     description: "Full-stack civic intelligence platform covering electoral processes for 6 countries (India, USA, UK, Australia, Germany, Canada), combining real-time polling with neutrality-prompted Gemini AI assistants and rate-limited API proxies.",
     coverImage: "/images/electiq/hero.png",
@@ -359,10 +370,10 @@ export const PROJECTS: Project[] = [
     ],
     highlights: [
       "Decoupled Express 5 proxy layer shielding Gemini API credentials from client exposure with per-IP rate limiting, Helmet security headers, and Zod runtime schema validation.",
-      "Prompt-engineered guardrails enforcing objective, multi-shot balance and fact-checking to eliminate political hallucination and editorial bias.",
+      "Prompt-engineered guardrails enforcing objective, multi-shot balance and fact-checking to eliminate political hallucination and editorial bias across 6 democracies.",
       "Achieved 98+ Lighthouse performance and 100% WCAG 2.1 AA accessibility compliance across interactive voter dashboards with Vitest and Playwright CI/CD."
     ],
-    technologies: ["React 19", "Vite", "Express 5 Proxy", "Gemini API", "Firebase", "Zod", "Playwright", "Vitest", "Tailwind CSS"],
+    technologies: ["React 19", "Vite", "Node.js", "Express 5 Proxy", "Gemini API", "Firebase", "Zod", "Playwright", "Vitest", "Tailwind CSS"],
     githubUrl: "https://github.com/ParthK0/election",
     metrics: [
       { label: "Country Coverage", value: "6 Nations", color: "cyan" },
@@ -373,11 +384,11 @@ export const PROJECTS: Project[] = [
     architecture: {
       title: "Secure Proxy & Grounded AI Pipeline",
       steps: [
-        "Client UI: React 19 + Accessible WCAG Dashboard",
-        "Express 5 Gateway + Helmet + Rate Limiter Gate",
-        "Zod Runtime Schema Validation & Sanitization",
-        "Google Gemini API (Neutral Multi-Shot System Prompts)",
-        "Firebase Firestore Analytics Sync"
+        "1. Accessible Client UI: React 19 + 100% WCAG 2.1 AA Dashboard",
+        "2. Express 5 Gateway: Helmet + IP Rate Limiter (100 req/min)",
+        "3. Zod & DOMPurify Runtime Schema Validation & Input Sanitization",
+        "4. Google Gemini API (Multi-Shot Neutrality System Prompts)",
+        "5. Firebase Firestore Real-Time Polling & Voter Analytics Sync"
       ]
     },
     caseStudy: {
@@ -405,7 +416,7 @@ export const PROJECTS: Project[] = [
     tagline: "Minecraft-Themed National Hackathon Event Platform",
     tier: "tier3",
     displayCategory: "supporting",
-    team: "Frontend & UI Engineer • National Student Hackathon",
+    team: "Frontend Developer & UI Engineer • National Student Hackathon",
     category: "Interactive Web & Community",
     description: "Minecraft-inspired responsive event platform for a national student hackathon with 4 technical tracks (AI/ML, Blockchain, Cybersecurity, Game Dev) and ₹35,000 prize pool, featuring custom animations and Unstop integration.",
     coverImage: "/images/quantcarft/hero.png",
@@ -429,12 +440,13 @@ export const PROJECTS: Project[] = [
       { label: "Responsive Coverage", value: "100%", color: "cyan" }
     ],
     architecture: {
-      title: "Frontend Architecture",
+      title: "Frontend & Performance Pipeline",
       steps: [
-        "Next.js 16 App Router Layouts",
-        "Intersection Observer Lazy Media",
-        "Framer Motion Micro-Interactions",
-        "Unstop Registration Flow"
+        "1. Next.js 16 App Router Layouts with Minecraft Voxel Design System",
+        "2. Intersection Observer Deferred Video & Media Loading",
+        "3. Framer Motion Scroll Orchestration & Audio Soundboard Interactivity",
+        "4. Centralized Typed Event Data Module (eventData.ts) for Zero Latency",
+        "5. Unstop API External Registration Routing"
       ]
     },
     caseStudy: {
@@ -453,41 +465,6 @@ export const PROJECTS: Project[] = [
           decision: "Centralized Event Data Module vs Dynamic Database",
           rationale: "A single-source typed static data module provides sub-1ms client rendering, zero API latency, and straightforward Git-tracked content updates for a 24-hour event."
         }
-      ]
-    }
-  },
-  {
-    id: "sparkx",
-    title: "SparkX 3.0",
-    tagline: "Upcoming Hackathon & Innovation Platform",
-    tier: "tier3",
-    displayCategory: "supporting",
-    team: "Lead Developer • In Active Development",
-    category: "Hackathon & Interactive Platforms",
-    description: "Next-generation hackathon platform engineered for real-time team collaboration, project submissions, and judge scoring workflows. Full project specifications coming soon.",
-    coverImage: "/images/sparkx3.0/hero.png",
-    gallery: [
-      "/images/sparkx3.0/hero.png",
-      "/images/sparkx3.0/2.png",
-      "/images/sparkx3.0/3.png",
-      "/images/sparkx3.0/4.png",
-      "/images/sparkx3.0/5.png"
-    ],
-    highlights: [
-      "Real-time team collaboration and portal submissions.",
-      "Architected for scalable hackathon operations and high concurrency."
-    ],
-    technologies: ["React 19", "Next.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/ParthK0",
-    metrics: [
-      { label: "Platform Tier", value: "3.0", color: "violet" }
-    ],
-    architecture: {
-      title: "Platform Overview",
-      steps: [
-        "Interactive Event Landing & Auth",
-        "Real-Time Team Submission Pipeline",
-        "Automated Scoring Matrix"
       ]
     }
   }
@@ -514,12 +491,39 @@ export const ARCHITECTURE_DECISIONS: ArchitectureDecision[] = [
   },
   {
     id: "dec-3",
-    project: "AetherFace",
+    project: "AetherFace.ai",
     badge: "Scalability",
     title: "pgvector HNSW Indexing vs In-Memory Brute-Force Matching",
     problem: "The legacy Java prototype performed an O(N) linear cosine similarity scan across facial vector embeddings in application memory, which degraded to 180ms+ latency as user rosters scaled to 10k records.",
     decision: "Moved vector storage directly into PostgreSQL with the pgvector extension utilizing Hierarchical Navigable Small World (HNSW) graph indexing.",
     impact: "Achieved logarithmic O(log N) search times (<1.5ms) with >97% recognition accuracy — a 120× latency improvement."
+  },
+  {
+    id: "dec-4",
+    project: "Shree Krishna Transport",
+    badge: "Lead Integrity",
+    title: "Zero Lead Loss Dual-Dispatch & In-Code Static Registry vs Dynamic DB",
+    problem: "Commercial freight inquiries suffered from high lead abandonment on traditional forms, while querying dynamic databases for static corridor tariffs added connection overhead and infrastructure cost.",
+    decision: "Engineered an asynchronous dual-channel pipeline (instant pre-filled WhatsApp click-to-chat + background EmailJS audit) and centralized corridor tariffs into a typed static in-code registry with parametric SEO templates.",
+    impact: "Delivered 0% lead capture drop-off, sub-1ms tariff lookup, 95+ Lighthouse scores across 18+ corridors, and zero server maintenance."
+  },
+  {
+    id: "dec-5",
+    project: "ElectIQ",
+    badge: "API Security & Neutrality",
+    title: "Decoupled Express 5 Security Gateway Shielding LLM Invocations",
+    problem: "Direct browser-to-LLM API calls exposed API secrets, left endpoints open to client-side quota exhaustion, and allowed raw user prompt injections to bias electoral guidance.",
+    decision: "Architected a decoupled Express 5 gateway enforcing IP-based sliding window rate limits (100 req/min), Helmet security headers, Zod runtime schema sanitization, and multi-shot non-partisan system instructions.",
+    impact: "100% API key isolation, 0 vulnerability to prompt injections, 98+ Lighthouse performance, and 100% WCAG 2.1 AA accessibility compliance."
+  },
+  {
+    id: "dec-6",
+    project: "QuantCraft 1.0",
+    badge: "Frontend Performance",
+    title: "Deferred Media Loading & Guarded Client Boundaries in Next.js",
+    problem: "Dense Minecraft-themed video backgrounds, voxel graphics, and browser window APIs caused high mobile initial payloads, thread freezing on 4G, and SSR hydration mismatches in Next.js App Router.",
+    decision: "Implemented Intersection Observer deferred video mounts, Next.js automated WebP image pipelines, and strict client component boundary guards with centralized static event architecture.",
+    impact: "Preserved desktop-grade visual immersion while keeping initial mobile network payloads minimal with zero hydration errors across 4 technical tracks."
   }
 ];
 
@@ -573,7 +577,7 @@ export const EDUCATION_ITEMS: EducationItem[] = [
     institution: "Galgotias University",
     degree: "B.Tech in Artificial Intelligence & Data Science",
     period: "2024 – 2028",
-    score: "CGPA: 8.89",
+    score: "CGPA: 8.93",
     location: "Greater Noida, Uttar Pradesh, India",
     coursework: [
       "Data Structures & Algorithms",
@@ -629,7 +633,7 @@ export const PROOF_METRICS: MetricProof[] = [
     colorClass: "text-purple-400"
   },
   {
-    value: "8.89",
+    value: "8.93",
     title: "Academic CGPA",
     description: "B.Tech in Artificial Intelligence & Data Science at Galgotias University (2024–2028).",
     colorClass: "text-slate-100"

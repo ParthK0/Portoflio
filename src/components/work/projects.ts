@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
     tier: "flagship",
     img: "/images/probe/dashboardhero.png",
     color: "#2a1b3a",
-    href: "https://github.com/ParthK0",
+    href: "https://github.com/jatingarg850/Knotic.git",
     gallery: [
       "/images/probe/dashboardhero.png",
       "/images/probe/interview-room.png",
@@ -86,7 +86,7 @@ export const PROJECTS: Project[] = [
     tier: "engineering",
     img: "/images/aetherface/hero.png",
     color: "#0f2f3d",
-    href: "https://github.com/ParthK0",
+    href: "https://github.com/ParthK0/FaceRecognitionJavaFX",
     gallery: [
       "/images/aetherface/hero.png",
       "/images/aetherface/1.png",
@@ -122,22 +122,6 @@ export const PROJECTS: Project[] = [
       "/images/quantcarft/about.png",
       "/images/quantcarft/overview.png",
       "/images/quantcarft/questions.png",
-    ],
-  },
-  {
-    slug: "sparkx",
-    title: "SparkX 3.0",
-    meta: "Hackathon & innovation collaboration platform",
-    tier: "supporting",
-    img: "/images/sparkx3.0/hero.png",
-    color: "#281838",
-    href: "https://github.com/ParthK0",
-    gallery: [
-      "/images/sparkx3.0/hero.png",
-      "/images/sparkx3.0/2.png",
-      "/images/sparkx3.0/3.png",
-      "/images/sparkx3.0/4.png",
-      "/images/sparkx3.0/5.png",
     ],
   },
 ];
@@ -1278,42 +1262,6 @@ export const DETAILS: Record<string, Detail> = {
       ["NASA", "Space Apps submission"],
       ["PWA", "Installable on phones"],
       ["7", "Core technologies"],
-    ],
-  },
-  sparkx: {
-    t: "Supporting, hackathon platform",
-    r: "Lead Developer",
-    tag: "A next-generation hackathon platform engineered for real-time team collaboration, project submissions, and judge scoring workflows.",
-    pr: "Hackathons suffer from fragmented team communications, delayed judging handoffs, and system strain during deadline submission spikes.",
-    so: "Engineered high-concurrency submission pipelines, dynamic track routing, and isolated real-time scoring rubrics.",
-    f: [
-      ["Live collaboration workspace", "Syncs team status, member roles, and project artifacts in real time."],
-      ["Dynamic track submission portal", "Validates multi-format project deliverables with automated artifact checks."],
-      ["Real-time judging matrix", "Isolated scoring states ensure fair evaluation and instant tallying without data leakage."],
-      ["Burst-optimized infrastructure", "Buffered queues ensure zero downtime and zero dropped submissions during deadline surges."],
-    ],
-    s: [
-      "React 19",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "WebSocket",
-      "Node.js",
-    ],
-    a: [
-      ["Client", ["React 19 Dashboard", "Live Participant Workspace", "Judge Scoring Matrix"]],
-      ["Backend", ["Event Sync Service", "Submission Validator", "Scoring Engine"]],
-      ["Infra", ["Edge CDN", "High-Availability DB"]],
-    ],
-    c: [
-      ["Deadline concurrency", "Rate limiting and optimistic UI keep the portal responsive under peak load."],
-      ["Fair judging tally", "Cryptographically sealed scorecards prevent premature leaderboards."],
-    ],
-    x: [
-      ["<100ms", "Live event sync"],
-      ["100%", "Submission delivery reliability"],
-      ["5", "Interactive platform views"],
     ],
   },
 };

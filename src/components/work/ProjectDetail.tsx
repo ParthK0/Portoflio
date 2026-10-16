@@ -17,18 +17,58 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ slug: propSlug }) 
     (project) =>
       project.slug === slug ||
       (slug === "reconcraft" && project.slug === "reconpilot") ||
-      (slug === "skt" && project.slug === "shree-krishna-transport") ||
-      (slug === "sparkx3.0" && project.slug === "sparkx")
+      (slug === "skt" && project.slug === "shree-krishna-transport")
   );
   const p = i !== -1 ? PROJECTS[i] : PROJECTS[0];
   const d = DETAILS[slug] || DETAILS[p?.slug] || DETAILS.probe;
   const next = PROJECTS[(i + 1) % PROJECTS.length];
 
   const [heroImg, setHeroImg] = React.useState<string>(p ? p.img : "");
+  const [activeLightboxIndex, setActiveLightboxIndex] = React.useState<number | null>(null);
 
   useEffect(() => {
     if (p) setHeroImg(p.img);
   }, [p]);
+
+  const handlePrevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (p?.gallery && p.gallery.length > 0 && activeLightboxIndex !== null) {
+      setActiveLightboxIndex((activeLightboxIndex - 1 + p.gallery.length) % p.gallery.length);
+    }
+  };
+
+  const handleNextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (p?.gallery && p.gallery.length > 0 && activeLightboxIndex !== null) {
+      setActiveLightboxIndex((activeLightboxIndex + 1) % p.gallery.length);
+    }
+  };
+
+  const handleCloseLightbox = () => {
+    setActiveLightboxIndex(null);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (activeLightboxIndex === null || !p?.gallery || p.gallery.length === 0) return;
+      if (e.key === "Escape") handleCloseLightbox();
+      if (e.key === "ArrowLeft") handlePrevImage();
+      if (e.key === "ArrowRight") handleNextImage();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeLightboxIndex, p?.gallery]);
+
+  useEffect(() => {
+    if (activeLightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeLightboxIndex]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -211,20 +251,16 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ slug: propSlug }) 
     if (p.gallery && p.gallery.length > 0) {
       sections.push([
         "Gallery",
-        "Visual Documentation & Architecture",
+        "Visual",
         <div className="h-gallery" key="gallery">
           {p.gallery.map((img, j) => (
             <div
               className={`h-gallery-item ${heroImg === img ? "active" : ""}`}
               key={j}
-              onClick={() => {
-                setHeroImg(img);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              title="Click to view in main showcase"
+              onClick={() => setActiveLightboxIndex(j)}
+              title="Click to inspect visual"
             >
               <img src={img} alt={`${p.title} view ${j + 1}`} loading="lazy" />
-              <span className="mono h-gallery-tag">{img.split("/").pop()}</span>
             </div>
           ))}
         </div>,
@@ -272,8 +308,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ slug: propSlug }) 
             {p.tier === "flagship"
               ? "Flagship"
               : p.tier === "engineering"
-              ? "Engineering focus"
-              : "Supporting"}
+                ? "Engineering focus"
+                : "Supporting"}
           </div>
           {d && (
             <div>
@@ -316,6 +352,107 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ slug: propSlug }) 
           <span className="mono">Next project</span>
           <b>{next.title}</b>
         </Link>
+      )}
+
+      {/* In-place Visual Lightbox with switching options */}
+      {activeLightboxIndex !== null && p?.gallery && p.gallery.length > 0 && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-xl flex flex-col justify-between p-4 sm:p-6 select-none animate-fadeIn"
+          onClick={handleCloseLightbox}
+        >
+          {/* Top Bar: Title, Counter, and Close Button */}
+          <div
+            className="flex items-center justify-between text-white border-b border-white/10 pb-3 z-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs uppercase px-2.5 py-1 rounded-md bg-[#9D6BEE]/20 border border-[#9D6BEE]/40 text-[#A87BF5]">
+                Visual
+              </span>
+              <span className="text-sm font-semibold text-white/90 hidden sm:inline">
+                {p.title}
+              </span>
+              <span className="text-xs text-white/50 font-mono">
+                ({activeLightboxIndex + 1} of {p.gallery.length})
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-white/40 hidden md:inline">
+                [← / → Switch • Esc Close]
+              </span>
+              <button
+                type="button"
+                onClick={handleCloseLightbox}
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-white/80 hover:text-white transition-all cursor-pointer text-sm"
+                aria-label="Close lightbox"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+
+          {/* Center Area: Main Image with Next/Prev Arrow Controls */}
+          <div
+            className="relative flex-1 flex items-center justify-center my-3 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Prev Button */}
+            {p.gallery.length > 1 && (
+              <button
+                type="button"
+                onClick={handlePrevImage}
+                className="absolute left-2 sm:left-6 z-20 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/70 hover:bg-[#9D6BEE] border border-white/20 hover:border-[#9D6BEE] flex items-center justify-center text-white text-2xl sm:text-3xl transition-all shadow-2xl cursor-pointer hover:scale-110"
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+            )}
+
+            {/* Active Image Container */}
+            <div className="max-w-[90vw] max-h-[72vh] flex items-center justify-center p-2">
+              <img
+                src={p.gallery[activeLightboxIndex]}
+                alt={`${p.title} visual ${activeLightboxIndex + 1}`}
+                className="max-h-[72vh] max-w-full w-auto object-contain rounded-xl shadow-2xl border border-white/15"
+              />
+            </div>
+
+            {/* Next Button */}
+            {p.gallery.length > 1 && (
+              <button
+                type="button"
+                onClick={handleNextImage}
+                className="absolute right-2 sm:right-6 z-20 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-black/70 hover:bg-[#9D6BEE] border border-white/20 hover:border-[#9D6BEE] flex items-center justify-center text-white text-2xl sm:text-3xl transition-all shadow-2xl cursor-pointer hover:scale-110"
+                aria-label="Next image"
+              >
+                ›
+              </button>
+            )}
+          </div>
+
+          {/* Bottom Thumbnails Strip for Quick Switching */}
+          {p.gallery.length > 1 && (
+            <div
+              className="flex items-center justify-center gap-2.5 overflow-x-auto py-2 z-10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {p.gallery.map((thumb, tIdx) => (
+                <button
+                  key={tIdx}
+                  type="button"
+                  onClick={() => setActiveLightboxIndex(tIdx)}
+                  className={`relative shrink-0 w-16 h-11 sm:w-20 sm:h-14 rounded-lg overflow-hidden border transition-all cursor-pointer ${activeLightboxIndex === tIdx
+                      ? "border-[#9D6BEE] ring-2 ring-[#9D6BEE]/50 scale-105 opacity-100"
+                      : "border-white/20 opacity-40 hover:opacity-80"
+                    }`}
+                  aria-label={`Switch to image ${tIdx + 1}`}
+                >
+                  <img src={thumb} alt={`Thumbnail ${tIdx + 1}`} className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       )}
     </main>
   );

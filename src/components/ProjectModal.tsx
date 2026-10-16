@@ -25,7 +25,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/90 backdrop-blur-md">
-      <div 
+      <div
         className="relative w-full max-w-4xl bg-[#141414] border border-[#262626] rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
@@ -59,29 +59,68 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
         {/* Scrollable Modal Content */}
         <div className="overflow-y-auto pr-1 sm:pr-3 space-y-8 flex-1 custom-scrollbar">
-          
+
           {/* Interactive Image Gallery */}
           {allImages.length > 0 && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase text-[#A0A0A0] tracking-wider flex items-center gap-1.5">
                   <ImageIcon className="w-3.5 h-3.5 text-[#9D6BEE]" />
-                  Visual Documentation & Diagrams ({allImages.length} images)
+                  Visual ({allImages.length} images)
                 </span>
-                <span className="text-[11px] text-[#707070] font-mono">Click thumbnail to inspect</span>
+                <span className="text-[11px] text-[#707070] font-mono">Click or switch below</span>
               </div>
 
-              {/* Main Active Image Display */}
+              {/* Main Active Image Display with In-Place Switching */}
               {activeImage && (
-                <div className="relative rounded-2xl overflow-hidden border border-[#262626] bg-[#0c0c0c] aspect-[16/10] sm:aspect-[16/9]">
+                <div className="relative rounded-2xl overflow-hidden border border-[#262626] bg-[#0c0c0c] aspect-[16/10] sm:aspect-[16/9] group/view">
                   <img
                     src={activeImage}
                     alt={`${project.title} active view`}
                     className="w-full h-full object-contain"
                   />
-                  <div className="absolute bottom-2 left-3 px-2 py-1 rounded bg-[#111111]/90 backdrop-blur-md text-[11px] font-mono text-[#A87BF5] border border-[#262626]">
-                    {activeImage.split('/').pop()}
-                  </div>
+
+                  {/* Previous Button */}
+                  {allImages.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const curIdx = allImages.indexOf(activeImage);
+                        const prevIdx = (curIdx - 1 + allImages.length) % allImages.length;
+                        setActiveImage(allImages[prevIdx]);
+                      }}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/70 hover:bg-[#9D6BEE] border border-white/20 hover:border-[#9D6BEE] text-white flex items-center justify-center text-xl sm:text-2xl transition-all shadow-xl cursor-pointer opacity-80 hover:opacity-100 hover:scale-110"
+                      aria-label="Previous image"
+                    >
+                      ‹
+                    </button>
+                  )}
+
+                  {/* Next Button */}
+                  {allImages.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const curIdx = allImages.indexOf(activeImage);
+                        const nextIdx = (curIdx + 1) % allImages.length;
+                        setActiveImage(allImages[nextIdx]);
+                      }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/70 hover:bg-[#9D6BEE] border border-white/20 hover:border-[#9D6BEE] text-white flex items-center justify-center text-xl sm:text-2xl transition-all shadow-xl cursor-pointer opacity-80 hover:opacity-100 hover:scale-110"
+                      aria-label="Next image"
+                    >
+                      ›
+                    </button>
+                  )}
+
+                  {allImages.length > 1 && (
+                    <div className="absolute bottom-2 left-3 px-2.5 py-1 rounded bg-[#111111]/90 backdrop-blur-md text-[11px] font-mono text-[#A87BF5] border border-[#262626]">
+                      <span>
+                        {allImages.indexOf(activeImage) + 1} of {allImages.length}
+                      </span>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -92,9 +131,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     <button
                       key={idx}
                       onClick={() => setActiveImage(img)}
-                      className={`relative shrink-0 w-20 h-14 sm:w-24 sm:h-16 rounded-xl overflow-hidden border transition-all cursor-pointer ${
-                        activeImage === img ? 'border-[#9D6BEE] ring-2 ring-[#9D6BEE]/40 scale-105' : 'border-[#262626] opacity-70 hover:opacity-100'
-                      }`}
+                      className={`relative shrink-0 w-20 h-14 sm:w-24 sm:h-16 rounded-xl overflow-hidden border transition-all cursor-pointer ${activeImage === img ? 'border-[#9D6BEE] ring-2 ring-[#9D6BEE]/40 scale-105' : 'border-[#262626] opacity-70 hover:opacity-100'
+                        }`}
                     >
                       <img
                         src={img}

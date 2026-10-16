@@ -10,8 +10,7 @@ export const ProjectDetailPage: React.FC = () => {
     (p) =>
       p.slug === slug ||
       (slug === "reconcraft" && p.slug === "reconpilot") ||
-      (slug === "skt" && p.slug === "shree-krishna-transport") ||
-      (slug === "sparkx3.0" && p.slug === "sparkx")
+      (slug === "skt" && p.slug === "shree-krishna-transport")
   );
 
   useEffect(() => {
