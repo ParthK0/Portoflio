@@ -3,7 +3,7 @@
   --fg: #f4f4f2;
   --mut: #8a8a90;
   --line: #26262a;
-  --acc: var(--accent-primary, #10b981);
+  --acc: var(--accent-primary, #9D6BEE);
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
   position: relative;
   padding: clamp(80px, 12vw, 160px) clamp(20px, 6vw, 96px);
@@ -20,6 +20,8 @@
   letter-spacing: -0.04em;
   line-height: 0.9;
   font-family: 'Outfit', sans-serif;
+  color: var(--acc);
+  transition: color 0.3s;
 }
 
 .w-dot {
@@ -83,8 +85,8 @@
   left: 0;
   width: 0;
   border-radius: 999px;
-  background: rgba(16, 185, 129, 0.14);
-  border: 1px solid rgba(16, 185, 129, 0.45);
+  background: var(--accent-subtle-2, rgba(157, 107, 238, 0.2));
+  border: 1px solid var(--accent-border-medium, rgba(157, 107, 238, 0.5));
   pointer-events: none;
 }
 
@@ -218,7 +220,7 @@
 .w-modal[data-on="true"] .w-modal-in {
   transform: scale(1);
   border-color: var(--acc);
-  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.12), 0 24px 70px -12px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 0 1px var(--accent-subtle, rgba(157, 107, 238, 0.12)), 0 24px 70px -12px var(--accent-subtle-3, rgba(157, 107, 238, 0.4));
 }
 
 /* light that travels around the border */
@@ -228,7 +230,7 @@
   inset: -2px;
   padding: 2px;
   border-radius: inherit;
-  background: conic-gradient(from var(--a), transparent 0 65%, #a7f3d0 100%);
+  background: conic-gradient(from var(--a), transparent 0 65%, var(--accent-light, #A87BF5) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0);
@@ -305,10 +307,12 @@
 
 /* Touch devices: no hover preview, always show the arrow, stack the meta line */
 @media (hover: none) {
+
   .w-modal,
   .w-cursor {
     display: none;
   }
+
   .w-arrow {
     opacity: 1;
     transform: none;
@@ -320,10 +324,12 @@
     grid-template-columns: 1fr 24px;
     gap: 8px 16px;
   }
+
   .w-meta {
     grid-column: 1;
     grid-row: 2;
   }
+
   .w-arrow {
     grid-column: 2;
     grid-row: 1;
@@ -331,6 +337,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .w-title,
   .w-arrow,
   .w-modal-in,

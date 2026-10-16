@@ -5,7 +5,7 @@ import { Project as PortfolioProject } from "../types";
 import { ProjectModal } from "./ProjectModal";
 import "./work.css";
 
-type Tier = "flagship" | "supporting";
+type Tier = "flagship" | "engineering" | "supporting";
 
 export interface WorkProjectItem {
   id?: string;
@@ -18,106 +18,85 @@ export interface WorkProjectItem {
 }
 
 const PROJECTS: WorkProjectItem[] = [
-  {
-    id: "alphaforge",
-    title: "AlphaForge",
-    meta: "Multi-agent stock research",
-    tier: "flagship",
-    img: "/images/probe/perception.png",
-    color: "#0f3d2e",
-    href: "https://github.com/ParthK0",
-  },
-  {
-    id: "forge",
-    title: "Forge",
-    meta: "Multi-tenant commerce platform",
-    tier: "flagship",
-    img: "/images/reconcraft/ledger-matching.png",
-    color: "#1b1b3a",
-    href: "https://github.com/ParthK0",
-  },
-  {
-    id: "aetherface",
-    title: "AetherFace",
-    meta: "Biometric attendance platform",
-    tier: "flagship",
-    img: "/images/aetherface/dashboard.png",
-    color: "#0f2f3d",
-    href: "https://github.com/ParthK0",
-  },
+  // Flagship
   {
     id: "probe",
     title: "PROBE",
-    meta: "Adaptive voice interview AI",
+    meta: "Adaptive multi-agent voice interview AI",
     tier: "flagship",
     img: "/images/probe/dashboard.png",
-    color: "#2a1b3a",
-    href: "https://github.com/ParthK0",
-  },
-  {
-    id: "reconcraft",
-    title: "ReconPilot",
-    meta: "AI reconciliation engine",
-    tier: "flagship",
-    img: "/images/reconcraft/dashboard.png",
-    color: "#2b2a12",
+    color: "#1d1536",
     href: "https://github.com/ParthK0",
   },
   {
     id: "skt",
     title: "Shree Krishna Transport",
-    meta: "Client website",
-    tier: "supporting",
+    meta: "Commercial logistics & route intelligence platform",
+    tier: "flagship",
     img: "/images/shree-krishna-transport/hero.png",
-    color: "#3a1f1f",
+    color: "#16281e",
     href: "https://shree-krishna-transport.org/",
   },
   {
-    id: "groundcontrol",
-    title: "GroundControl",
-    meta: "Stadium operations GenAI",
-    tier: "supporting",
-    img: "/images/probe/voice-agent.png",
-    color: "#0f3d2e",
+    id: "reconcraft",
+    title: "ReconPilot",
+    meta: "Deterministic AI reconciliation engine",
+    tier: "flagship",
+    img: "/images/reconcraft/dashboard.png",
+    color: "#2a2210",
+    href: "https://github.com/ParthK0",
+  },
+
+  // Engineering
+  {
+    id: "aetherface",
+    title: "AetherFace.ai",
+    meta: "Enterprise biometrics & vector attendance platform",
+    tier: "engineering",
+    img: "/images/aetherface/dashboard.png",
+    color: "#0f2f3d",
     href: "https://github.com/ParthK0",
   },
   {
     id: "electiq",
     title: "ElectIQ",
-    meta: "Civic education SaaS",
-    tier: "supporting",
+    meta: "Civic education & election intelligence SaaS",
+    tier: "engineering",
     img: "/images/electiq/ai-summary.png",
     color: "#1b1b3a",
     href: "https://github.com/ParthK0/election",
   },
+
+  // Supporting
   {
     id: "quantcraft",
     title: "QuantCraft",
-    meta: "Hackathon registration platform",
+    meta: "Minecraft-themed hackathon platform",
     tier: "supporting",
     img: "/images/projects/skt-hero.png",
-    color: "#0f2f3d",
+    color: "#1c2b1e",
     href: "https://github.com/ParthK0/Quantacraft",
   },
   {
-    id: "terrawatch",
-    title: "TerraWatch",
-    meta: "Carbon footprint tracker",
+    id: "sparkx",
+    title: "SparkX 3.0",
+    meta: "Hackathon & innovation platform",
     tier: "supporting",
     img: "/images/projects/aetherface-admin.png",
-    color: "#2b2a12",
+    color: "#281838",
     href: "https://github.com/ParthK0",
   },
 ];
 
 const TABS = [
   { id: "all", label: "All" },
-  { id: "flagship", label: "Flagship Engineering" },
+  { id: "flagship", label: "Flagship" },
+  { id: "engineering", label: "Engineering" },
   { id: "supporting", label: "Supporting" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
-const STEP = 4;
+const STEP = 7;
 
 export const WorkSection: React.FC = () => {
   const [tab, setTab] = useState<TabId>("all");
@@ -267,9 +246,7 @@ export const WorkSection: React.FC = () => {
 
   return (
     <section className="work" id="work" ref={root}>
-      <h2>
-        Work<span className="w-dot">.</span>
-      </h2>
+      <h2>Work</h2>
 
       <div className="w-bar">
         <div className="w-tabs" role="tablist">

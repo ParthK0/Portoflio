@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Copyright } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { useTheme } from '../context/ThemeContext';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isAtFooter, setIsAtFooter] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { currentTheme } = useTheme();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      const footer = document.getElementById('contact');
-      if (footer) {
-        const rect = footer.getBoundingClientRect();
-        // Disappear smoothly when footer enters into view
-        setIsAtFooter(rect.top < window.innerHeight * 0.6);
-      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -48,7 +41,7 @@ export const Navbar: React.FC = () => {
   ];
 
   const isHome = location.pathname === '/';
-  const showNav = (!isHome || isScrolled) && !isAtFooter;
+  const showNav = !isHome || isScrolled;
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${showNav ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'
