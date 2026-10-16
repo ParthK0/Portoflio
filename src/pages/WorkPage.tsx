@@ -8,7 +8,7 @@ export const WorkPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-[#0e0e10] min-h-screen text-[#f4f4f2]">
+    <div className="bg-[#111111] min-h-screen text-[#FFFFFF]">
       <WorkSection />
     </div>
   );

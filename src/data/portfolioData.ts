@@ -122,9 +122,10 @@ export const PROJECTS: Project[] = [
     coverImage: "/images/probe/dashboardhero.png",
     gallery: [
       "/images/probe/dashboardhero.png",
-      "/images/probe/overview.png",
       "/images/probe/interview-room.png",
+      "/images/probe/match-score.png",
       "/images/probe/perception.png",
+      "/images/probe/report.png",
       "/images/probe/voice-agent.png"
     ],
     highlights: [
@@ -184,7 +185,8 @@ export const PROJECTS: Project[] = [
       "/images/reconcraft/engine.png",
       "/images/reconcraft/paisa-validator.png",
       "/images/reconcraft/ledger-matching.png",
-      "/images/reconcraft/dashboard.png"
+      "/images/reconcraft/dashboard.png",
+      "/images/reconcraft/benchmark.png"
     ],
     highlights: [
       "7-Stage deterministic rule engine resolves 90–95% of records at zero AI cost (Order ID, exact UTR, same-day amount, date window, statutory rate card, tolerance, FX corridor).",
@@ -297,10 +299,10 @@ export const PROJECTS: Project[] = [
     coverImage: "/images/aetherface/hero.png",
     gallery: [
       "/images/aetherface/hero.png",
+      "/images/aetherface/1.png",
       "/images/aetherface/2.png",
       "/images/aetherface/3.png",
-      "/images/aetherface/4.png",
-      "/images/aetherface/5.png"
+      "/images/aetherface/4.png"
     ],
     highlights: [
       "Replaced linear O(N) in-memory scanning (~180ms) with PostgreSQL pgvector HNSW indexing, cutting vector search latency to <1.5ms for 10,000+ student records (120× speedup).",
@@ -361,11 +363,12 @@ export const PROJECTS: Project[] = [
       "Achieved 98+ Lighthouse performance and 100% WCAG 2.1 AA accessibility compliance across interactive voter dashboards with Vitest and Playwright CI/CD."
     ],
     technologies: ["React 19", "Vite", "Express 5 Proxy", "Gemini API", "Firebase", "Zod", "Playwright", "Vitest", "Tailwind CSS"],
-    githubUrl: "https://github.com/ParthK0",
+    githubUrl: "https://github.com/ParthK0/election",
     metrics: [
       { label: "Country Coverage", value: "6 Nations", color: "cyan" },
       { label: "Accessibility Rating", value: "100% WCAG", color: "emerald" },
-      { label: "API Protection", value: "Zod + RateLimit", color: "violet" }
+      { label: "API Protection", value: "Zod + RateLimit", color: "violet" },
+      { label: "Initial Bundle", value: "<180kB", color: "cyan" }
     ],
     architecture: {
       title: "Secure Proxy & Grounded AI Pipeline",
@@ -375,6 +378,24 @@ export const PROJECTS: Project[] = [
         "Zod Runtime Schema Validation & Sanitization",
         "Google Gemini API (Neutral Multi-Shot System Prompts)",
         "Firebase Firestore Analytics Sync"
+      ]
+    },
+    caseStudy: {
+      problem: "Public election information is fragmented across archaic government portals, unindexed PDFs, and politically partisan news sources, leading to voter disengagement and widespread misinformation.",
+      solution: "Engineered a secure full-stack civic intelligence platform covering 6 democracies with real-time polling simulation, verified registration deadlines, and neutrality-prompted Gemini AI assistants shielded by an Express 5 gateway.",
+      challenges: [
+        "API key exposure & quota abuse: prototype called Gemini directly from the client. Solved by building an Express 5 proxy with IP-based rate limiting, Helmet security headers, and Zod runtime schema sanitization.",
+        "Partisan bias in LLM outputs: raw models exhibit subtle political bias. Solved via multi-shot neutrality guardrails requiring balanced counter-perspectives validated by structured schemas."
+      ],
+      technicalDecisions: [
+        {
+          decision: "Express 5 Backend Proxy vs Direct Client Calls",
+          rationale: "Completely isolates Google Gemini API credentials, enforces per-IP rate limiting (100 req/min), and sanitizes all inputs via Zod and DOMPurify before upstream forwarding."
+        },
+        {
+          decision: "Multi-Shot Neutrality System Prompts with Schema Validation",
+          rationale: "Guarantees impartial political discourse by mandating both majority and minority viewpoints with cited sources, eliminating single-source bias."
+        }
       ]
     }
   },
@@ -387,16 +408,25 @@ export const PROJECTS: Project[] = [
     team: "Frontend & UI Engineer • National Student Hackathon",
     category: "Interactive Web & Community",
     description: "Minecraft-inspired responsive event platform for a national student hackathon with 4 technical tracks (AI/ML, Blockchain, Cybersecurity, Game Dev) and ₹35,000 prize pool, featuring custom animations and Unstop integration.",
+    coverImage: "/images/quantcarft/hero.png",
+    gallery: [
+      "/images/quantcarft/hero.png",
+      "/images/quantcarft/about.png",
+      "/images/quantcarft/overview.png",
+      "/images/quantcarft/questions.png"
+    ],
     highlights: [
       "Built responsive UI components across desktop and mobile breakpoints with Next.js 16, React 19, Tailwind CSS, and Framer Motion.",
       "Implemented lazy-loaded video using Intersection Observer and Next.js image optimization, reducing initial load footprint while maintaining visual immersion.",
       "Centralized event information architecture managing timelines, track specs, sponsor tiers, and Unstop external registration."
     ],
-    technologies: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "Vercel"],
-    githubUrl: "https://github.com/ParthK0",
+    technologies: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "Unstop API", "Vercel"],
+    githubUrl: "https://github.com/ParthK0/Quantacraft",
     metrics: [
       { label: "Prize Pool", value: "₹35,000", color: "violet" },
-      { label: "Tech Tracks", value: "4 Tracks", color: "cyan" }
+      { label: "Tech Tracks", value: "4 Tracks", color: "cyan" },
+      { label: "Event Duration", value: "24 Hours", color: "emerald" },
+      { label: "Responsive Coverage", value: "100%", color: "cyan" }
     ],
     architecture: {
       title: "Frontend Architecture",
@@ -405,6 +435,24 @@ export const PROJECTS: Project[] = [
         "Intersection Observer Lazy Media",
         "Framer Motion Micro-Interactions",
         "Unstop Registration Flow"
+      ]
+    },
+    caseStudy: {
+      problem: "Collegiate hackathon landing pages are typically generic, unengaging forms that fail to convey event identity, suffer from high bounce rates, and cause mobile rendering glitches on lower-end devices.",
+      solution: "Engineered a Minecraft-themed Next.js 16 event platform with custom voxel art, Framer Motion scroll motion, centralized data architecture, and Intersection Observer media deferral leading directly to Unstop registration.",
+      challenges: [
+        "Media-heavy landing page performance: rich custom visuals and background video risked inflating bundle and load times. Solved with Next.js image optimization and Intersection Observer deferred video loading so media loads only as viewers scroll into viewport.",
+        "Browser-only APIs causing SSR hydration errors: client-side window/canvas access caused build failures in Next.js App Router. Solved by isolating interactive components into explicit client boundaries with guarded execution checks."
+      ],
+      technicalDecisions: [
+        {
+          decision: "Intersection Observer Video Deferral + Next.js Image Optimization",
+          rationale: "Reduces initial network payload on mobile 4G while preserving high-fidelity visual immersion as participants scroll through event tracks."
+        },
+        {
+          decision: "Centralized Event Data Module vs Dynamic Database",
+          rationale: "A single-source typed static data module provides sub-1ms client rendering, zero API latency, and straightforward Git-tracked content updates for a 24-hour event."
+        }
       ]
     }
   },
@@ -417,6 +465,14 @@ export const PROJECTS: Project[] = [
     team: "Lead Developer • In Active Development",
     category: "Hackathon & Interactive Platforms",
     description: "Next-generation hackathon platform engineered for real-time team collaboration, project submissions, and judge scoring workflows. Full project specifications coming soon.",
+    coverImage: "/images/sparkx3.0/hero.png",
+    gallery: [
+      "/images/sparkx3.0/hero.png",
+      "/images/sparkx3.0/2.png",
+      "/images/sparkx3.0/3.png",
+      "/images/sparkx3.0/4.png",
+      "/images/sparkx3.0/5.png"
+    ],
     highlights: [
       "Real-time team collaboration and portal submissions.",
       "Architected for scalable hackathon operations and high concurrency."

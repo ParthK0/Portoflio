@@ -10,6 +10,7 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { PageTransition } from './components/PageTransition';
 import { HomePage } from './pages/HomePage';
 import { WorkPage } from './pages/WorkPage';
+import { ProjectDetailPage } from './pages/ProjectDetailPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 
@@ -21,6 +22,7 @@ const AnimatedRoutes: React.FC = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
         <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
+        <Route path="/work/:slug" element={<PageTransition><ProjectDetailPage /></PageTransition>} />
         <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
         <Route path="/beyond" element={<Navigate to="/about" replace />} />
         <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
