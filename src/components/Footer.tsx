@@ -18,7 +18,8 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
-  Globe
+  Globe,
+  Code2
 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { PERSONAL_INFO } from '../data/portfolioData';
@@ -339,6 +340,28 @@ export const Footer: React.FC = () => {
                   <div className="text-xs font-medium text-[#888888] mb-0.5">GitHub</div>
                   <div className="text-sm font-semibold text-white group-hover:underline truncate">
                     github.com/ParthK0
+                  </div>
+                </div>
+                <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors shrink-0" />
+              </a>
+
+              {/* LeetCode Card */}
+              <a
+                href={PERSONAL_INFO.leetcode || "https://leetcode.com/u/pk1662005/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-[#111111] border border-white/[0.07] hover:border-white/20 transition-all group shadow-lg"
+              >
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 shrink-0"
+                  style={{ backgroundColor: `${accentColor}15`, color: accentColor }}
+                >
+                  <Code2 className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-xs font-medium text-[#888888] mb-0.5">LeetCode</div>
+                  <div className="text-sm font-semibold text-white group-hover:underline truncate">
+                    leetcode.com/u/pk1662005
                   </div>
                 </div>
                 <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors shrink-0" />

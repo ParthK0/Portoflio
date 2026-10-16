@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Command, ArrowRight, Palette, Volume2, VolumeX, Mail, Github, Linkedin, Check, X, Terminal, FileText } from 'lucide-react';
+import { Search, Command, ArrowRight, Palette, Volume2, VolumeX, Mail, Github, Linkedin, Check, X, Terminal, FileText, Code2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { sound } from '../utils/audio';
 
@@ -198,6 +198,17 @@ export const CommandPalette: React.FC = () => {
       icon: <Github className="w-4 h-4" />,
       perform: () => {
         window.open('https://github.com/ParthK0', '_blank');
+        setIsOpen(false);
+      },
+    },
+    {
+      id: 'act-leetcode',
+      category: 'External',
+      label: 'Open LeetCode Profile',
+      detail: 'leetcode.com/u/pk1662005 (697+ solved, streak)',
+      icon: <Code2 className="w-4 h-4" />,
+      perform: () => {
+        window.open('https://leetcode.com/u/pk1662005/', '_blank');
         setIsOpen(false);
       },
     },

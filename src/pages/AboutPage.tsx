@@ -99,7 +99,7 @@ export const AboutPage: React.FC = () => {
                   </div>
                   <div className="flex justify-between border-b border-[#1a1a1a] pb-2">
                     <span className="text-[#888888]">Academic Standing</span>
-                    <span className="text-[var(--accent-primary)] font-bold">8.89 CGPA</span>
+                    <span className="text-[var(--accent-primary)] font-bold">8.93 CGPA</span>
                   </div>
                   <div className="flex justify-between border-b border-[#1a1a1a] pb-2">
                     <span className="text-[#888888]">Experience</span>
