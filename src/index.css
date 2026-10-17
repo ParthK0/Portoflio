@@ -410,5 +410,25 @@
   }
 }
 
+/* ========================================================
+   HORIZONTAL PHOTO LIBRARY MARQUEE
+   ======================================================== */
+@keyframes photo-marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
+.animate-photo-marquee {
+  display: flex;
+  width: max-content;
+  animation: photo-marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
 
+.animate-photo-marquee:hover {
+  animation-play-state: paused;
+}

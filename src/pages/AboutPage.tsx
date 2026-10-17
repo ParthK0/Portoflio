@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   User, 
@@ -16,7 +16,9 @@ import {
   Users,
   CheckCircle2,
   Award,
-  ChevronRight
+  ChevronRight,
+  Camera,
+  X
 } from 'lucide-react';
 import { Experience } from '../components/Experience';
 import { LeetCodeStats } from '../components/LeetCodeStats';
@@ -24,8 +26,20 @@ import { GitHubActivity } from '../components/GitHubActivity';
 import { PERSONAL_INFO, EDUCATION_ITEMS, CERTIFICATIONS, LEADERSHIP_ITEMS } from '../data/portfolioData';
 import { useTheme } from '../context/ThemeContext';
 
+const ABOUT_GALLERY_IMAGES: string[] = [
+  '/images/about/DSC08858.JPG',
+  '/images/about/IMG_5815.JPG',
+  '/images/about/IMG_7609.JPG',
+  '/images/about/2.jpeg',
+  '/images/about/3.jpeg',
+  '/images/about/4.jpeg',
+  '/images/about/5.jpeg',
+  '/images/about/event-team.jpeg'
+];
+
 export const AboutPage: React.FC = () => {
   const { currentTheme } = useTheme();
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "About Me | Parth Khowal";
@@ -281,7 +295,7 @@ export const AboutPage: React.FC = () => {
               </h2>
             </div>
             <p className="text-[#A0A0A0] text-sm sm:text-base max-w-lg leading-relaxed">
-              Competitive honors, industry simulations, and campus leadership roles.
+              International competitive honors and industry-accredited simulations.
             </p>
           </div>
 
@@ -317,10 +331,8 @@ export const AboutPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Grid: Industry Certifications + Leadership */}
+          {/* Grid: Industry Certifications */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            {/* JPMorgan Chase Simulation */}
             {CERTIFICATIONS.map((cert) => (
               <div
                 key={cert.id}
@@ -360,32 +372,57 @@ export const AboutPage: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
 
-            {/* Leadership Roles (IEEE CIS & Quanta Club) */}
+        </div>
+      </section>
+
+      {/* 4. Leadership & Campus Impact + Clean Horizontal Photo Library */}
+      <section id="leadership" className="py-16 sm:py-20 relative bg-[#111111] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10">
+
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#9D6BEE]/10 border border-[#9D6BEE]/25 text-[#A87BF5] text-xs font-mono font-semibold uppercase tracking-wider mb-4">
+                <Users className="w-3.5 h-3.5 text-[#9D6BEE]" />
+                Leadership &amp; Community
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#FFFFFF] tracking-tight">
+                Leadership &amp; Campus Impact
+              </h2>
+            </div>
+            <p className="text-[#A0A0A0] text-sm sm:text-base max-w-lg leading-relaxed">
+              Driving developer communities, organizing flagship international conferences, and mentoring peer cohorts in software and algorithms.
+            </p>
+          </div>
+
+          {/* Leadership Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             {LEADERSHIP_ITEMS.map((item) => (
               <div
                 key={item.id}
-                className="p-6 sm:p-7 rounded-3xl bg-[#161616] border border-[#262626] hover:border-[#9D6BEE]/40 transition-all duration-300 shadow-xl shadow-black/40 flex flex-col justify-between group"
+                className="p-6 sm:p-8 rounded-3xl bg-[#161616] border border-[#262626] hover:border-[#9D6BEE]/40 transition-all duration-300 shadow-xl shadow-black/40 flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#262626]">
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#262626]">
                     <span className="text-xs font-mono uppercase text-[#A87BF5] font-semibold flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-[#9D6BEE]" />
                       {item.organization}
                     </span>
-                    <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#181818] border border-[#262626] text-[#A0A0A0]">
+                    <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#181818] border border-[#262626] text-[#A0A0A0]">
                       {item.tag}
                     </span>
                   </div>
 
-                  <h4 className="text-lg font-bold text-[#FFFFFF] group-hover:text-[#A87BF5] transition-colors mb-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#FFFFFF] group-hover:text-[#A87BF5] transition-colors mb-4">
                     {item.role}
-                  </h4>
+                  </h3>
 
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-2.5 mb-6">
                     {item.bullets.map((bullet, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-[#A0A0A0] leading-relaxed">
-                        <ChevronRight className="w-3.5 h-3.5 text-[#9D6BEE] shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#A0A0A0] leading-relaxed">
+                        <ChevronRight className="w-4 h-4 text-[#9D6BEE] shrink-0 mt-0.5" />
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -394,26 +431,76 @@ export const AboutPage: React.FC = () => {
 
                 <div className="pt-4 border-t border-[#262626] flex items-center gap-2 text-xs font-mono text-[#707070]">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#9D6BEE]" />
-                  <span>Campus Leadership &amp; Community Impact</span>
+                  <span>Executive Responsibility &amp; Team Leadership</span>
                 </div>
               </div>
             ))}
+          </div>
 
+          {/* Photo Library Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pt-4 border-t border-[#262626]">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-[#9D6BEE]/10 border border-[#9D6BEE]/25 flex items-center justify-center text-[#A87BF5]">
+                <Camera className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white tracking-tight">
+                  Campus Moments &amp; Gallery
+                </h3>
+                <p className="text-xs text-[#A0A0A0]">
+                  Snapshots from workshops, conference planning, hackathons &amp; community events
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-mono text-[#707070]">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Hover to pause · Click to expand</span>
+            </div>
           </div>
 
         </div>
+
+        {/* Full-bleed Horizontal Marquee Carousel (Clean: No Names on Images) */}
+        <div className="relative w-full overflow-hidden py-3 group">
+          {/* Edge Fade Gradients */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#111111] via-[#111111]/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#111111] via-[#111111]/80 to-transparent z-10" />
+
+          {/* Scrolling Strip: Double-mapped for seamless infinite loop */}
+          <div className="animate-photo-marquee flex items-center gap-5 px-4">
+            {[...ABOUT_GALLERY_IMAGES, ...ABOUT_GALLERY_IMAGES].map((src, pIdx) => (
+              <div
+                key={pIdx}
+                onClick={() => setSelectedPhoto(src)}
+                className="w-72 sm:w-84 h-52 sm:h-60 shrink-0 relative rounded-2xl overflow-hidden border border-[#262626] bg-[#161616] group/card hover:border-[#9D6BEE]/70 transition-all duration-300 cursor-pointer shadow-lg shadow-black/50"
+              >
+                {/* Clean Photo Image - No text or title overlay */}
+                <img
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
+                />
+
+                {/* Subtle hover feedback */}
+                <div className="absolute inset-0 bg-black/0 group-hover/card:bg-black/10 transition-colors" />
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* 4. Industry Work Experience */}
+      {/* 5. Industry Work Experience */}
       <Experience />
 
-      {/* 5. LeetCode & Competitive Programming */}
+      {/* 6. LeetCode & Competitive Programming */}
       <LeetCodeStats />
 
-      {/* 6. GitHub & Open Source Activity */}
+      {/* 7. GitHub & Open Source Activity */}
       <GitHubActivity />
 
-      {/* 7. Bottom Collaboration CTA */}
+      {/* 8. Bottom Collaboration CTA */}
       <section className="py-20 bg-[#111111] relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-10">
           <div className="p-8 sm:p-12 rounded-3xl bg-[#161616] border border-[#262626] shadow-xl shadow-black/60 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -450,6 +537,36 @@ export const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Clean Photo Lightbox Modal - No Names or Titles */}
+      {selectedPhoto && (
+        <div 
+          onClick={() => setSelectedPhoto(null)}
+          className="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-4xl w-full bg-[#161616] border border-[#262626] rounded-3xl overflow-hidden shadow-2xl shadow-black relative"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedPhoto(null)}
+              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/75 border border-white/20 text-white flex items-center justify-center hover:bg-black hover:border-white transition-all cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Image */}
+            <div className="w-full max-h-[85vh] bg-black flex items-center justify-center overflow-hidden p-2">
+              <img
+                src={selectedPhoto}
+                alt=""
+                className="w-full max-h-[85vh] object-contain rounded-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
