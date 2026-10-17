@@ -16,6 +16,25 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
     }
   }, [project]);
 
+  // Lock body scroll and enable Escape key to close modal
+  useEffect(() => {
+    if (project) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [project, onClose]);
+
   if (!project) return null;
 
   const allImages = [
@@ -24,7 +43,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/90 backdrop-blur-md">
+    <div 
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-black/90 backdrop-blur-md"
+    >
       <div
         className="relative w-full max-w-4xl bg-[#141414] border border-[#262626] rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}

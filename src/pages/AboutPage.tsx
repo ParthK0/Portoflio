@@ -45,8 +45,27 @@ export const AboutPage: React.FC = () => {
     document.title = "About Me | Parth Khowal";
   }, []);
 
+  // Lock body scroll and enable Escape key to close lightbox
+  useEffect(() => {
+    if (selectedPhoto) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setSelectedPhoto(null);
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [selectedPhoto]);
+
   return (
-    <div className="pt-24 pb-0 bg-[#111111] min-h-screen text-[#FFFFFF] select-none">
+    <div className="pt-24 pb-0 bg-[#111111] min-h-screen text-[#FFFFFF]">
 
       {/* 1. Hero Section: Personal About Me */}
       <section className="py-16 sm:py-20 relative">
@@ -480,6 +499,7 @@ export const AboutPage: React.FC = () => {
                   src={src}
                   alt=""
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
                 />
 

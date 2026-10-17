@@ -233,6 +233,17 @@ export const TechStackGlobe: React.FC = () => {
       resizeObserver.observe(stage);
     }
 
+    let isGlobeVisible = true;
+    let visibilityObserver: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== 'undefined') {
+      visibilityObserver = new IntersectionObserver((entries) => {
+        if (entries[0]) {
+          isGlobeVisible = entries[0].isIntersecting;
+        }
+      }, { rootMargin: '100px 0px' });
+      visibilityObserver.observe(stage);
+    }
+
     let yaw = 0;
     let pitch = 0.3;
     let ivy = 0;
@@ -250,6 +261,12 @@ export const TechStackGlobe: React.FC = () => {
     let animId: number;
 
     const frame = (t: number) => {
+      if (!isGlobeVisible) {
+        last = t;
+        animId = requestAnimationFrame(frame);
+        return;
+      }
+
       if (stage.clientWidth !== W || stage.clientHeight !== H) {
         resize();
       }
@@ -472,6 +489,7 @@ export const TechStackGlobe: React.FC = () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
       if (resizeObserver) resizeObserver.disconnect();
+      if (visibilityObserver) visibilityObserver.disconnect();
       stage.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerup', onPointerUp);

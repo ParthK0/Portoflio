@@ -97,6 +97,13 @@ export const Hero: React.FC = () => {
   const curPosRef = useRef({ cx: -99, cy: -99 });
 
   useEffect(() => {
+    // Only enable custom cursor tracking on desktop fine pointer devices
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (!hasFinePointer) {
+      if (cursorRef.current) cursorRef.current.style.display = 'none';
+      return;
+    }
+
     const onMove = (e: MouseEvent) => {
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
@@ -249,6 +256,17 @@ export const Hero: React.FC = () => {
       return [(o.cx + u * c - v * s) * kk, (o.cy + u * s + v * c) * kk];
     };
 
+    let isHeroVisible = true;
+    let visibilityObserver: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== 'undefined' && mainTrackRef.current) {
+      visibilityObserver = new IntersectionObserver((entries) => {
+        if (entries[0]) {
+          isHeroVisible = entries[0].isIntersecting;
+        }
+      }, { rootMargin: '120px 0px' });
+      visibilityObserver.observe(mainTrackRef.current);
+    }
+
     let orb = 0;
     let sh = 0;
     let lt = 0;
@@ -257,12 +275,22 @@ export const Hero: React.FC = () => {
     let animId: number;
 
     const render = (now: number) => {
+      if (!isHeroVisible) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
       const t = (now - t0) / 1000;
       const p = scrollProgRef.current;
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const px = mouseRef.current.px;
       const py = mouseRef.current.py;
+
+      // Fade out fixed orbital canvas when scrolling past hero stage
+      const canvasFade = 1 - clamp((p - 0.9) / 0.1, 0, 1);
+      cv.style.opacity = `${canvasFade}`;
+      cv.style.visibility = canvasFade <= 0.01 ? 'hidden' : 'visible';
 
       orb += ((orbitMode === 'orbit' ? 1 : 0) - orb) * 0.05;
       sh += ((isSheetOver ? 1 : 0) - sh) * 0.1;
@@ -459,6 +487,7 @@ export const Hero: React.FC = () => {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', onResize);
+      if (visibilityObserver) visibilityObserver.disconnect();
     };
   }, [orbitMode, isSheetOver, accentColor]);
 
@@ -466,12 +495,12 @@ export const Hero: React.FC = () => {
 
   return (
     <>
-      {/* Fluid Custom Cursor Dot */}
+      {/* Fluid Custom Cursor Dot - desktop mouse only */}
       <div
         id="cd"
         ref={cursorRef}
         style={{ backgroundColor: accentColor }}
-        className="fixed z-[99999] left-0 top-0 w-2.5 h-2.5 -m-[5px] rounded-full pointer-events-none transition-[width,height,margin,background-color] duration-250 ease-out"
+        className="fixed z-[99999] left-0 top-0 w-2.5 h-2.5 -m-[5px] rounded-full pointer-events-none transition-[width,height,margin,background-color] duration-250 ease-out hidden md:block"
       />
 
 

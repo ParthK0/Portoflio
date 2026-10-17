@@ -32,4 +32,5 @@ next-env.d.ts
 
 # Temp files
 ~$*
+public/images/about_original_backup/
 

@@ -6,6 +6,7 @@ import { fetchGitHubStats, GitHubData, DEFAULT_GITHUB_DATA } from '../services/s
 export const GitHubActivity: React.FC = () => {
   const [gitData, setGitData] = useState<GitHubData>(DEFAULT_GITHUB_DATA);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [streakImgError, setStreakImgError] = useState<boolean>(false);
 
   const loadData = async () => {
     setIsLoading(true);
@@ -191,12 +192,34 @@ export const GitHubActivity: React.FC = () => {
             </div>
 
             <div className="w-full overflow-x-auto flex justify-center py-2">
-              <img
-                src={gitData.streakCardUrl}
-                alt="GitHub Contribution Streak"
-                className="w-full max-w-xl h-auto rounded-xl border border-[#222222] shadow-lg"
-                loading="lazy"
-              />
+              {!streakImgError ? (
+                <img
+                  src={gitData.streakCardUrl}
+                  alt="GitHub Contribution Streak"
+                  className="w-full max-w-xl h-auto rounded-xl border border-[#222222] shadow-lg"
+                  loading="lazy"
+                  onError={() => setStreakImgError(true)}
+                />
+              ) : (
+                <div className="w-full max-w-xl p-6 rounded-xl bg-[#181818] border border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                  <div>
+                    <div className="text-sm font-bold text-white mb-1">
+                      Consistent Open-Source &amp; Full-Stack Commits
+                    </div>
+                    <div className="text-xs text-[#A0A0A0]">
+                      Active across {gitData.publicRepos} public repositories with TypeScript, Python, and Java.
+                    </div>
+                  </div>
+                  <a
+                    href={gitData.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-lg bg-[var(--accent-primary)] text-[#111111] text-xs font-semibold uppercase tracking-wider shrink-0 hover:bg-white transition-colors"
+                  >
+                    View Commit Graph ↗
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 

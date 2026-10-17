@@ -92,13 +92,23 @@ export const WorkSection: React.FC = () => {
     const cy = gsap.quickTo(c, "y", { duration: 0.45, ease: "power3" });
 
     const move = (e: MouseEvent) => {
+      if (!root.current) return;
+      const rect = root.current.getBoundingClientRect();
+      if (
+        e.clientY < rect.top - 100 ||
+        e.clientY > rect.bottom + 100 ||
+        e.clientX < rect.left - 50 ||
+        e.clientX > rect.right + 50
+      ) {
+        return;
+      }
       mx(e.clientX);
       my(e.clientY);
       cx(e.clientX);
       cy(e.clientY);
     };
 
-    window.addEventListener("mousemove", move);
+    window.addEventListener("mousemove", move, { passive: true });
     return () => window.removeEventListener("mousemove", move);
   }, []);
 

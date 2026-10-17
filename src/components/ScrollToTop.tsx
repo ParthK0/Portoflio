@@ -12,7 +12,12 @@ export const ScrollToTop = () => {
         return;
       }
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Ensure instant reset on route change so leaving page doesn't stutter upward
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => {
+      document.documentElement.style.scrollBehavior = '';
+    });
   }, [pathname, hash]);
 
   return null;

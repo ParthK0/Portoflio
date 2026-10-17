@@ -105,7 +105,7 @@ export const DEFAULT_GITHUB_DATA: GitHubData = {
     }
   ],
   profileUrl: "https://github.com/ParthK0",
-  streakCardUrl: "https://github-readme-streak-stats.herokuapp.com/?user=ParthK0&theme=dark&background=161616&border=262626&stroke=9D6BEE&ring=9D6BEE&fire=A87BF5&currStreakLabel=A0A0A0",
+  streakCardUrl: "https://streak-stats.demolab.com/?user=ParthK0&theme=dark&background=161616&border=262626&stroke=9D6BEE&ring=9D6BEE&fire=A87BF5&currStreakLabel=A0A0A0",
   isLive: false,
   lastFetched: new Date().toISOString(),
 };
@@ -321,7 +321,7 @@ export async function fetchGitHubStats(username = "ParthK0"): Promise<GitHubData
       topLanguages: topLangs.length ? topLangs : DEFAULT_GITHUB_DATA.topLanguages,
       recentRepos: recentRepos.length ? recentRepos : DEFAULT_GITHUB_DATA.recentRepos,
       profileUrl: `https://github.com/${username}`,
-      streakCardUrl: `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=dark&background=161616&border=262626&stroke=9D6BEE&ring=9D6BEE&fire=A87BF5&currStreakLabel=A0A0A0`,
+      streakCardUrl: `https://streak-stats.demolab.com/?user=${username}&theme=dark&background=161616&border=262626&stroke=9D6BEE&ring=9D6BEE&fire=A87BF5&currStreakLabel=A0A0A0`,
       isLive: true,
       lastFetched: new Date().toISOString()
     };
